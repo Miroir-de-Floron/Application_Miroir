@@ -1,32 +1,25 @@
-
-#define BUT1 11
-
-int etatboutton1;
-
-
+#define BOUTTON1 3
+#define BOUTTON2 4
 
 void setup() {
-  Serial.begin(9600);
-  pinMode(BUT1, INPUT_PULLUP);
-
+  // on configure les broches en entrée avec une résistance de pull-up
+  pinMode(BOUTTON1, INPUT_PULLUP); 
+  pinMode(BOUTTON2, INPUT_PULLUP); 
+  Serial.begin(9600); 
 }
 
 void loop() {
-  etatboutton1 = digitalRead(BUT1);
+  // on lit l'état des boutons
+  int etatBouton1 = digitalRead(BOUTTON1); 
+  int etatBouton2 = digitalRead(BOUTTON2); 
 
+// si un des boutons est appuyé, on envoie un message sur le port série qui executera une des requêtes HTTP corepondante
+  if (etatBouton1 == LOW) {
+    Serial.println("1"); 
+  } 
+  else if (etatBouton2 == LOW) {
+    Serial.println("2"); 
+  } 
 
-  if (etatboutton1 == LOW ) {
- 
-    Serial.println("Envoi de la requête HTTP 1...");
-    Serial.println("Envoi de la requête HTTP...");
-    Serial.println("GET /recevoir?nom=120 HTTP/1.1");
-    Serial.println("Host: localhost:8080");
-    Serial.println("Connection: close");
-    Serial.println();
-    delay(1000); 
-  }
-
-
-
-  delay(100); 
+  delay(500); 
 }
