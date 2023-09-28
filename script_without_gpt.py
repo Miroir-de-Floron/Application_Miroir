@@ -91,7 +91,7 @@ def lanceur_video_de_prediction():
             baseDeDonnees.commit()
 
             # On lance le thread TTS
-            tts_thread = threading.Thread(target=lancement_voix_prediction, args=("Vous avez tiré la carte soleil, bohneur sur vous , plein de chance et de reichesses",))
+            tts_thread = threading.Thread(target=lancement_voix_prediction, args=("Vous avez tiré la carte soleil, bohneur sur vous , plein de chance et de richesses",))
             tts_thread.start()
             tts_thread.join()
 
