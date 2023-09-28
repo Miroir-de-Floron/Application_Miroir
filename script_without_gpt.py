@@ -13,21 +13,12 @@ lanceur = vlc.Instance()
 
 pygame.init()
 
-# on charge le fichier audio de la musique de fond
-pygame.mixer.music.load("Ressource/Son/Musique_de_fond.mp3")
-
+# on charge les fichiers audio de musique 
+musique_de_fond = pygame.mixer.Sound("Ressource/Son/Musique_de_fond.mp3")
+voix_intro = pygame.mixer.Sound("Ressource/Son/voix_intro.mp3")
 
 ######################################################################################################
 
-
-# fonction(threader) pour lancer le TTS de l'intro
-def lancement_voix_intro(intro):
-        robot_intro = pyttsx3.init() 
-        robot_intro.stop()
-        robot_intro.say(intro)
-        robot_intro.setProperty('rate', 115)
-        robot_intro.runAndWait()
- 
 
 
 # fonction(threader) pour lancer le TTS de la prédiction
@@ -123,7 +114,9 @@ def lanceur_video_intro():
     media_intro.set_playback_mode(vlc.PlaybackMode.loop)
     media_intro.play()
     #on configure la musique de fond
-    pygame.mixer.music.play(-1)
+    musique_de_fond.play(-1)
+    #on configure la voix d'introduction
+    voix_intro.play(-1)
     
     #on récupère la valeur booléenne de la video de prédiction
     global video_de_prediction
@@ -133,24 +126,17 @@ def lanceur_video_intro():
         #si la video de prediction ne tourne pas on lance la vidéo d'introduction et la musique de fond
         if video_de_prediction == False and not joue_son:  
             media_intro.play()
-            pygame.mixer.music.play(-1)
+            musique_de_fond.play(-1)
+            voix_intro.play(-1)
             joue_son = True  
-
-        #si la video de prdiction ne tourne pas et que la musique de fond est en cours de lecture on lance le thread TTS intro
-        if video_de_prediction == False and joue_son:
-            intro_robot = threading.Thread(target=lancement_voix_intro, args=("Approche vers l'écran et vien voir t'es prédiction.",))
-            intro_robot.start()
-            time.sleep(5)
-            intro_robot.join()
-               
+        
               
         #si la video de prédiction tourne on arrête la vidéo d'introduction et la musique de fond
         if video_de_prediction == True:
-            intro_robot._stop() 
+            voix_intro.stop()
             media_intro.stop()
-            pygame.mixer.music.stop()
+            musique_de_fond.stop()
             joue_son = False
-
 
         #on attend 0.2 secondes avant de relancer la boucle
         time.sleep(0.2)  
