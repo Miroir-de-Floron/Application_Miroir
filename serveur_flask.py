@@ -1,5 +1,5 @@
 from flask import Flask, request
-from Model.models import db, Tag
+from Model.Tag import db, Tag
 
 app = Flask(__name__)
 
