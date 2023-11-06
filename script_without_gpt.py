@@ -26,8 +26,9 @@ def lancement_voix_prediction(prediction):
     robot_prediction = pyttsx3.init() 
     robot_prediction.stop()
     print("tts en cours ")
+    robot_prediction.setProperty('rate', 135)
+    robot_prediction.setProperty('voice', 'fr+f5')
     robot_prediction.say(prediction)
-    robot_prediction.setProperty('rate', 115)
     robot_prediction.runAndWait()
     print("tts terminé")
 

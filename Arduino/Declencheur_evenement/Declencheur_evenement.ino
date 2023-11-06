@@ -1,5 +1,5 @@
 #define BOUTTON1 3
-#define BOUTTON2 4
+#define BOUTTON2 5
 
 void setup() {
   // on configure les broches en entrée avec une résistance de pull-up

@@ -3,7 +3,7 @@ import subprocess
 
 
 # ouverture du port série
-ser = serial.Serial('COM3', 9600) 
+ser = serial.Serial('/dev/ttyACM0', 9600) 
 while True:
     data = ser.read()
    
