@@ -39,18 +39,10 @@ def lancement_voix_prediction(prediction):
 
 def lectureDepuisJsonAvecInput(nbTag, temps):
     # On lance la vidéo de prédiction
-
     for i in range(len(obj_python)):
         if(obj_python[i]['tag'] == int(nbTag)):
-            tts = pyttsx3.init() 
-            tts.stop()
-            print("tts en cours ")
             print(obj_python[i]['nom'])
-            tts.setProperty('rate', 135)
-            tts.setProperty('voice', 'fr+f5')
-            tts.say(obj_python[i]['prediction'][temps])
-            tts.runAndWait()
-            print("tts terminé")
+            lancement_voix_prediction(obj_python[i]['prediction'][temps])
 
 
 # Fonction pour la lecture des vidéos de prediction
