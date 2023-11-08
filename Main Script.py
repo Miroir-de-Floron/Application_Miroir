@@ -48,8 +48,6 @@ def lectureDepuisJsonAvecInput(nbTag, temps):
 # Fonction pour la lecture des vidéos de prediction
 def lanceur_video_de_prediction():
   
-    ##### !!! Refaire Tag 
-
     #on récupère la valeur booléenne la video de prédiction
     global video_de_prediction  
 
@@ -61,21 +59,32 @@ def lanceur_video_de_prediction():
     media_prediction.get_media_player().set_fullscreen(True)
 
     while True:
+        
+        #on récupére la méthode de l'observateur
+        import Arduino as Card
+        Card.listener_requete.get_id()
 
-        input1 = input()
-        input2 = input()
-        input3 = input()
-
-        if(input3 != None):
+        #on récupére les donnée du tableau de l'observateur
+        id_passe = Card.listener_requete.Tab_id[0]
+        id_present = Card.listener_requete.Tab_id[1]
+        id_futur = Card.listener_requete.Tab_id[2]
+   
+        if(len(Card.listener_requete.Tab_id) == 3):
             media_prediction.play()
             video_de_prediction = True
-            lectureDepuisJsonAvecInput(input1, 'passe')
-            lectureDepuisJsonAvecInput(input2, 'present')
-            lectureDepuisJsonAvecInput(input3, 'futur')
+
+            #lancement des méthode pour le texte to speech
+            lectureDepuisJsonAvecInput(id_passe, 'passe')
+            lectureDepuisJsonAvecInput(id_present, 'present')
+            lectureDepuisJsonAvecInput(id_futur, 'futur')
+
+            #on reset toute les valeur pour reprendre la vidéo d'introduction
             video_de_prediction = False
             media_prediction.stop()
 
             fileObject.close()
+            Card.listener_requete.Tab_id.clear()
+            Card.listener_requete.ligne_compteur = 0
 
 
 # Fonction pour la lecture de la vidéo d'introduction

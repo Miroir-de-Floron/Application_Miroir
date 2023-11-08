@@ -1,25 +1,37 @@
-#define BOUTTON1 3
-#define BOUTTON2 5
+#include "SPI.h"
+#include "MFRC522.h"
+#define RST_PIN  9 // RES pin
+#define SS_PIN  10 // SDA (SS) pin
+
+MFRC522 mfrc522(SS_PIN, RST_PIN);
 
 void setup() {
-  // on configure les broches en entrée avec une résistance de pull-up
-  pinMode(BOUTTON1, INPUT_PULLUP); 
-  pinMode(BOUTTON2, INPUT_PULLUP); 
-  Serial.begin(9600); 
+   Serial.begin(9600);
+   SPI.begin();
+   mfrc522.PCD_Init();
+   delay(4);
 }
 
+
 void loop() {
-  // on lit l'état des boutons
-  int etatBouton1 = digitalRead(BOUTTON1); 
-  int etatBouton2 = digitalRead(BOUTTON2); 
+   //on regarde si la carte et présente
+   if ( ! mfrc522.PICC_IsNewCardPresent()) {
+      return;
+   }
 
-// si un des boutons est appuyé, on envoie un message sur le port série qui executera une des requêtes HTTP corepondante
-  if (etatBouton1 == LOW) {
-    Serial.println("1"); 
-  } 
-  else if (etatBouton2 == LOW) {
-    Serial.println("2"); 
-  } 
+   if ( ! mfrc522.PICC_ReadCardSerial()) {
+      return;
+   }
+   
+  int i;
+  String id ="";
+  for(i=0;i<10;++i){
+   //on concatene l'id
+    id += mfrc522.uid.uidByte[i];
 
-  delay(500); 
+}
+//on print l'id
+Serial.println(id);
+delay(1000);
+
 }
