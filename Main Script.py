@@ -4,6 +4,7 @@ import time
 import pyttsx3
 import pygame
 import json
+import cv2
 
 ############################################################################################### Déclaration
 # booléen pour savoir si une vidéo de prédiction est en cours de lecture ou non
@@ -21,8 +22,57 @@ voix_intro = pygame.mixer.Sound("Ressource/Son/voix_intro.mp3")
 fileObject = open("Data/data.json", "r")
 jsonContent = fileObject.read()
 obj_python = json.loads(jsonContent)
+
+
 ######################################################################################################
 
+
+def lire_video(type):
+    global video_de_prediction
+
+    if type == 1:
+        musique_de_fond.play(-1)
+        voix_intro.play(-1)
+        chemin_video = 'Ressource/Video/Fond.mp4'
+    elif type == 2:
+        chemin_video = 'Ressource/Video/Carte.mp4'
+    else:
+        print("le Type ne correspond pa")
+        return
+
+    video = cv2.VideoCapture(chemin_video)
+    
+
+    if not video.isOpened():
+        print("La vidéo ne s'ouvre pas")
+        return
+    
+    #on met en grand écran
+    cv2.namedWindow('La Video', cv2.WINDOW_NORMAL)  
+    cv2.setWindowProperty('La Video', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    
+    while True:
+        #on lance les frame en boucle
+        ret, frame = video.read()
+
+        # si on et en fin de vidéo on boucle la vidéo
+        if not ret:
+            video.set(cv2.CAP_PROP_POS_FRAMES, 0)
+            continue
+
+        # on affiche la video
+        cv2.imshow('La Video', frame)
+
+        if type == 1 and video_de_prediction == True:
+            break
+        elif type == 2 and video_de_prediction == False:
+            break
+        elif cv2.waitKey(25) & 0xFF == ord('q'):
+            break
+
+    # on libére les frame et on ferme la video
+    video.release()
+    cv2.destroyAllWindows()
 
 
 # fonction(threader) pour lancer le TTS de la prédiction
@@ -51,57 +101,39 @@ def lanceur_video_de_prediction():
     #on récupère la valeur booléenne la video de prédiction
     global video_de_prediction  
 
-    #on configure la video de prédiction
-    prediction = lanceur.media_list_new()
-    prediction.add_media(lanceur.media_new('Ressource/Video/Carte.mp4'))
-    media_prediction = lanceur.media_list_player_new()
-    media_prediction.set_media_list(prediction)
-    media_prediction.get_media_player().set_fullscreen(True)
 
     while True:
         
         #on récupére la méthode de l'observateur
-        import Arduino as Card
-        Card.listener_requete.get_id()
+        #import Arduino as Card
+        #Card.listener_requete.get_id()
 
         #on récupére les donnée du tableau de l'observateur
-        id_passe = Card.listener_requete.Tab_id[0]
-        id_present = Card.listener_requete.Tab_id[1]
-        id_futur = Card.listener_requete.Tab_id[2]
+        id_passe = input()
+        id_present = input()
+        id_futur = input()
+        print(id_futur)
    
-        if(len(Card.listener_requete.Tab_id) == 3):
-            media_prediction.play()
+        #if(len(Card.listener_requete.Tab_id) == 3):
+        if id_futur !=None:
             video_de_prediction = True
-
-            #lancement des méthode pour le texte to speech
             lectureDepuisJsonAvecInput(id_passe, 'passe')
-            lectureDepuisJsonAvecInput(id_present, 'present')
-            lectureDepuisJsonAvecInput(id_futur, 'futur')
-
-            #on reset toute les valeur pour reprendre la vidéo d'introduction
+            lectureDepuisJsonAvecInput(id_present, 'passe')
+            lectureDepuisJsonAvecInput(id_futur, 'passe')
             video_de_prediction = False
-            media_prediction.stop()
+                                 
 
-            fileObject.close()
-            Card.listener_requete.Tab_id.clear()
-            Card.listener_requete.ligne_compteur = 0
+        #Card.listener_requete.Tab_id.clear()
+        #Card.listener_requete.ligne_compteur = 0
 
 
 # Fonction pour la lecture de la vidéo d'introduction
 def lanceur_video_intro():
-    #on configure la vidéo d'introduction
-    default = lanceur.media_list_new()
-    default.add_media(lanceur.media_new('Ressource/Video/Fond.mp4'))
-    media_intro = lanceur.media_list_player_new()
-    media_intro.set_media_list(default)
-    media_intro.get_media_player().set_fullscreen(True)
-    media_intro.set_playback_mode(vlc.PlaybackMode.loop)
-    media_intro.play()
-    #on configure la musique de fond
-    musique_de_fond.play(-1)
-    #on configure la voix d'introduction
-    voix_intro.play(-1)
     
+    #on lance la video d'introduction
+    lire_video(1) 
+  
+
     #on récupère la valeur booléenne de la video de prédiction
     global video_de_prediction
     #on crée un boolén pour savoir si la musique de fond est en cours de lecture ou non
@@ -109,18 +141,17 @@ def lanceur_video_intro():
     while True:
         #si la video de prediction ne tourne pas on lance la vidéo d'introduction et la musique de fond
         if video_de_prediction == False and not joue_son:  
-            media_intro.play()
-            musique_de_fond.play(-1)
-            voix_intro.play(-1)
+            lire_video(1)
             joue_son = True  
         
               
         #si la video de prédiction tourne on arrête la vidéo d'introduction et la musique de fond
         if video_de_prediction == True:
-            voix_intro.stop()
-            media_intro.stop()
             musique_de_fond.stop()
+            voix_intro.stop()
             joue_son = False
+            lire_video(2)
+            
 
         #on attend 0.2 secondes avant de relancer la boucle
         time.sleep(0.2)  
