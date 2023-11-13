@@ -1,0 +1,112 @@
+[
+    {
+        "tag":0,
+        "nom":"Le Fou",
+        "url":"Ressource/image/fou.png"
+    },
+    {
+        "tag":1,
+        "nom":"Le Magicien",
+        "url":"Ressource/image/magicien.jpg"
+    },
+    {
+        "tag":2,
+        "nom":"La Papesse",
+        "url":"Ressource/image/papesse.jpg"
+    },
+    {
+        "tag":3,
+        "nom":"L’Impératrice",
+        "url":"Ressource/image/imperatrice.jpg"
+    },
+    {
+        "tag":4,
+        "nom":"L’Empereur",
+        "url":"Ressource/image/empereur.jpg"
+    },
+    {
+        "tag":5,
+        "nom":"Le Pape",
+        "url":"Ressource/image/pape.png"
+    },
+    {
+        "tag":6,
+        "nom":"Les Amoureux",
+        "url":"Ressource/image/amoureux.png"
+    },
+    {
+        "tag":7,
+        "nom":"Le Chariot",
+        "url":"Ressource/image/chariot.jpg"
+    },
+    {
+        "tag":8,
+        "nom":"La Justice",
+        "url":"Ressource/image/justice.jpeg"
+    },
+    {
+        "tag":9,
+        "nom":"L’Ermite",
+        "url":"Ressource/image/ermite.png"
+    },
+    {
+        "tag":10,
+        "nom":"La Roue de Fortune",
+        "url":"Ressource/image/roue.png"
+    },
+    {
+        "tag":11,
+        "nom":"La Force",
+        "url":"Ressource/image/force.jpg"
+    },
+    {
+        "tag":12,
+        "nom":"Le Pendu",
+        "url":"Ressource/image/pendu.png"
+    },
+    {
+        "tag":13,
+        "nom":"La Mort",
+        "url":"Ressource/image/mort.jpg"
+    },
+    {
+        "tag":14,
+        "nom":"La Tempérance",
+        "url":"Ressource/image/tempérance.jpg"
+    },
+    {
+        "tag":15,
+        "nom":"Le Diable",
+        "url":"Ressource/image/tempérance.jpg"
+    },
+    {
+        "tag":16,
+        "nom":"La Maison-Dieu",
+        "url":"Ressource/image/tempérance.jpg"
+    },
+    {
+        "tag":17,
+        "nom":"L’Étoile",
+        "url":"Ressource/image/étoile.jpg"
+    },
+    {
+        "tag":18,
+        "nom":"La Lune",
+        "url":"Ressource/image/lune.jpg"
+    },
+    {
+        "tag":19,
+        "nom":"Le Soleil",
+        "url":"Ressource/image/solei.jpg"
+    },
+    {
+        "tag":20,
+        "nom":"La Renaissance",
+        "url":"Ressource/image/renaissance.jpg"
+    },
+    {
+        "tag":21,
+        "nom":"Le Monde",
+        "url":"Ressource/image/le_monde.png"
+    }
+]
