@@ -1,11 +1,9 @@
 import threading
 import datetime
 import time
-import pyttsx3
 import pygame
-import json
 import cv2
-import Script as read_json
+import Script as script
 ############################################################################################### Déclaration
 # booléen pour savoir si une vidéo de prédiction est en cours de lecture ou non
 video_de_prediction = False
@@ -28,10 +26,7 @@ id_present = None
 id_futur = None
 url = None
 
-
-
 ######################################################################################################
-
 
 def lire_video():
     global lancement_effets
@@ -133,35 +128,16 @@ def lire_video():
     video.release()
     cv2.destroyAllWindows()
 
-
-# fonction(threader) pour lancer le TTS de la prédiction
-def lancement_voix(prediction):
-
+   
+def tts_carte(carte_tag,id):
     global carte_txt1
     global carte_txt2
     global carte_txt3
 
-    robot_prediction = pyttsx3.init() 
-    robot_prediction.stop()
-    print("tts en cours ")
-    robot_prediction.setProperty('rate', 135)
-    robot_prediction.setProperty('voice', 'fr+f5')
-    robot_prediction.say(prediction)
-    if carte_txt1 == True:
-        robot_prediction.say("vien d'étre piocher il vous reste deux carte à piocher")
-    if carte_txt2 == True:
-        robot_prediction.say("vien d'étre piocher il vous reste une carte à piocher")
-    if carte_txt3 == True:
-        robot_prediction.say("début des prédiction")
-    robot_prediction.runAndWait()
-    print("tts terminé")
-
-            
-def tts_carte(carte_tag,id):
     musique_de_fond.fadeout(1)
     voix_intro.fadeout(1)
-    lancement_voix(carte_tag)
-    read_json.lecture_json.fileObject2.close()
+    script.text_to_speech.voix_tts.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
+    script.json.recherche_json.fileObject2.close()
     if id != 3:
         musique_de_fond.play(-1)
         voix_intro.play(-1)
@@ -193,14 +169,14 @@ def gestion_des_prediction():
         if id_passe == None :   
 
             id_passe = input()
-            url = read_json.lecture_json.rechercheUrlEtNom(id_passe)
+            url = script.json.recherche_json.rechercheUrlEtNom(id_passe)
 
             #on indique qu'on lance les effet de la carte et le tts
             lancement_effets = True
             carte_txt1 = True
 
             # on coupe le son le temps du tts d'anonce de carte
-            tts_carte(read_json.lecture_json.nom,1)
+            tts_carte(script.json.recherche_json.nom,1)
 
             #on indique que le passage de la carte passé et terminer
             carte_txt1 = False
@@ -209,14 +185,14 @@ def gestion_des_prediction():
         if id_present is None and id_passe is not None and lancement_effets == False :
             
             id_present = input()
-            url = read_json.lecture_json.rechercheUrlEtNom(id_present) 
+            url = script.json.recherche_json.rechercheUrlEtNom(id_present) 
 
             #on indique qu'on lance les effet de la carte et le tts
             lancement_effets = True
             carte_txt2 = True
 
             # on coupe le son le temps du tts d'anonce de carte
-            tts_carte(read_json.lecture_json.nom,2)
+            tts_carte(script.json.recherche_json.nom,2)
 
             #on indique que le passage de la carte présent et terminer
             carte_txt2 = False
@@ -225,14 +201,14 @@ def gestion_des_prediction():
         if id_futur is None and id_passe is not None and lancement_effets == False :
 
             id_futur = input()
-            url = read_json.lecture_json.rechercheUrlEtNom(id_futur)
+            url = script.json.recherche_json.rechercheUrlEtNom(id_futur)
 
             #on indique qu'on lance les effet de la carte et le tts
             lancement_effets = True
             carte_txt3 = True
             
             # on coupe le son le temps du tts d'anonce de carte
-            tts_carte(read_json.lecture_json.nom,3)
+            tts_carte(script.json.recherche_json.nom,3)
 
             #on indique que le passage de la carte futur et terminer
             carte_txt3 = False
@@ -243,13 +219,13 @@ def gestion_des_prediction():
         #si le derniére id et rentrée on lance la vidéo de prediction avec le tts
         if id_futur is not None and lancement_effets == False:
             prediction = True
-            read_json.lecture_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
-            lancement_voix(read_json.lecture_json.prediction)
-            read_json.lecture_json.lectureDepuisJsonAvecInput(id_present, 'present')
-            lancement_voix(read_json.lecture_json.prediction)
-            read_json.lecture_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
-            lancement_voix(read_json.lecture_json.prediction)
-            read_json.lecture_json.fileObject.close()
+            script.json.recherche_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
+            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction)
+            script.json.recherche_json.lectureDepuisJsonAvecInput(id_present, 'present')
+            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction)
+            script.json.recherche_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
+            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction)
+            script.json.recherche_json.fileObject.close()
             prediction = False
             musique_de_fond.play(-1)
             voix_intro.play(-1)

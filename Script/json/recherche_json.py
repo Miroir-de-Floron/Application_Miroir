@@ -26,4 +26,5 @@ def rechercheUrlEtNom(nbTag):
     for i in range(len(obj_python2)):
         if(obj_python2[i]['tag'] == int(nbTag)):
             nom = obj_python2[i]['nom']
+            print(nom)
             return(obj_python2[i]['url'])
