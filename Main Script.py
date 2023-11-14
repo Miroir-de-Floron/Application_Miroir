@@ -32,6 +32,7 @@ def lire_video():
     global lancement_effets
     global recupération_temps
     global url
+    global prediction
  
     chemin_video = 'Ressource/Video/Fond.mp4'
 
@@ -69,6 +70,7 @@ def lire_video():
             continue
         frame_copy = frame.copy()
 
+
         # si l'effet et lancé on affiche l'image avec effet de blur
         if lancement_effets == True:
                 
@@ -81,13 +83,12 @@ def lire_video():
             centre_y = (hauteur_video - image_resized.shape[0]) // 2
 
             # on copie la vidéo defaut pour les modification
-            frame_copy = frame.copy()
             frame_copy_default = frame_copy.copy()
 
             ####################### Application effet de blur
 
             # on met un effet de flou à la vidéo originale
-            frame_copy_default = cv2.GaussianBlur(frame_copy_default, (0, 0), 10)
+            frame_copy_default = cv2.GaussianBlur(frame_copy_default, (0, 0), 1)
 
             # on superpose l'image sur la vidéo avec le blur
             frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1]] = image_resized
@@ -113,7 +114,28 @@ def lire_video():
                 print("mince")
                 recupération_temps = False
                 lancement_effets = False   
-                
+        
+        
+        if prediction == True:
+            
+            ####################### Application effet de blur
+            # on met un effet de flou à la vidéo originale
+            frame_copy= cv2.GaussianBlur(frame_copy, (0, 0), 10)
+
+            # Définir les propriétés du texte
+            police = cv2.FONT_HERSHEY_SIMPLEX
+            position = (50, 50)
+            taille_police = 1
+            couleur_police = (255, 255, 255)
+            espacement = 2
+
+            text = "test"
+            cv2.putText(frame_copy, text, position, police, taille_police, couleur_police, espacement)
+
+            #Ajouter effet
+
+            ##################################
+
 
          # on affiche la video
         cv2.imshow('Video', frame_copy)
