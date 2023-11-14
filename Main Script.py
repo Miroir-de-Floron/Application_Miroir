@@ -16,6 +16,7 @@ pygame.init()
 musique_de_fond = pygame.mixer.Sound("Ressource/Son/Musique_de_fond.mp3")
 voix_intro = pygame.mixer.Sound("Ressource/Son/voix_intro.mp3")
 
+prediction = False
 lancement_effets = False
 recupération_temps = False
 carte_txt1 = False
@@ -32,23 +33,16 @@ url = None
 ######################################################################################################
 
 
-def lire_video(type):
+def lire_video():
     global lancement_effets
     global recupération_temps
-    global video_de_prediction
     global url
  
-    if type == 1:
-        musique_de_fond.play(-1)
-        voix_intro.play(-1)
-        chemin_video = 'Ressource/Video/Fond.mp4'
+    chemin_video = 'Ressource/Video/Fond.mp4'
 
-    elif type == 2:
-        chemin_video = 'Ressource/Video/Carte.mp4'
-    else:
-        print("le Type ne correspond pas")
-        return
-
+    musique_de_fond.play(-1)
+    voix_intro.play(-1)
+   
     video = cv2.VideoCapture(chemin_video)
     
     #exception 
@@ -118,9 +112,9 @@ def lire_video(type):
             #on bloque la récupération du temps
             recupération_temps = True
 
-            #tant que les 4 seconde d'animation ne sont pas terminée on enléve aucun effet
+            #tant que les 5 seconde d'animation ne sont pas terminée on enléve aucun effet
             
-            if (datetime.datetime.now() - temp_actuelle).total_seconds() >= 6:  
+            if (datetime.datetime.now() - temp_actuelle).total_seconds() >= 5:  
                 print("mince")
                 recupération_temps = False
                 lancement_effets = False   
@@ -129,19 +123,10 @@ def lire_video(type):
          # on affiche la video
         cv2.imshow('Video', frame_copy)
 
-
-
         # Mettre la fenêtre en plein écran
         cv2.setWindowProperty('Video', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
-
-        if type == 1 and video_de_prediction == True:
-            break
-        elif type == 2 and video_de_prediction == False:
-            break
-
-
-        elif cv2.waitKey(25) & 0xFF == ord('q'):
+        if cv2.waitKey(25) & 0xFF == ord('q'):
             break
 
     # on libére les frame et on ferme la video
@@ -182,7 +167,7 @@ def tts_carte(carte_tag,id):
         voix_intro.play(-1)
 
 # Fonction pour la lecture des vidéos de prediction
-def lanceur_video_de_prediction():
+def gestion_des_prediction():
     global lancement_effets
     global id_passe
     global id_present
@@ -192,8 +177,8 @@ def lanceur_video_de_prediction():
     global carte_txt2
     global carte_txt3
   
-    #on récupère la valeur booléenne la video de prédiction
-    global video_de_prediction  
+    #on récupère la valeur booléenne de la prédiction
+    global prediction  
 
     while True:
 
@@ -257,8 +242,7 @@ def lanceur_video_de_prediction():
 
         #si le derniére id et rentrée on lance la vidéo de prediction avec le tts
         if id_futur is not None and lancement_effets == False:
-            print("ok")
-            video_de_prediction = True
+            prediction = True
             read_json.lecture_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
             lancement_voix(read_json.lecture_json.prediction)
             read_json.lecture_json.lectureDepuisJsonAvecInput(id_present, 'present')
@@ -266,48 +250,21 @@ def lanceur_video_de_prediction():
             read_json.lecture_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
             lancement_voix(read_json.lecture_json.prediction)
             read_json.lecture_json.fileObject.close()
+            prediction = False
+            musique_de_fond.play(-1)
+            voix_intro.play(-1)
             #une fois fini on remet tout à None pour pouvoir recommencer 
             id_passe = None
             id_present = None
             id_futur = None
-            video_de_prediction = False
                                  
         ### Pour Rfid
         #Card.listener_requete.Tab_id.clear()
         #Card.listener_requete.ligne_compteur = 0
 
 
-# Fonction pour la lecture de la vidéo d'introduction
-def lanceur_video_intro():
-
-    #on lance la video d'introduction
-    lire_video(1) 
-  
-    #on récupère la valeur booléenne de la video de prédiction
-    global video_de_prediction
-
-    #on crée un boolén pour savoir si la musique de fond est en cours de lecture ou non
-    joue_son = False 
-
-    while True:
-
-        #si la video de prediction ne tourne pas on lance la vidéo d'introduction et la musique de fond
-        if video_de_prediction == False and not joue_son:  
-            lire_video(1)
-            joue_son = True  
-        
-        #si la video de prédiction tourne on arrête la vidéo d'introduction et la musique de fond
-        if video_de_prediction == True :
-            musique_de_fond.stop()
-            voix_intro.stop()
-            joue_son = False
-            lire_video(2)
-            
-        #on attend 0.2 secondes avant de relancer la boucle
-        time.sleep(0.2)  
-
 # Création des threads et lancement des fonctions
-intro_thread = threading.Thread(target=lanceur_video_de_prediction)
+intro_thread = threading.Thread(target=gestion_des_prediction)
 intro_thread.start()
-prediction_thread = threading.Thread(target=lanceur_video_intro)
+prediction_thread = threading.Thread(target=lire_video)
 prediction_thread.start()
