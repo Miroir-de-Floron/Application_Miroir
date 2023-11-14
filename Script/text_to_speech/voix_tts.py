@@ -8,7 +8,7 @@ def annonce_carte(prediction,carte1,carte2,carte3):
     robot_prediction = pyttsx3.init() 
     robot_prediction.stop()
     print("tts en cours ")
-    robot_prediction.setProperty('rate', 135)
+    robot_prediction.setProperty('rate', 150)
     robot_prediction.setProperty('voice', 'fr+f5')
     robot_prediction.say(prediction)
     if carte1 == True:
@@ -24,7 +24,7 @@ def annonce_carte(prediction,carte1,carte2,carte3):
 def lancement_voix_de_prediction(prediction):
     robot_prediction = pyttsx3.init() 
     robot_prediction.stop()
-    robot_prediction.setProperty('rate', 105)
+    robot_prediction.setProperty('rate', 150)
     robot_prediction.setProperty('voice', 'fr+f5')
     robot_prediction.say(prediction)
     robot_prediction.runAndWait()

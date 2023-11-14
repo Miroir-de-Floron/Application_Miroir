@@ -26,6 +26,11 @@ id_present = None
 id_futur = None
 url = None
 
+nom_passe = None
+nom_present = None
+
+nom1 = False
+nom2 = False
 ######################################################################################################
 
 def lire_video():
@@ -33,6 +38,10 @@ def lire_video():
     global recupération_temps
     global url
     global prediction
+    global nom_passe
+    global nom_present
+    global nom1
+    global nom2
  
     chemin_video = 'Ressource/Video/Fond.mp4'
 
@@ -53,9 +62,6 @@ def lire_video():
     largeur_video = int(video.get(3))
     hauteur_video = int(video.get(4))
 
-    # on crée une video modfiée
-    type_video = cv2.VideoWriter_fourcc(*'mp4v')  
-    video_en_sotie = cv2.VideoWriter('Carte.mp4', type_video, fps, (int(video.get(3)), int(video.get(4))))
     
     # Créer une fenêtre
     cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
@@ -77,7 +83,7 @@ def lire_video():
             #On charge l'url
             image = cv2.imread(url)
             #on redimensionne l'image
-            image_resized = cv2.resize(image, (largeur_video// 2, hauteur_video // 2))
+            image_resized = cv2.resize(image, (largeur_video// 4, hauteur_video // 3))
             # on centre l image
             centre_x = (largeur_video - image_resized.shape[1]) // 2
             centre_y = (hauteur_video - image_resized.shape[0]) // 2
@@ -88,7 +94,7 @@ def lire_video():
             ####################### Application effet de blur
 
             # on met un effet de flou à la vidéo originale
-            frame_copy_default = cv2.GaussianBlur(frame_copy_default, (0, 0), 1)
+            frame_copy_default = cv2.GaussianBlur(frame_copy_default, (0, 0), 10)
 
             # on superpose l'image sur la vidéo avec le blur
             frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1]] = image_resized
@@ -97,9 +103,6 @@ def lire_video():
             frame_copy = frame_copy_default
 
             ##################################
-
-            frame = cv2.GaussianBlur(frame, (15, 15), 0)
-            video_en_sotie.write(frame)
             
             # on récupére le temps une seul fois 
             if recupération_temps == False :
@@ -124,16 +127,21 @@ def lire_video():
 
             # Définir les propriétés du texte
             police = cv2.FONT_HERSHEY_SIMPLEX
-            position = (50, 50)
-            taille_police = 1
+            position = (800, 500)
+            taille_police = 2
             couleur_police = (255, 255, 255)
             espacement = 2
 
-            text = "test"
+            if nom1 :
+                text = nom_passe
+            elif nom2 :
+                text = nom_present
+            else :    
+                text = script.json.recherche_json.nom
+
             cv2.putText(frame_copy, text, position, police, taille_police, couleur_police, espacement)
 
-            #Ajouter effet
-
+        
             ##################################
 
 
@@ -174,9 +182,13 @@ def gestion_des_prediction():
     global carte_txt1
     global carte_txt2
     global carte_txt3
+    global nom1
+    global nom2
   
     #on récupère la valeur booléenne de la prédiction
     global prediction  
+    global nom_passe
+    global nom_present
 
     while True:
 
@@ -199,6 +211,7 @@ def gestion_des_prediction():
 
             # on coupe le son le temps du tts d'anonce de carte
             tts_carte(script.json.recherche_json.nom,1)
+            nom_passe = script.json.recherche_json.nom
 
             #on indique que le passage de la carte passé et terminer
             carte_txt1 = False
@@ -215,6 +228,7 @@ def gestion_des_prediction():
 
             # on coupe le son le temps du tts d'anonce de carte
             tts_carte(script.json.recherche_json.nom,2)
+            nom_present = script.json.recherche_json.nom
 
             #on indique que le passage de la carte présent et terminer
             carte_txt2 = False
@@ -241,10 +255,14 @@ def gestion_des_prediction():
         #si le derniére id et rentrée on lance la vidéo de prediction avec le tts
         if id_futur is not None and lancement_effets == False:
             prediction = True
+            nom1 = True
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
             script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction)
+            nom1 = False
+            nom2 = True
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_present, 'present')
             script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction)
+            nom2 = False
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
             script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction)
             script.json.recherche_json.fileObject.close()
