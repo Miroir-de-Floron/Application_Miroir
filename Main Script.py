@@ -5,7 +5,7 @@ import pyttsx3
 import pygame
 import json
 import cv2
-
+import Script as read_json
 ############################################################################################### Déclaration
 # booléen pour savoir si une vidéo de prédiction est en cours de lecture ou non
 video_de_prediction = False
@@ -15,14 +15,6 @@ pygame.init()
 # on charge les fichiers audio de musique 
 musique_de_fond = pygame.mixer.Sound("Ressource/Son/Musique_de_fond.mp3")
 voix_intro = pygame.mixer.Sound("Ressource/Son/voix_intro.mp3")
-
-fileObject = open("Data/data.json", "r")
-jsonContent = fileObject.read()
-obj_python = json.loads(jsonContent)
-
-fileObject2 = open("Data/image.json", "r")
-jsonContent2 = fileObject2.read()
-obj_python2 = json.loads(jsonContent2)
 
 lancement_effets = False
 recupération_temps = False
@@ -34,7 +26,7 @@ id_passe = None
 id_present = None
 id_futur = None
 url = None
-nom = None
+
 
 
 ######################################################################################################
@@ -77,10 +69,6 @@ def lire_video(type):
     
     # Créer une fenêtre
     cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
-
-    # Variable pour contrôler l'affichage de l'image
-    afficher_image = False
-
    
     while True:
         #on lance les frame en boucle
@@ -91,10 +79,10 @@ def lire_video(type):
             video.set(cv2.CAP_PROP_POS_FRAMES, 0)
             continue
         frame_copy = frame.copy()
-    
-        # si un input et rentré on affiche l'image
-        if afficher_image == True :
-            
+
+        # si l'effet et lancé on affiche l'image avec effet de blur
+        if lancement_effets == True:
+                
             #On charge l'url
             image = cv2.imread(url)
             #on redimensionne l'image
@@ -120,26 +108,22 @@ def lire_video(type):
 
             ##################################
 
-        # si l'effet et lancé on affiche l'image avec effet de blur
-        if lancement_effets == True:
-                afficher_image = True
-                frame = cv2.GaussianBlur(frame, (15, 15), 0)
-                video_en_sotie.write(frame)
-                
-                # on récupére le temps une seul fois 
-                if recupération_temps == False :
-                    temp_actuelle= datetime.datetime.now()
+            frame = cv2.GaussianBlur(frame, (15, 15), 0)
+            video_en_sotie.write(frame)
+            
+            # on récupére le temps une seul fois 
+            if recupération_temps == False :
+                temp_actuelle= datetime.datetime.now()
 
-                #on bloque la récupération du temps
-                recupération_temps = True
+            #on bloque la récupération du temps
+            recupération_temps = True
 
-                #tant que les 4 seconde d'animation ne sont pas terminée on enléve aucun effet
-                
-                if (datetime.datetime.now() - temp_actuelle).total_seconds() >= 4:  
-                    print("mince")
-                    recupération_temps = False
-                    lancement_effets = False   
-                    afficher_image = False
+            #tant que les 4 seconde d'animation ne sont pas terminée on enléve aucun effet
+            
+            if (datetime.datetime.now() - temp_actuelle).total_seconds() >= 6:  
+                print("mince")
+                recupération_temps = False
+                lancement_effets = False   
                 
 
          # on affiche la video
@@ -187,26 +171,12 @@ def lancement_voix(prediction):
     robot_prediction.runAndWait()
     print("tts terminé")
 
-
-def lectureDepuisJsonAvecInput(nbTag, temps):
-    # On lance la vidéo de prédiction
-    for i in range(len(obj_python)):
-        if(obj_python[i]['tag'] == int(nbTag)):
-            print(obj_python[i]['nom'])
-            lancement_voix(obj_python[i]['prediction'][temps])
-
-def rechercheUrlEtNom(nbTag):
-    global nom
-    # On lance la vidéo de prédiction
-    for i in range(len(obj_python2)):
-        if(obj_python2[i]['tag'] == int(nbTag)):
-            nom = obj_python2[i]['nom']
-            return(obj_python2[i]['url'])
             
 def tts_carte(carte_tag,id):
     musique_de_fond.fadeout(1)
     voix_intro.fadeout(1)
     lancement_voix(carte_tag)
+    read_json.lecture_json.fileObject2.close()
     if id != 3:
         musique_de_fond.play(-1)
         voix_intro.play(-1)
@@ -217,8 +187,7 @@ def lanceur_video_de_prediction():
     global id_passe
     global id_present
     global id_futur
-    global url
-    global nom
+    global url 
     global carte_txt1
     global carte_txt2
     global carte_txt3
@@ -239,14 +208,14 @@ def lanceur_video_de_prediction():
         if id_passe == None :   
 
             id_passe = input()
-            url = rechercheUrlEtNom(id_passe)
+            url = read_json.lecture_json.rechercheUrlEtNom(id_passe)
 
             #on indique qu'on lance les effet de la carte et le tts
             lancement_effets = True
             carte_txt1 = True
 
             # on coupe le son le temps du tts d'anonce de carte
-            tts_carte(nom,1)
+            tts_carte(read_json.lecture_json.nom,1)
 
             #on indique que le passage de la carte passé et terminer
             carte_txt1 = False
@@ -255,14 +224,14 @@ def lanceur_video_de_prediction():
         if id_present is None and id_passe is not None and lancement_effets == False :
             
             id_present = input()
-            url = rechercheUrlEtNom(id_present) 
+            url = read_json.lecture_json.rechercheUrlEtNom(id_present) 
 
             #on indique qu'on lance les effet de la carte et le tts
             lancement_effets = True
             carte_txt2 = True
 
             # on coupe le son le temps du tts d'anonce de carte
-            tts_carte(nom,2)
+            tts_carte(read_json.lecture_json.nom,2)
 
             #on indique que le passage de la carte présent et terminer
             carte_txt2 = False
@@ -271,14 +240,14 @@ def lanceur_video_de_prediction():
         if id_futur is None and id_passe is not None and lancement_effets == False :
 
             id_futur = input()
-            url = rechercheUrlEtNom(id_futur)
+            url = read_json.lecture_json.rechercheUrlEtNom(id_futur)
 
             #on indique qu'on lance les effet de la carte et le tts
             lancement_effets = True
             carte_txt3 = True
             
             # on coupe le son le temps du tts d'anonce de carte
-            tts_carte(nom,3)
+            tts_carte(read_json.lecture_json.nom,3)
 
             #on indique que le passage de la carte futur et terminer
             carte_txt3 = False
@@ -288,10 +257,15 @@ def lanceur_video_de_prediction():
 
         #si le derniére id et rentrée on lance la vidéo de prediction avec le tts
         if id_futur is not None and lancement_effets == False:
+            print("ok")
             video_de_prediction = True
-            lectureDepuisJsonAvecInput(id_passe, 'passe')
-            lectureDepuisJsonAvecInput(id_present, 'passe')
-            lectureDepuisJsonAvecInput(id_futur, 'passe')
+            read_json.lecture_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
+            lancement_voix(read_json.lecture_json.prediction)
+            read_json.lecture_json.lectureDepuisJsonAvecInput(id_present, 'present')
+            lancement_voix(read_json.lecture_json.prediction)
+            read_json.lecture_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
+            lancement_voix(read_json.lecture_json.prediction)
+            read_json.lecture_json.fileObject.close()
             #une fois fini on remet tout à None pour pouvoir recommencer 
             id_passe = None
             id_present = None
@@ -316,13 +290,6 @@ def lanceur_video_intro():
     joue_son = False 
 
     while True:
-
-        # si les carte sont joué
-        if carte_txt1 == True :
-            musique_de_fond.stop()
-            voix_intro.stop()
-            joue_son = False
-
 
         #si la video de prediction ne tourne pas on lance la vidéo d'introduction et la musique de fond
         if video_de_prediction == False and not joue_son:  
