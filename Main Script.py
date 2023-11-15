@@ -12,7 +12,7 @@ pygame.init()
 
 # on charge les fichiers audio de musique 
 musique_de_fond = pygame.mixer.Sound("Ressource/Son/Musique_de_fond.mp3")
-voix_intro = pygame.mixer.Sound("Ressource/Son/voix_intro.mp3")
+pygame.mixer.music.set_volume(0.2)
 
 prediction = False
 lancement_effets = False
@@ -31,6 +31,8 @@ nom_present = None
 
 nom1 = False
 nom2 = False
+
+stop = False
 ######################################################################################################
 
 def lire_video():
@@ -47,7 +49,6 @@ def lire_video():
     chemin_fumée = 'Ressource/Video/Fumee.mov'
 
     musique_de_fond.play(-1)
-    voix_intro.play(-1)
    
     video = cv2.VideoCapture(chemin_video)
     video_fumée = cv2.VideoCapture(chemin_fumée)
@@ -69,6 +70,7 @@ def lire_video():
     cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
    
     while True:
+
         #on lance les frame en boucle
         ret, frame = video.read()
         ret_fumee, frame_fumée = video_fumée.read()
@@ -144,6 +146,8 @@ def lire_video():
             else :    
                 text = script.json.recherche_json.nom
 
+            text = text.encode('utf-8').decode('utf-8')   
+
             cv2.putText(frame_copy, text, position, police, taille_police, couleur_police, espacement)
 
         
@@ -177,14 +181,14 @@ def tts_carte(carte_tag,id):
     global carte_txt1
     global carte_txt2
     global carte_txt3
+    global stop
 
     musique_de_fond.fadeout(1)
-    voix_intro.fadeout(1)
+    stop = True
     script.text_to_speech.voix_tts.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
     script.json.recherche_json.fileObject2.close()
     if id != 3:
         musique_de_fond.play(-1)
-        voix_intro.play(-1)
 
 # Fonction pour la lecture des vidéos de prediction
 def gestion_des_prediction():
@@ -282,7 +286,7 @@ def gestion_des_prediction():
             script.json.recherche_json.fileObject.close()
             prediction = False
             musique_de_fond.play(-1)
-            voix_intro.play(-1)
+            #voix_intro.play(-1)
             #une fois fini on remet tout à None pour pouvoir recommencer 
             id_passe = None
             id_present = None
@@ -292,9 +296,18 @@ def gestion_des_prediction():
         #Card.listener_requete.Tab_id.clear()
         #Card.listener_requete.ligne_compteur = 0
 
+def musique():
+     while True:
+        if script.text_to_speech.voix_tts.flag == False :
+            script.text_to_speech.voix_tts.voix_introduction()
+            time.sleep(25)
 
+
+     
 # Création des threads et lancement des fonctions
 intro_thread = threading.Thread(target=gestion_des_prediction)
 intro_thread.start()
 prediction_thread = threading.Thread(target=lire_video)
 prediction_thread.start()
+musique_thread = threading.Thread(target=musique)
+musique_thread.start() 
