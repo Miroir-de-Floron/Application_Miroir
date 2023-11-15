@@ -1,10 +1,10 @@
 import json
 
-fileObject = open("Data/data.json", "r")
+fileObject = open("Data/data.json", "r", encoding="utf-8")
 jsonContent = fileObject.read()
 obj_python = json.loads(jsonContent)
 
-fileObject2 = open("Data/image.json", "r")
+fileObject2 = open("Data/image.json", "r", encoding="utf-8")
 jsonContent2 = fileObject2.read()
 obj_python2 = json.loads(jsonContent2)
 

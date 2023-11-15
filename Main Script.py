@@ -44,11 +44,13 @@ def lire_video():
     global nom2
  
     chemin_video = 'Ressource/Video/Fond.mp4'
+    chemin_fumée = 'Ressource/Video/Fumee.mov'
 
     musique_de_fond.play(-1)
     voix_intro.play(-1)
    
     video = cv2.VideoCapture(chemin_video)
+    video_fumée = cv2.VideoCapture(chemin_fumée)
     
     #exception 
     if not video.isOpened():
@@ -69,10 +71,12 @@ def lire_video():
     while True:
         #on lance les frame en boucle
         ret, frame = video.read()
+        ret_fumee, frame_fumée = video_fumée.read()
 
         # si on et en fin de vidéo on boucle la vidéo
-        if not ret:
+        if not ret or not ret_fumee:
             video.set(cv2.CAP_PROP_POS_FRAMES, 0)
+            video_fumée.set(cv2.CAP_PROP_POS_FRAMES, 0)
             continue
         frame_copy = frame.copy()
 
@@ -101,7 +105,7 @@ def lire_video():
 
             #on mix les deux copie pour exlure le flou de l'image
             frame_copy = frame_copy_default
-
+            
             ##################################
             
             # on récupére le temps une seul fois 
@@ -122,8 +126,9 @@ def lire_video():
         if prediction == True:
             
             ####################### Application effet de blur
-            # on met un effet de flou à la vidéo originale
-            frame_copy= cv2.GaussianBlur(frame_copy, (0, 0), 10)
+                # on lance les effets
+            frame_copy = effets(frame_copy,frame_fumée)
+
 
             # Définir les propriétés du texte
             police = cv2.FONT_HERSHEY_SIMPLEX
@@ -145,6 +150,8 @@ def lire_video():
             ##################################
 
 
+
+    
          # on affiche la video
         cv2.imshow('Video', frame_copy)
 
@@ -156,9 +163,16 @@ def lire_video():
 
     # on libére les frame et on ferme la video
     video.release()
+    video_fumée.release()
     cv2.destroyAllWindows()
 
-   
+def effets(frame_copy,frame_fumée):
+    global prediction
+    if prediction == True :
+        frame_fumée_resized = cv2.resize(frame_fumée, (frame_copy.shape[1], frame_copy.shape[0]))
+        return cv2.addWeighted(frame_copy, 0.5, frame_fumée_resized, 0.5, 0)
+    return frame_copy
+
 def tts_carte(carte_tag,id):
     global carte_txt1
     global carte_txt2
