@@ -45,7 +45,7 @@ def lire_video():
     global nom1
     global nom2
  
-    chemin_video = 'Ressource/Video/Fond.mp4'
+    chemin_video = 'Ressource/Video/voyante.mp4'
     chemin_fumée = 'Ressource/Video/Fumee.mov'
 
     musique_de_fond.play(-1)
@@ -209,20 +209,25 @@ def gestion_des_prediction():
     global nom_present
 
     while True:
+        print("ok cbon")
 
         ### Pour Rfid
         #on récupére la méthode de l'observateur
-        #import Arduino as Card
-        #Card.listener_requete.get_id()
+        import Arduino as Card
+        print("ok cbon2")
+        Card.listener_requete.get_id()
+        
 
         #on récupére les donnée du tableau de l'observateur
 
-        #si il n'y a pas d'id passé on rentre un tag
-        if id_passe == None :   
+        if id_passe == None :
+            #si il n'y a pas d'id passé on rentre un tag
+            print("longeur",len(Card.listener_requete.Tab_id))
 
-            id_passe = input()
+            id_passe = Card.listener_requete.Tab_id[0]
+            print(id_present)
+
             url = script.json.recherche_json.rechercheUrlEtNom(id_passe)
-
             #on indique qu'on lance les effet de la carte et le tts
             lancement_effets = True
             carte_txt1 = True
@@ -237,7 +242,7 @@ def gestion_des_prediction():
         #si il n'y a pas d'id present et que le précedent à était rentrée on rentre l'id présent
         if id_present is None and id_passe is not None and lancement_effets == False :
             
-            id_present = input()
+            id_present = Card.listener_requete.Tab_id[1]
             url = script.json.recherche_json.rechercheUrlEtNom(id_present) 
 
             #on indique qu'on lance les effet de la carte et le tts
@@ -254,7 +259,7 @@ def gestion_des_prediction():
         #si il n'y a pas d'id futur et que le précedent à était rentrée on rentre l'id futur
         if id_futur is None and id_passe is not None and lancement_effets == False :
 
-            id_futur = input()
+            id_futur = Card.listener_requete.Tab_id[2]
             url = script.json.recherche_json.rechercheUrlEtNom(id_futur)
 
             #on indique qu'on lance les effet de la carte et le tts
@@ -267,11 +272,7 @@ def gestion_des_prediction():
             #on indique que le passage de la carte futur et terminer
             carte_txt3 = False
 
-        ### Pour Rfid
-        #if(len(Card.listener_requete.Tab_id) == 3):
-
-        #si le derniére id et rentrée on lance la vidéo de prediction avec le tts
-        if id_futur is not None and lancement_effets == False:
+            print("on et laaaaaaaa")
             prediction = True
             nom1 = True
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
@@ -293,8 +294,8 @@ def gestion_des_prediction():
             id_futur = None
                                  
         ### Pour Rfid
-        #Card.listener_requete.Tab_id.clear()
-        #Card.listener_requete.ligne_compteur = 0
+            Card.listener_requete.Tab_id.clear()
+            Card.listener_requete.ligne_compteur = 0
 
 def musique():
      while True:

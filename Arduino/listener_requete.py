@@ -49,6 +49,7 @@ def get_id():
                 #on vérifie si l'élement n'est pas dans le tableau
                 if result not in Tab_id :
                     Tab_id.append(result)
+                    print(result)
 
             else:
                 print("ligne n'a pas de valeur")
@@ -57,7 +58,7 @@ def get_id():
         
             
         #on sort si le tableau d'id et égale à 3
-        if(len(Tab_id) == 3):
+        if(len(Tab_id) >= 1):
             print("Sortie de boucle")
             break
             
