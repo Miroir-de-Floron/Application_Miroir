@@ -1,15 +1,19 @@
 # fichier1.py
 import serial
 import subprocess
+import time
 Tab_id = []
 ligne_compteur = 0
+exception_tableau = False
+result = None
 
 def get_id():
     global Tab_id
     global ligne_compteur
+    global exception_tableau
 
     ser = serial.Serial('/dev/ttyACM0', 9600) 
-
+    time.sleep(1)
     while True:
         #on lit une ligne du serial qui correpons à l'id uniquement
         ligne = ser.readline()
@@ -18,6 +22,7 @@ def get_id():
     
         #on vérifie toute les possibilité à l'aide d'un switch case des carte qui peuvent etre utilisée
         def switch_case(ligne):
+            global result
             switch_dict = {
                 b"83156130233000000\r\n": 0,
                 b"17913821233000000\r\n": 1,
@@ -59,6 +64,6 @@ def get_id():
             
         #on sort si le tableau d'id et égale à 3
         if(len(Tab_id) >= 1):
-            print("Sortie de boucle")
+            print("Sortie de boucle",Tab_id)
             break
             
