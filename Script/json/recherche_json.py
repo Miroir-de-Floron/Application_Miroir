@@ -9,6 +9,7 @@ jsonContent2 = fileObject2.read()
 obj_python2 = json.loads(jsonContent2)
 
 nom = None
+color = None
 prediction = None
 
 
@@ -22,9 +23,11 @@ def lectureDepuisJsonAvecInput(nbTag, temps):
 
 def rechercheUrlEtNom(nbTag):
     global nom
+    global color
     print("le tag et",nbTag)
     # On lance la vidéo de prédiction
     for i in range(len(obj_python2)):
         if(obj_python2[i]['tag'] == int(nbTag)):
             nom = obj_python2[i]['nom']
+            color = obj_python2[i]['color']
             return(obj_python2[i]['url'])

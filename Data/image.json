@@ -2,111 +2,134 @@
     {
         "tag":0,
         "nom":"Le Fou",
-        "url":"Ressource/image/fou.png"
+        "url":"Ressource/image/fou.png",
+        "color":"LAB2BGR"
+        
     },
     {
         "tag":1,
         "nom":"Le Magicien",
-        "url":"Ressource/image/magicien.jpeg"
+        "url":"Ressource/image/magicien.jpeg",
+        "color":"LAB2BGR"
     },
     {
         "tag":2,
         "nom":"La Papesse",
-        "url":"Ressource/image/papesse.jpg"
+        "url":"Ressource/image/papesse.jpg",
+        "color":"LUV2BGR"
     },
     {
         "tag":3,
         "nom":"L’Impératrice",
-        "url":"Ressource/image/imperatrice.jpg"
+        "url":"Ressource/image/imperatrice.jpg",
+        "color":"LUV2BGR"
     },
     {
         "tag":4,
         "nom":"L’Empereur",
-        "url":"Ressource/image/empereur.jpg"
+        "url":"Ressource/image/empereur.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":5,
         "nom":"Le Pape",
-        "url":"Ressource/image/pape.png"
+        "url":"Ressource/image/pape.png",
+        "color":"HSV2RGB"
     },
     {
         "tag":6,
         "nom":"Les Amoureux",
-        "url":"Ressource/image/amoureux.png"
+        "url":"Ressource/image/amoureux.png",
+        "color":"HSV2RGB"
     },
     {
         "tag":7,
         "nom":"Le Chariot",
-        "url":"Ressource/image/chariot.jpg"
+        "url":"Ressource/image/chariot.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":8,
         "nom":"La Justice",
-        "url":"Ressource/image/justice.jpeg"
+        "url":"Ressource/image/justice.jpeg",
+        "color":"HSV2RGB"
     },
     {
         "tag":9,
         "nom":"L’Ermite",
-        "url":"Ressource/image/ermite.png"
+        "url":"Ressource/image/ermite.png",
+        "color":"HSV2RGB"
     },
     {
         "tag":10,
         "nom":"La Roue de Fortune",
-        "url":"Ressource/image/roue.png"
+        "url":"Ressource/image/roue.png",
+        "color":"HSV2RGB"
     },
     {
         "tag":11,
         "nom":"La Force",
-        "url":"Ressource/image/force.jpg"
+        "url":"Ressource/image/force.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":12,
         "nom":"Le Pendu",
-        "url":"Ressource/image/pendu.png"
+        "url":"Ressource/image/pendu.png",
+        "color":"HSV2RGB"
     },
     {
         "tag":13,
         "nom":"La Mort",
-        "url":"Ressource/image/mort.jpg"
+        "url":"Ressource/image/mort.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":14,
         "nom":"La Tempérance",
-        "url":"Ressource/image/tempérance.jpg"
+        "url":"Ressource/image/tempérance.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":15,
         "nom":"Le Diable",
-        "url":"Ressource/image/tempérance.jpg"
+        "url":"Ressource/image/tempérance.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":16,
         "nom":"La Maison-Dieu",
-        "url":"Ressource/image/tempérance.jpg"
+        "url":"Ressource/image/tempérance.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":17,
         "nom":"L’Étoile",
-        "url":"Ressource/image/étoile.jpg"
+        "url":"Ressource/image/étoile.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":18,
         "nom":"La Lune",
-        "url":"Ressource/image/lune.jpg"
+        "url":"Ressource/image/lune.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":19,
         "nom":"Le Soleil",
-        "url":"Ressource/image/soleil.jpg"
+        "url":"Ressource/image/soleil.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":20,
         "nom":"La Renaissance",
-        "url":"Ressource/image/renaissance.jpg"
+        "url":"Ressource/image/renaissance.jpg",
+        "color":"HSV2RGB"
     },
     {
         "tag":21,
         "nom":"Le Monde",
-        "url":"Ressource/image/le_monde.png"
+        "url":"Ressource/image/le_monde.png",
+        "color":"HSV2RGB"
     }
 ]

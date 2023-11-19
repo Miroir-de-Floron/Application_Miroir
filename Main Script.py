@@ -7,6 +7,7 @@ import psutil
 import os
 import signal
 import Script as script
+
 ############################################################################################### Déclaration
 
 # booléen pour savoir si une vidéo de prédiction est en cours de lecture ou non
@@ -20,7 +21,6 @@ musique_de_fond.set_volume(0.3)
 
 prediction = False
 lancement_effets = False
-recupération_temps = False
 carte_txt1 = False
 carte_txt2 = False
 carte_txt3 = False
@@ -41,39 +41,60 @@ nom_futur = False
 ######################################################################################################
 
 def lire_video():
+
+    ############################################################################## Utilisation de variable commmune
+    #variable booléene pour la gestion des effets
     global lancement_effets
-    global recupération_temps
+    
+    # variable contenant l'url de l'image de la carte
     global url_image_carte
+
+    #variable booléene pour savoir si la prédiction et en cours
     global prediction
+
+
+    # variables qui contienent le nom des carte selon le temp
     global affiche_nom_passe
     global affiche_nom_present
     global affiche_nom_futur
+
+    # variables booléene pour savoir quel nom de carte afficher
     global nom_passe
     global nom_present
     global nom_futur
- 
+
+    ############################################################################## 
+
+    ############################################################################## Déclaration
+
+    #Chemin pour les ressources vidéo
     chemin_video = 'Ressource/Video/Fond.mp4'
     chemin_fumée = 'Ressource/Video/Fumee.mov'
+    
+    #variable booléene pour vérifier si c'est le moment de récupérer le temp ou non
+    recupération_temps = False
 
+
+    #On lance la musique de fond en boucle
     musique_de_fond.play(-1)
    
+    #on initialise les vidéo à la bibliothéque cv2
     video = cv2.VideoCapture(chemin_video)
     video_fumée = cv2.VideoCapture(chemin_fumée)
-    
-    #exception 
-    if not video.isOpened():
-        print("La vidéo ne s'ouvre pas")
-        return
-    
-    # fréquence d'images par seconde
-    fps = video.get(cv2.CAP_PROP_FPS)
-
+   
     # on récupere kes coordonée de la video
     largeur_video = int(video.get(3))
     hauteur_video = int(video.get(4))
-
     
-    # Créer une fenêtre
+    ############################################################################## 
+    
+    
+    #exception si l'url de la vidéo n'est pas bonne
+    if not video.isOpened():
+        print("La vidéo ne s'ouvre pas")
+        return
+
+    #On crée une fenêtre
     cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
    
     while True:
@@ -88,6 +109,8 @@ def lire_video():
             video_fumée.set(cv2.CAP_PROP_POS_FRAMES, 0)
             continue
         frame_copy = frame.copy()
+
+        cv2.imshow('Video', frame_copy)
 
 
         # si l'effet et lancé on affiche l'image avec effet de blur
@@ -129,6 +152,8 @@ def lire_video():
             if (datetime.datetime.now() - temp_actuelle).total_seconds() >= 5:  
                 recupération_temps = False
                 lancement_effets = False   
+
+            cv2.imshow('Video', frame_copy)
         
         
         if prediction == True:
@@ -138,7 +163,7 @@ def lire_video():
             frame_copy = effets(frame_copy,frame_fumée)
 
 
-            # Définir les propriétés du texte
+            # on défini les propriétés du texte
             police = cv2.FONT_HERSHEY_SIMPLEX
             position = (800, 500)
             taille_police = 2
@@ -156,14 +181,16 @@ def lire_video():
 
             text = text.encode('utf-8').decode('utf-8')   
 
-            cv2.putText(frame_copy, text, position, police, taille_police, couleur_police, espacement)
+            color = script.json.recherche_json.color
+            couleur_opencv = getattr(cv2, f"COLOR_{color}")
+            frame_color = cv2.cvtColor(frame_copy, couleur_opencv)
+            cv2.putText(frame_color, text, position, police, taille_police, couleur_police, espacement)
+            
 
-        
+            cv2.imshow('Video', frame_color)
             ##################################
     
-         # on affiche la video
-        cv2.imshow('Video', frame_copy)
-
+        
         # Mettre la fenêtre en plein écran
         cv2.setWindowProperty('Video', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
