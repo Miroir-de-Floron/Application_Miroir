@@ -6,18 +6,36 @@ Tab_id = []
 ligne_compteur = 0
 exception_tableau = False
 result = None
+arduino_brancher = True
+ligne = 0
+
 
 def get_id():
     global Tab_id
     global ligne_compteur
     global exception_tableau
+    global ligne
 
-    ser = serial.Serial('/dev/ttyACM0', 9600) 
+    try:
+        ser = serial.Serial('/dev/ttyACM0', 9600)
+    except:
+        arduino_brancher = False
+
     time.sleep(1)
     while True:
-        #on lit une ligne du serial qui correpons à l'id uniquement
-        ligne = ser.readline()
-        ligne_compteur+= 1
+        # si la arduino est branché nous executons le code si dessous 
+        if arduino_brancher:
+            #on lit une ligne du serial qui correpons à l'id uniquement
+            ligne = ser.readline()
+            ligne_compteur+= 1
+        # sinon nous demandons des entrées au clavier
+        else:
+            print("veillez entré un nombre entre 0 et 21")
+            result = int(input()) 
+            ligne_compteur+= 1
+            if result not in Tab_id :
+                    Tab_id.append(result)
+                    print(result)
 
     
         #on vérifie toute les possibilité à l'aide d'un switch case des carte qui peuvent etre utilisée
@@ -49,7 +67,7 @@ def get_id():
                 
             }
             
-            if ligne in switch_dict:
+            if ligne in switch_dict and arduino_brancher:
                 result = switch_dict[ligne]
                 #on vérifie si l'élement n'est pas dans le tableau
                 if result not in Tab_id :
