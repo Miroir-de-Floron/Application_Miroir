@@ -7,6 +7,7 @@ import psutil
 import os
 import signal
 import Script as script
+from waiting import wait
 
 ############################################################################################### Déclaration
 
@@ -16,8 +17,8 @@ video_de_prediction = False
 pygame.init()
 
 # on charge les fichiers audio de musique 
-musique_de_fond = pygame.mixer.Sound("Ressource/Son/Musique_de_fond.mp3")
-musique_de_fond.set_volume(0.3)
+# musique_de_fond = pygame.mixer.Sound("Ressource/Son/Musique_de_fond.mp3")
+# musique_de_fond.set_volume(0.2)
 
 prediction = False
 lancement_effets = False
@@ -68,7 +69,7 @@ def lire_video():
     ############################################################################## Déclaration
 
     #Chemin pour les ressources vidéo
-    chemin_video = 'Ressource/Video/Fond.mp4'
+    chemin_video = 'Ressource/Video/voyante.mp4'
     chemin_fumée = 'Ressource/Video/Fumee.mov'
     
     #variable booléene pour vérifier si c'est le moment de récupérer le temp ou non
@@ -76,7 +77,7 @@ def lire_video():
 
 
     #On lance la musique de fond en boucle
-    musique_de_fond.play(-1)
+    # musique_de_fond.play(-1)
    
     #on initialise les vidéo à la bibliothéque cv2
     video = cv2.VideoCapture(chemin_video)
@@ -214,7 +215,7 @@ def tts_carte(carte_tag):
     global carte_txt2
     global carte_txt3
 
-    musique_de_fond.fadeout(1)
+    # musique_de_fond.fadeout(1)
     script.text_to_speech.voix_tts.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
     script.json.recherche_json.fileObject2.close()
   
@@ -267,12 +268,12 @@ def gestion_des_prediction():
     ############################################################################## 
 
     while True:
-        
 
         import Arduino as Card
         #on récupére les donnée du tableau de l'observateur
         Card.listener_requete.get_id()
-
+        global voix_intro_flag
+        voix_intro_flag = False
 
         #si l'id du passée n'existe pas on affecte la valeur de l'id passe au premiére id du tableau
         if id_passe is None :
@@ -303,11 +304,6 @@ def gestion_des_prediction():
         # si l'id du passé et non null ,que l'id du présent n'a pas était encore rentré et que on et jamais rentré dans cette condition
         #on peut donc jouer les animation pour le passé
         if id_passe is not None and id_present is None and fin_passe == False :
-            
-            #on tue le processus tts en cours
-            get_pid_and_kill()
-            #on attend que le processus soit bien tuer
-            time.sleep(0.5)
 
             url_image_carte = script.json.recherche_json.rechercheUrlEtNom(id_passe)
             
@@ -335,12 +331,6 @@ def gestion_des_prediction():
             nom_passe = False
             carte_txt1 = False
 
-            #on crée et on démarre un nouveau thread car l'ancien à était tuer pour avoir la voix d'introduction qui tourne
-            voix_intro_thread1 = threading.Thread(target=voix_intro)
-            voix_intro_thread1.start()
-
-            #on attend que la voix d'intro soit bien lancer
-            time.sleep(1)
             # on indique l'animation present peut etre lancée
             declencheur_present= True
             #on attend un peu
@@ -348,18 +338,12 @@ def gestion_des_prediction():
             #on indique que l'on peut plus passée ici tant que les trois prédiction n'ont pas était dite
             fin_passe = True
 
-            musique_de_fond.play(-1)
-
-
+            # musique_de_fond.play(-1)
 
         # si l'id du présent et non null ,que l'id du futur n'a pas était encore rentré et que on et jamais rentré dans cette condition
         #on peut donc jouer les animation pour le présent
         if id_present is not None and id_futur is None and fin_present == False and fin_futur == False:
 
-            #on tue le processus tts en cours
-            get_pid_and_kill()
-            #on attend que le processus soit bien tuer
-            time.sleep(0.5)
 
             url_image_carte = script.json.recherche_json.rechercheUrlEtNom(id_present)
             
@@ -387,12 +371,6 @@ def gestion_des_prediction():
             nom_present= False
             carte_txt2 = False
 
-            #on crée et on démarre un nouveau thread car l'ancien à était tuer pour avoir la voix d'introduction qui tourne
-            voix_intro_thread2 = threading.Thread(target=voix_intro)
-            voix_intro_thread2.start()
-
-            #on attend que la voix d'intro soit bien lancer
-            time.sleep(1)
             # on indique l'animation present peut etre lancée
             declencheur_futur= True
             #on attend un peu
@@ -400,15 +378,13 @@ def gestion_des_prediction():
             #on indique que l'on peut plus passée ici tant que les trois prédiction n'ont pas était dite
             fin_present = True
 
-            musique_de_fond.play(-1)
+            # musique_de_fond.play(-1)
 
 
         #si l'id du futur n'est pas null
         #on peut donc jouer les animation pour le futur
         if id_futur is not None :
 
-           #on tue le processus tts en cours
-            get_pid_and_kill()
             #on attend que le processus soit bien tuer
             time.sleep(0.5)
 
@@ -438,10 +414,6 @@ def gestion_des_prediction():
             nom_futur= False
             carte_txt3 = False
 
-            #on crée et on démarre un nouveau thread car l'ancien à était tuer pour avoir la voix d'introduction qui tourne
-            voix_intro_thread3 = threading.Thread(target=voix_intro)
-            voix_intro_thread3.start()
-
 
             # comme les prédiction sont terminée on reset toutes les variable (id,tableau et flag de condition)
             id_passe = None
@@ -458,36 +430,28 @@ def gestion_des_prediction():
             fin_present = False
             fin_futur= False
 
-            musique_de_fond.play(-1)
+            voix_intro_flag = True
+            # musique_de_fond.play(-1)
             
             
             
-            
+#les voix ce chevauche mais c'est réglabe (je pense)   
 def voix_intro():
-     # tant que les carte ne sont pas passée et que l'animation n'est pas en cour la voix d'intro tourne
-     while carte_txt1 == False and carte_txt2 == False and carte_txt3 == False:
-        if script.text_to_speech.voix_tts.flag == False :
-            script.text_to_speech.voix_tts.voix_introduction()
-            time.sleep(3)
+    global voix_intro_flag
+    voix_intro_flag = True
+    chanel_d_intro = script.text_to_speech.voix_tts.voix_introduction()
+    stoped = False
+    while True:
+        if voix_intro_flag:
+            if not chanel_d_intro.get_busy():
+                time.sleep(20)
+                chanel_d_intro = script.text_to_speech.voix_tts.voix_introduction()
+        else : 
+            if not stoped:
+                chanel_d_intro.stop()
+                stoped = True
 
 
-def get_pid_and_kill():
-    #on récupére le nom du process à tuer
-    process_nom = 'aplay'
-    #on boucle sur le process
-    for process in psutil.process_iter(['pid', 'name', 'cmdline']):
-        try:
-            #on récupere le nom du processus en cours
-            if process.info['name'] == process_nom or (process.info['cmdline'] and len(process.info['cmdline']) > 1 and process.info['cmdline'][1] == process_nom):
-                #on récupere le pid du process
-                pid = process.info['pid']
-                #on tue le process tts
-                os.kill(pid, signal.SIGTERM)
-                return pid
-        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-            pass
-
-    return None
 
 
 # Création des threads et lancement des fonctions

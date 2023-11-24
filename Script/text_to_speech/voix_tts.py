@@ -1,43 +1,48 @@
 import pyttsx3
 from random import *
 import psutil
-
+import pygame
+from waiting import wait
 
 flag = False
 robot_introduction = None
 # fonction(threader) pour lancer le TTS de la prédiction
-def annonce_carte(prediction,carte1,carte2,carte3):
-
-    robot_annonce = pyttsx3.init() 
-    robot_annonce.stop()
-    print("tts en cours ")
-    robot_annonce.setProperty('rate', 150)
-    robot_annonce.setProperty('voice', 'fr+f5')
-    robot_annonce.say(prediction)
+def annonce_carte(urlNomCarte,carte1,carte2,carte3):
+    voix_de_nom = pygame.mixer.Sound(urlNomCarte)
+    chanel_de_nom = voix_de_nom.play()
+    wait(lambda:audioFinished(chanel_de_nom))
     if carte1 == True:
-        robot_annonce.say("vien d'étre piocher voici votre prédiction du passé")
+        voix_de_nom_passe = pygame.mixer.Sound("Ressource/Son/nom_passe.mp3")
+        chanel_de_nom_passe = voix_de_nom_passe.play()
+        wait(lambda:audioFinished(chanel_de_nom_passe))
     if carte2 == True:
-        robot_annonce.say("vien d'étre piocher voici votre prédiction du présent")
+        voix_de_nom_present = pygame.mixer.Sound("Ressource/Son/nom_present.mp3")
+        chanel_de_nom_present = voix_de_nom_present.play()
+        wait(lambda:audioFinished(chanel_de_nom_present))
     if carte3 == True:
-        robot_annonce.say("vien d'étre piocher voici votre prédiction du futur")
-    robot_annonce.runAndWait()
-    print("tts terminé")
+        voix_de_nom_futur = pygame.mixer.Sound("Ressource/Son/nom_futur.mp3")
+        chanel_de_nom_futur = voix_de_nom_futur.play()
+        wait(lambda:audioFinished(chanel_de_nom_futur))
+
 
 # fonction(threader) pour lancer le TTS de la prédiction
 def lancement_voix_de_prediction(prediction,carte1,carte2,carte3):
-    robot_prediction = pyttsx3.init() 
-    robot_prediction.stop()
-    robot_prediction.setProperty('rate', 150)
-    robot_prediction.setProperty('voice', 'fr+f5')
-    robot_prediction.say(prediction)
+    voix_de_prediction = pygame.mixer.Sound(prediction)
+    chanel_de_prediction = voix_de_prediction.play()
+    wait(lambda:audioFinished(chanel_de_prediction))
     
     if carte1 == True:
-        robot_prediction.say("Si vous voulez savoir votre prediction du présent et du futur ,il vous reste maintenant deux carte à piocher")
+        voix_de_prediction_passe = pygame.mixer.Sound("Ressource/Son/prediction_passe.mp3")
+        chanel_de_prediction_passe = voix_de_prediction_passe.play()
+        wait(lambda:audioFinished(chanel_de_prediction_passe))
     if carte2 == True:
-        robot_prediction.say("Si vous voulez savoir votre prediction du futur ,il vous reste maintenant une carte à piocher")
+        voix_de_prediction_present = pygame.mixer.Sound("Ressource/Son/prediction_present.mp3")
+        chanel_de_prediction_present = voix_de_prediction_present.play()
+        wait(lambda:audioFinished(chanel_de_prediction_present))
     if carte3 == True:
-        robot_prediction.say("vos prédiction sont faite aux revoir")
-    robot_prediction.runAndWait()
+        voix_de_prediction_futur = pygame.mixer.Sound("Ressource/Son/prediction_futur.mp3")
+        chanel_de_prediction_futur = voix_de_prediction_futur.play()
+        wait(lambda:audioFinished(chanel_de_prediction_futur))
 
 
 def voix_introduction():
@@ -46,23 +51,31 @@ def voix_introduction():
 
     texte = None
     global flag
-    texte_actif = "Approchez, n’ayez crainte, vous êtes en présence de la voyante. Brave sont ceux qui souhaitent faire face à leurs destins... Vos réponses face à l’adversité pourraient se trouver au sein de ces cartes. Le passé, le présent et le futur 3 carte vous devrais tirer pour desceller la vérité."
-    texte_inactif = ["Je suis reflet de ce qui vous est étrangé serez vous capable de venir vous présenter.","Les options sont à votre portée, 3 vous devrez en tirer.","Miroir, Miroir..."]
-   
+    intro_texts = ["texte_actif.mp3", "texte_inactif_1.mp3", "texte_inactif_2.mp3", "texte_inactif_3.mp3"]
+
+    texte = intro_texts[0]
     n = randint(0,100)
 
-    if(n <75):
-        texte = texte_actif
-    else :
-        texte = choice(texte_inactif)
+    if n < 75:
+        texte = intro_texts[0]
+    elif n < 85 :
+        texte = intro_texts[1]
+    elif n < 95 :
+        texte = intro_texts[2]
+    elif n > 95 :
+        texte = intro_texts[3]
+    else : 
+        print("probleme voix d'intro")
 
     flag = True
-    robot_introduction = pyttsx3.init() 
-    robot_introduction.setProperty('rate', 150)
-    robot_introduction.setProperty('voice', 'fr+f5')
-    robot_introduction.say(texte)
-    robot_introduction.runAndWait()
+    voix_d_intro = pygame.mixer.Sound("Ressource/Son/"+texte)
+    chanel_d_intro = voix_d_intro.play()
+    return chanel_d_intro
     flag = False
 
 
 
+def audioFinished( chanel ):
+    if not chanel.get_busy():
+        return True
+    return False

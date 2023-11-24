@@ -3,198 +3,198 @@
         "tag":0,
         "nom":"Le Fou",
         "prediction":{
-            "passe":"Les événements passés ont été caractérisés par une période de spontanéité, d’innocence ou de prises de risques audacieuses. Un nouveau chapitre de votre vie, c’est ouvert.",
-            "present":"Une période propice à un nouveau départ ou à des aventures spontanées. Vous êtes  peut-être dans une phase de votre vie où vous abordez les choses avec confiance et optimisme. L’aventure et découverte sont le maître-mot.",
-            "futur":"Dans une nouvelle perspective d’un départ, voyage et opportunités d’exploration. Vous aborderez le futur avec confiance, optimisme et une attitude ouverte."
+            "passe":"Ressource/Son/fou_prediction_passe.mp3",
+            "present":"Ressource/Son/fou_prediction_present.mp3",
+            "futur":"Ressource/Son/fou_prediction_futur.mp3"
         }
     },
     {
         "tag":1,
         "nom":"Le Magicien",
         "prediction":{
-            "passe":"Le passé a pu impliquer la mise en œuvre de vos compétences, de ressources et de talents pour réaliser des objectifs ou des projets.",
-            "present":"Manifester vos désirs et à utiliser vos compétences de manière créative. Vous êtes prêt à prendre des mesures concrètes pour atteindre vos objectifs.",
-            "futur":"Vous serez acteur capable de manifester des résultats concrets. Mettez à profit vos capacités."
+            "passe":"Ressource/Son/magicien_prediction_passe.mp3",
+            "present":"Ressource/Son/magicien_prediction_present.mp3",
+            "futur":"Ressource/Son/magicien_prediction_futur.mp3"
         }
     },
     {
         "tag":2,
         "nom":"La Papesse",
         "prediction":{
-            "passe":"Des moments d’intuition profonde ont traversé votre passé. Un désir d’exploration des mystères ou de l’inconscients.",
-            "present":"Vous êtes actuellement en harmonie avec votre intuition et votre sagesse intérieure. Vous êtes attiré par l’exploration de sujets mystérieux ou spirituels.",
-            "futur":"Une remise en question et de nouveaux intérêts sont naissant. L’intuition et votre sagesse intérieure continueront de vous guider dans le futur."
+            "passe":"Ressource/Son/papesse_prediction_passe.mp3",
+            "present":"Ressource/Son/papesse_prediction_present.mp3",
+            "futur":"Ressource/Son/papesse_prediction_futur.mp3"
         }
     },
     {
         "tag":3,
         "nom":"L’Impératrice",
         "prediction":{
-            "passe":"Fertilité créative et de croissance personnelle ont traversé votre passé. Vous avez fait l’expérience liées à l’abondance, à la protection, stabilité.",
-            "present":"Vous êtes dans une phase de votre vie où vous prenez soin des autres et de vous-même, développez des projets créatifs. Votre présent est marqué par un sentiment d’abondance et de fertilité.",
-            "futur":"Les jours à venir seront marqués par la bienveillance, le développement de projets créatifs et la promotion de la croissance. Préparez-vous à une période d’abondance et de prospérité. Le divin féminin vous gracie"
+            "passe":"Ressource/Son/imperatrice_prediction_passe.mp3",
+            "present":"Ressource/Son/imperatrice_prediction_present.mp3",
+            "futur":"Ressource/Son/imperatrice_prediction_futur.mp3"
         }
     },
     {
         "tag":4,
         "nom":"L’Empereur",
         "prediction":{
-            "passe":"Vous avez pu être influencé ou fait preuve d’une figure d’autorité. La structure et des décisions de leadership on été assuré avec confiance face aux différentes situations.",
-            "present":"Vous exercez une autorité, mettre en place une structure dans votre vie actuelle. Une capacité à prendre des décisions et à diriger menant à bien vos objectifs.",
-            "futur":"Vous établirez une structure solide qui développera votre autorité. Votre capacité à prendre des décisions et à diriger sera une force dominante."
+            "passe":"Ressource/Son/empereur_prediction_passe.mp3",
+            "present":"Ressource/Son/empereur_prediction_present.mp3",
+            "futur":"Ressource/Son/empereur_prediction_futur.mp3"
         }
     },
     {
         "tag":5,
         "nom":"Le Pape",
         "prediction":{
-            "passe":" Dans le passé, il y a peut-être eu une influence de la tradition ou de la spiritualité dans votre vie. Cette carte suggère que vous avez peut-être cherché la guidance d’une figure spirituelle ou d’un enseignant.",
-            "present":"Vous êtes en train de suivre des traditions ou de recevoir un enseignement spirituel ou moral. Vous poursuivez dans une phase qui utilise des normes ou des règles établies.",
-            "futur":"Vous serez en position de guide, transmission de votre savoir. Une figure de sagesse croise votre chemin vous tournant vers des anciennes mémoires."
+            "passe":"Ressource/Son/pape_prediction_passe.mp3",
+            "present":"Ressource/Son/pape_prediction_present.mp3",
+            "futur":"Ressource/Son/pape_prediction_futur.mp3"
         }
     },
     {
         "tag":6,
         "nom":"Les Amoureux",
         "prediction":{
-            "passe":"Vous avez dû faire des choix importants concernant relations, d’amour ou de partenariats. Des expériences passées ont été liées à l’union, à la connexion et à la compréhension profonde avec l’autre.",
-            "present":"Dés à présent des décisions importantes liées aux relations, à l’amour ou aux partenariats. Vous êtes en période d’harmonie avec votre partenaire ou vous ferez une rencontre, une connexion qui aboutira sur le début d’un lien.",
-            "futur":"Vous croiserez à l’avenir, de nouveaux être sure votre route. Fortifier vos liens avec vos ou votre aimer. Des décisions significatives qui impacteront votre vie pour un meilleur équilibre."
+            "passe":"Ressource/Son/amoureux_prediction_passe.mp3",
+            "present":"Ressource/Son/amoureux_prediction_present.mp3",
+            "futur":"Ressource/Son/amoureux_prediction_futur.mp3"
         }
     },
     {
         "tag":7,
         "nom":"Le Chariot",
         "prediction":{
-            "passe":"Vous avez fait preuve de détermination, de volonté et de contrôle pour atteindre vos objectifs. Ayant pu surmonter des obstacles et avancer malgré les défis.",
-            "present":"Vous êtes dans une phase où votre détermination vous mène vers la victoire et le succès. En pleine mesure de contrôler des aspects importants de votre vie actuelle",
-            "futur":"Faisans preuve d’endurance et de courage vous triompherais de votre situation. Vous saurez maintenir un contrôle efficace sur les aspects essentiels de votre vie future."
+            "passe":"Ressource/Son/chariot_prediction_passe.mp3",
+            "present":"Ressource/Son/chariot_prediction_present.mp3",
+            "futur":"Ressource/Son/amoureux_prediction_futur.mp3"
         }
     },
     {
         "tag":8,
         "nom":"La Justice",
         "prediction":{
-            "passe":"Une recherche d’équilibre, la justice et la justesse dans vos actions et vos décisions. Vous avez pu prendre conscient des conséquences. La providence a pu trancher sur votre devenir.",
-            "present":"La justice impartiale analyse votre situation. Vous prenez des décisions justes et assumer la responsabilité de vos actions.",
-            "futur":"Le juste croise votre route à venir, l’équité et la vérité seront les maîtres-mots. Trancher de façon raisonner vos décisions."
+            "passe":"Ressource/Son/justice_prediction_passe.mp3",
+            "present":"Ressource/Son/justice_prediction_present.mp3",
+            "futur":"Ressource/Son/justicce_prediction_futur.mp3"
         }
     },
     {
         "tag":9,
         "nom":"L’Ermite",
         "prediction":{
-            "passe":"Recherche des réponses à l’intérieur de vous-même, à la recherche de la sagesse intérieure. Vous avez trouvé de la valeur dans la solitude et l’introspection pour résoudre vos problèmes.",
-            "present":"Le temps est à la rétrospection, une phase de recherche intérieure, c’est une période de solitude nécessaire pour trouver des réponses. Marqué par la sagesse qui émerge de la réflexion intérieure.",
-            "futur":"Vous serez amené à vous à explorer votre monde intérieur en quête de réponses. Faire un point sur les conséquences de vos actions, une introspective pour vous recentrer"
+            "passe":"Ressource/Son/ermite_prediction_passe.mp3",
+            "present":"Ressource/Son/ermite_prediction_present.mp3",
+            "futur":"Ressource/Son/ermite_prediction_futur.mp3"
         }
     },
     {
         "tag":10,
         "nom":"La Roue de Fortune",
         "prediction":{
-            "passe":"Vous avez été marqué par des changements majeurs, les aléas vous ont mis dans des positions de challenge avec des tournants inattendus.",
-            "present":"Vous saisissez des opportunités qui se présentent à vous. Période qui demande de la flexibilité pour recevoir la récompense qui vous revient",
-            "futur":"Des cycles de changement sont à l’horizon, il est nécessaire de faire preuve d’adaptation. La roue karmique tourne déterminant les récompenses ou obstacle que vous surmonterais."
+            "passe":"Ressource/Son/roue_de_fortune_prediction_passe.mp3",
+            "present":"Ressource/Son/roue_de_fortune_prediction_present.mp3",
+            "futur":"Ressource/Son/roue_de_fortune_prediction_futur.mp3"
         }
     },
     {
         "tag":11,
         "nom":"La Force",
         "prediction":{
-            "passe":"Vous avez fait preuve de force intérieure et de courage nécessaire pour surmonter des obstacles ou des défis.",
-            "present":"Vous pouvez être capable de maîtriser vos émotions et de les utiliser de manière constructive. Un souffle d’énergie vous pousse à avancer, prêt à lutter pour vos objectifs.",
-            "futur":"Votre force intérieure vous aidera à surmonter les obstacles à l’horizon. Vous maintiendrez le contrôle de vos émotions et les utiliserez de manière constructive."
+            "passe":"Ressource/Son/force_prediction_passe.mp3",
+            "present":"Ressource/Son/force_prediction_present.mp3",
+            "futur":"Ressource/Son/force_prediction_futur.mp3"
         }
     },
     {
         "tag":12,
         "nom":"Le Pendu",
         "prediction":{
-            "passe":"Lâcher-prise : Vous avez dû lâcher prise sur une situation, d’une idée ou d’une croyance qui ne vous servait plus. Vous avez acquis une nouvelle perspective ou une compréhension plus profonde en suspendant le jugement.",
-            "present":"On vous demande de lâcher prise et de regarder les choses sous un nouvel angle, éviter de vous acharner sur une situation. Vous devez intégrer une réalité pour mieux l’appréhender, vous permettent une libération.",
-            "futur":"Une période de relâche pointe à l’horizon de nouvelles perspectives et idées en émergeront. La patience est amenée à se développer, rien ne sert de vous précipiter, pour comprendre une situation, car l’erreur peut être facile."
+            "passe":"Ressource/Son/pendu_prediction_passe.mp3",
+            "present":"Ressource/Son/pendu_prediction_present.mp3",
+            "futur":"Ressource/Son/pendu_prediction_futur.mp3"
         }
     },
     {
         "tag":13,
         "nom":"La Mort",
         "prediction":{
-            "passe":"Une transformation ou une fin significative, ce qui a ouvert la voie à de nouvelles opportunités. Vous avez coupé avec des influences qui ne vous servaient plus.",
-            "present":"Vous traversez un bouleversement, des liens sont amenés à se briser pour faire place au nouveau. Une purification salvatrice pour vous libérer de ce qui vous pèse et ne sert plus.",
-            "futur":"Vous allez entamer la fin d’un cycle, vous libérer de liens qui ne vous serviront plus. Accueillez le renouveau et les opportunités qui arriveront."
+            "passe":"Ressource/Son/mort_prediction_passe.mp3",
+            "present":"Ressource/Son/mort_prediction_present.mp3",
+            "futur":"Ressource/Son/mort_prediction_futur.mp3"
         }
     },
     {
         "tag":14,
         "nom":"La Tempérance",
         "prediction":{
-            "passe":"Le passé a pu être marqué par la recherche d’un équilibre, d’harmonie et de modération dans divers aspects de votre vie.",
-            "present":"La patience est source de vertu afin de permettre un équilibre et développement des différents aspects de votre vie.",
-            "futur":"L’équilibre, l’harmonie et la modération continueront d’être recherchés dans votre vie future. Vous travaillerez à réconcilier des éléments opposés de votre existence."
+            "passe":"Ressource/Son/temperance_prediction_passe.mp3",
+            "present":"Ressource/Son/temperance_prediction_present.mp3",
+            "futur":"Ressource/Son/temperance_prediction_futur.mp3"
         }
     },
     {
         "tag":15,
         "nom":"Le Diable",
         "prediction":{
-            "passe":"Pendant votre vie, vous avez été exposé à des influences ou un comportement excessif, addiction ou toxicité. Vous avez décidé de créer un renouveau et de mettre fin à ce cycle qui ne vous entrave pas votre route.",
-            "present":"Vous faites face à des tentations ou à des attachements qui vous empêchent d’avancer. Vous êtes conscient des forces qui vous retiennent et chercher à vous en libérer.",
-            "futur":"Le diable est symbole de comportement excessif et d’addiction. Certaines relations ou habitude ne sont plus saines ainsi, vous allez en prendre conscient déjouant des pièges potentiels a éviter."
+            "passe":"Ressource/Son/diable_prediction_passe.mp3",
+            "present":"Ressource/Son/diable_prediction_present.mp3",
+            "futur":"Ressource/Son/diable_prediction_futur.mp3"
         }
     },
     {
         "tag":16,
         "nom":"La Maison-Dieu",
         "prediction":{
-            "passe":"Il y a eu un bouleversement majeur ou une crise dans votre vie, qui a peut-être entraîné des changements radicaux. L’adaptation fut abrupte, faite table rase pour reconstruire des bases solides.",
-            "present":"Effondrement et le bouleversement soudains exigent un réveil ou un changement radical. Vous êtes en prise de conscience vous libérant de structures ou de croyances obsolètes.",
-            "futur":"Préparez-vous à effondrement des structure et fondation de votre vision. Car votre vision est limitée par certaines croyances qui deviendront obsolètes. Un changement radical de votre situation est nécessaire"
+            "passe":"Ressource/Son/maison_dieu_prediction_passe.mp3",
+            "present":"Ressource/Son/maison_dieu_prediction_present.mp3",
+            "futur":"Ressource/Son/maison_dieu_prediction_futur.mp3"
         }
     },
     {
         "tag":17,
         "nom":"L’Étoile",
         "prediction":{
-            "passe":"Vous étiez emplis d’espoir, d’inspiration et de foi en un avenir meilleur. Suivant des objectifs ou des rêves qui ont une influence en suivi votre guidance intérieure et votre intuition pour prendre des décisions importantes.",
-            "present":"L’espoir et l’inspiration preuve de votre foi les jours avenir seront meilleurs. Poursuivez vos objectifs et rêves qui ont une place importante à vos yeux.",
-            "futur":" L’étoile de l’espoir s’élève dans votre ciel de futur. Poursuivez avec confiance vous regagnerais votre inspiration et ressources pour réaliser vos rêves."
+            "passe":"Ressource/Son/etoile_prediction_passe.mp3",
+            "present":"Ressource/Son/etoile_prediction_present.mp3",
+            "futur":"Ressource/Son/etoile_prediction_futur.mp3"
         }
     },
     {
         "tag":18,
         "nom":"La Lune",
         "prediction":{
-            "passe":"Vous avez suivi avec confiance votre intuition. Des émotions profondes et des rêves ont joué un rôle significatif. Vous avez traversé des périodes de transformation intérieure ou de croissance spirituelle.",
-            "present":"Connectez-vous à votre intuition, à vos émotions profondes et à vos rêves. Vous pourriez être confronté à des situations ambiguës ou à des mystères à résoudre.",
-            "futur":"Vos rêves sont porteurs de message, ils proviennent de votre inconscient et subconscient. Ces signes doivent être décryptés par votre intuition. Vous pourriez faire face à des situations ambiguës ou mystérieuses dans votre futur."
+            "passe":"Ressource/Son/lune_prediction_passe.mp3",
+            "present":"Ressource/Son/lune_prediction_present.mp3",
+            "futur":"Ressource/Son/lune_prediction_futur.mp3"
         }
     },
     {
         "tag":19,
         "nom":"Le Soleil",
         "prediction":{
-            "passe":"Vous avez travers un chemin lumineux, marqué par le succès et le triomphe. Vous avez trouvé des réponses par rapport à des questions ou des défis passés.",
-            "present":"Le présent comporte des moments de joie, de bonheur et de clarté. Vous pourriez vous sentir radieux et optimiste. Vous êtes en phase de réussite personnelle et de succès.",
-            "futur":"Vous serez illuminé avec clarté par le soleil irradiant de lumière. Vous rayonneriez porté par le succès ainsi enfin récolterez les graines semées."
+            "passe":"Ressource/Son/soleil_prediction_passe.mp3",
+            "present":"Ressource/Son/soleil_prediction_present.mp3",
+            "futur":"Ressource/Son/soleil_prediction_futur.mp3"
         }
     },
     {
         "tag":20,
         "nom":"La Renaissance",
         "prediction":{
-            "passe":"Il y a eu un moment où vous avez ressenti le besoin de vous éveiller sur vos actions passées ou spirituellement. Cette carte suggère que vous avez pu passer en revue et évaluer les éléments qui ont impacté des décisions importantes.",
-            "present":"Un réveil spirituel permet de réévaluer des aspects importants de votre vie. Vous verrez sous un nouveau regard certaines situation ainsi prendre des décisions basées sur une compréhension plus profonde.",
-            "futur":"Après avoir traversé les ombres vous passez à la lumière. Une renaissance, éveil de votre conscience vous permet d’accueillir de nouvelle expérience dans votre vie"
+            "passe":"Ressource/Son/renaissance_prediction_passe.mp3",
+            "present":"Ressource/Son/renaissance_prediction_present.mp3",
+            "futur":"Ressource/Son/renaissance_prediction_futur.mp3"
         }
     },
     {
         "tag":21,
         "nom":"Le Monde",
         "prediction":{
-            "passe":"Dans le passé, vous avez peut-être atteint un objectif important, réalisé un rêve. C’est un chapitre de votre vie que vous avez conclu, une phase significative vous permettant de démarre sur de nouveaux objectifs.",
-            "present":"Le présent est une période d’accomplissement et de réalisation personnelle. Vous pouvez vous sentir comblé. Vous pourriez être en train de clôturer un chapitre important de votre vie pour passer à quelque chose de nouveau.",
-            "futur":"Le futur apportera des réalisations personnelles et un sentiment d’accomplissement. Vous clôturerez des chapitres et embrasserez de nouveaux départs."
+            "passe":"Ressource/Son/monde_prediction_passe.mp3",
+            "present":"Ressource/Son/monde_prediction_present.mp3",
+            "futur":"Ressource/Son/monde_prediction_futur.mp3"
         }
     }
 ]

@@ -1,4 +1,3 @@
-# fichier1.py
 import serial
 import subprocess
 import time
@@ -84,4 +83,3 @@ def get_id():
         if(len(Tab_id) >= 1):
             print("Sortie de boucle",Tab_id)
             break
-            
