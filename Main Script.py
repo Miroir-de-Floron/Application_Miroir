@@ -17,8 +17,6 @@ video_de_prediction = False
 pygame.init()
 
 # on charge les fichiers audio de musique 
-# musique_de_fond = pygame.mixer.Sound("Ressource/Son/Musique_de_fond.mp3")
-# musique_de_fond.set_volume(0.2)
 
 prediction = False
 lancement_effets = False
@@ -74,16 +72,12 @@ def lire_video():
     
     #variable booléene pour vérifier si c'est le moment de récupérer le temp ou non
     recupération_temps = False
-
-
-    #On lance la musique de fond en boucle
-    # musique_de_fond.play(-1)
    
     #on initialise les vidéo à la bibliothéque cv2
     video = cv2.VideoCapture(chemin_video)
     video_fumée = cv2.VideoCapture(chemin_fumée)
    
-    # on récupere kes coordonée de la video
+    # on récupere les coordonée de la video
     largeur_video = int(video.get(3))
     hauteur_video = int(video.get(4))
     
@@ -104,7 +98,7 @@ def lire_video():
         ret, frame = video.read()
         ret_fumee, frame_fumée = video_fumée.read()
 
-        # si on et en fin de vidéo on boucle la vidéo
+        # si on est en fin de vidéo on boucle la vidéo
         if not ret or not ret_fumee:
             video.set(cv2.CAP_PROP_POS_FRAMES, 0)
             video_fumée.set(cv2.CAP_PROP_POS_FRAMES, 0)
@@ -114,7 +108,7 @@ def lire_video():
         cv2.imshow('Video', frame_copy)
 
 
-        # si l'effet et lancé on affiche l'image avec effet de blur
+        # si l'effet est lancé on affiche l'image avec effet de blur
         if lancement_effets == True:
                 
             #On charge l'url_image_carte
@@ -160,7 +154,7 @@ def lire_video():
         if prediction == True:
             
             ####################### Application effet de blur
-                # on lance les effets
+            # on lance les effets
             frame_copy = effets(frame_copy,frame_fumée)
 
 
@@ -217,7 +211,7 @@ def tts_carte(carte_tag):
 
     # musique_de_fond.fadeout(1)
     script.text_to_speech.voix_tts.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
-    script.json.recherche_json.fileObject2.close()
+    script.json.recherche_json.fileObject.close()
   
 
 # Fonction pour la lecture des vidéos de prediction
@@ -261,7 +255,7 @@ def gestion_des_prediction():
     declencheur_present= False
     declencheur_futur = False
 
-    #variables booléene qui permetent de savoir si les annonce (passe,present et futur) on était réalisé
+    #variables booléene qui permetent de savoir si les annonces (passe,present et futur) on était réalisé
     fin_passe = False
     fin_present = False
     fin_futur = False
@@ -279,7 +273,7 @@ def gestion_des_prediction():
         if id_passe is None :
             id_passe = Card.listener_requete.Tab_id[0]
 
-        #si l'id du passée existe , que le déclencheur de l'évenement présent et activer et que le resultat renvoyé et différent de l'id affecter précedement
+        #si l'id du passée existe , que le déclencheur de l'évenement présent est activer et que le resultat renvoyé est différent de l'id affecter précedement
         #on affecte la valeur de l'id present au deuxiéme id du tableau
         if id_passe is not None and declencheur_present== True and Card.listener_requete.result != id_passe:
             id_present = Card.listener_requete.Tab_id[1]
@@ -288,7 +282,7 @@ def gestion_des_prediction():
         else :
             print("le tableau n'est pas à la bonne taille car vous avez rentrez deux fois la même carte")
 
-        #si l'id du présent existe , que le déclencheur de l'évenement futur et activer et que le resultat renvoyé et différent de l'id affecter précedement
+        #si l'id du présent existe , que le déclencheur de l'évenement futur est activer et que le resultat renvoyé est différent de l'id affecter précedement
         #on affecte la valeur de l'id futur au troisiéme id du tableau
         if id_present is not None and declencheur_futur == True and Card.listener_requete.result != id_present :
 
@@ -301,7 +295,7 @@ def gestion_des_prediction():
     
 
 
-        # si l'id du passé et non null ,que l'id du présent n'a pas était encore rentré et que on et jamais rentré dans cette condition
+        # si l'id du passé est non null ,que l'id du présent n'a pas était encore rentré et que on est jamais rentré dans cette condition
         #on peut donc jouer les animation pour le passé
         if id_passe is not None and id_present is None and fin_passe == False :
 
@@ -314,10 +308,10 @@ def gestion_des_prediction():
             # on lance le tts d'annonce de carte
             tts_carte(script.json.recherche_json.nom)
 
-            #on indique quel et le nom de la carte passé
+            #on indique quel est le nom de la carte passé
             affiche_nom_passe = script.json.recherche_json.nom
 
-            #on annonce que la prediction et en cours
+            #on annonce que la prediction est en cours
             prediction = True
             #on indique quel nom doit etre afficher
             nom_passe = True
@@ -326,7 +320,7 @@ def gestion_des_prediction():
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
             script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
-            #on enleve tout les précedent effet
+            #on enleve tout les précedents effets
             prediction = False
             nom_passe = False
             carte_txt1 = False
@@ -340,7 +334,7 @@ def gestion_des_prediction():
 
             # musique_de_fond.play(-1)
 
-        # si l'id du présent et non null ,que l'id du futur n'a pas était encore rentré et que on et jamais rentré dans cette condition
+        # si l'id du présent est non null ,que l'id du futur n'a pas était encore rentré et que on est jamais rentré dans cette condition
         #on peut donc jouer les animation pour le présent
         if id_present is not None and id_futur is None and fin_present == False and fin_futur == False:
 
@@ -354,7 +348,7 @@ def gestion_des_prediction():
             # on lance le tts d'annonce de carte
             tts_carte(script.json.recherche_json.nom)
 
-            #on indique quel et le nom de la carte présent
+            #on indique quel est le nom de la carte présent
             affiche_nom_present = script.json.recherche_json.nom
 
             #on annonce que la prediction et en cours
@@ -378,8 +372,6 @@ def gestion_des_prediction():
             #on indique que l'on peut plus passée ici tant que les trois prédiction n'ont pas était dite
             fin_present = True
 
-            # musique_de_fond.play(-1)
-
 
         #si l'id du futur n'est pas null
         #on peut donc jouer les animation pour le futur
@@ -397,7 +389,7 @@ def gestion_des_prediction():
             # on lance le tts d'annonce de carte
             tts_carte(script.json.recherche_json.nom)
 
-            #on indique quel et le nom de la carte futur
+            #on indique quel est le nom de la carte futur
             affiche_nom_futur = script.json.recherche_json.nom
 
             #on annonce que la prediction et en cours
@@ -409,18 +401,19 @@ def gestion_des_prediction():
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
             script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
-            #on enleve tout les précedent effet
+            #on enleve tout les précedents effets
             prediction = False
             nom_futur= False
             carte_txt3 = False
 
 
-            # comme les prédiction sont terminée on reset toutes les variable (id,tableau et flag de condition)
+            # comme les prédictions sont terminée on reset toutes les variables (id,tableau et flag de condition)
             id_passe = None
             id_present = None
             id_futur = None
         
             Card.listener_requete.Tab_id.clear()
+            
             #compteur de ligne dans le serial monitor remi à zero
             Card.listener_requete.ligne_compteur = 0
 
@@ -431,7 +424,6 @@ def gestion_des_prediction():
             fin_futur= False
 
             voix_intro_flag = True
-            # musique_de_fond.play(-1)
             
             
             
