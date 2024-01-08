@@ -7,7 +7,6 @@ import psutil
 import os
 import signal
 import Script as script
-from waiting import wait
 
 ############################################################################################### Déclaration
 
@@ -29,13 +28,6 @@ id_present = None
 id_futur = None
 url_image_carte = None
 
-affiche_nom_passe = None
-affiche_nom_present = None
-affiche_nom_futur = None
-
-nom_passe = False
-nom_present = False
-nom_futur = False
 
 ######################################################################################################
 
@@ -52,15 +44,6 @@ def lire_video():
     global prediction
 
 
-    # variables qui contienent le nom des carte selon le temp
-    global affiche_nom_passe
-    global affiche_nom_present
-    global affiche_nom_futur
-
-    # variables booléene pour savoir quel nom de carte afficher
-    global nom_passe
-    global nom_present
-    global nom_futur
 
     ############################################################################## 
 
@@ -110,27 +93,33 @@ def lire_video():
 
         # si l'effet est lancé on affiche l'image avec effet de blur
         if lancement_effets == True:
-                
+            
             #On charge l'url_image_carte
-            image = cv2.imread(url_image_carte)
+            image = cv2.imread(url_image_carte, cv2.IMREAD_UNCHANGED)
+
             #on redimensionne l'image
-            image_resized = cv2.resize(image, (largeur_video// 4, hauteur_video // 3))
+            image_resized = cv2.resize(image, (largeur_video//4, hauteur_video//3))
+
             # on centre l image
             centre_x = (largeur_video - image_resized.shape[1]) // 2
             centre_y = (hauteur_video - image_resized.shape[0]) // 2
 
-            # on copie la vidéo defaut pour les modification
+             # on copie la vidéo defaut pour les modification
             frame_copy_default = frame_copy.copy()
 
-            ####################### Application effet de blur
-
-            # on met un effet de flou à la vidéo originale
+            #On applique les effets de blur
             frame_copy_default = cv2.GaussianBlur(frame_copy_default, (0, 0), 10)
 
-            # on superpose l'image sur la vidéo avec le blur
-            frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1]] = image_resized
+            # On récuper le canal alpha de l'image PNG
+            alpha_channel = image_resized[:, :, 3] / 255.0
 
-            #on mix les deux copie pour exlure le flou de l'image
+            # On superpose l'image avec la transparence du png
+            for c in range(0, 3):
+                frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] = \
+                    (1 - alpha_channel) * frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] + \
+                    alpha_channel * image_resized[:, :, c]
+
+            # On mixe les deux copies pour exclure le flou de l'image
             frame_copy = frame_copy_default
             
             ##################################
@@ -153,36 +142,45 @@ def lire_video():
         
         if prediction == True:
             
-            ####################### Application effet de blur
+            ###################### Application effet de blur
             # on lance les effets
-            frame_copy = effets(frame_copy,frame_fumée)
-
-
-            # on défini les propriétés du texte
-            police = cv2.FONT_HERSHEY_SIMPLEX
-            position = (800, 500)
-            taille_police = 2
-            couleur_police = (255, 255, 255)
-            espacement = 2
-
-            if nom_passe :
-                text = affiche_nom_passe
-            elif nom_present :
-                text = affiche_nom_present
-            elif nom_futur :
-                text = affiche_nom_futur
-            else :    
-                text = script.json.recherche_json.nom
-
-            text = text.encode('utf-8').decode('utf-8')   
+            frame_copy = effets(frame_copy, frame_fumée)
 
             color = script.json.recherche_json.color
             couleur_opencv = getattr(cv2, f"COLOR_{color}")
             frame_color = cv2.cvtColor(frame_copy, couleur_opencv)
-            cv2.putText(frame_color, text, position, police, taille_police, couleur_police, espacement)
-            
 
-            cv2.imshow('Video', frame_color)
+            # On charge l'url_image_carte
+            image = cv2.imread(url_image_carte, cv2.IMREAD_UNCHANGED)
+
+            # On redimensionne l'image
+            image_resized = cv2.resize(image, (largeur_video//4, hauteur_video//3))
+
+            # On centre l'image
+            centre_x = (largeur_video - image_resized.shape[1]) // 2
+            centre_y = (hauteur_video - image_resized.shape[0]) // 2
+
+            # On copie la vidéo defaut pour les modifications
+            frame_copy_default = frame_copy.copy()
+
+            # On applique les effets de blur
+            frame_copy_default = cv2.GaussianBlur(frame_copy_default, (0, 0), 10)
+
+            # On récupère le canal alpha de l'image PNG
+            alpha_channel = image_resized[:, :, 3] / 255.0
+
+            # On superpose l'image avec la transparence du png
+            for c in range(0, 3):
+                frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] = \
+                    (1 - alpha_channel) * frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] + \
+                    alpha_channel * image_resized[:, :, c]
+
+            # On utilise addWeighted pour fusionner les deux  frame donc effet de couleur et image
+            frame_result = cv2.addWeighted(frame_color, 0.5, frame_copy_default, 0.5, 0)
+
+            cv2.imshow('Video', frame_result)
+                    
+
             ##################################
     
         
@@ -237,15 +235,7 @@ def gestion_des_prediction():
     #variable booléene pour savoir si la prédiction et en cours
     global prediction 
 
-    # variables booléene pour savoir quel nom de carte afficher
-    global nom_passe
-    global nom_present
-    global nom_futur
 
-    # variables qui contienent le nom des carte selon le temp
-    global affiche_nom_passe
-    global affiche_nom_present
-    global affiche_nom_futur
 
     ##############################################################################
 
@@ -308,13 +298,10 @@ def gestion_des_prediction():
             # on lance le tts d'annonce de carte
             tts_carte(script.json.recherche_json.nom)
 
-            #on indique quel est le nom de la carte passé
-            affiche_nom_passe = script.json.recherche_json.nom
 
             #on annonce que la prediction est en cours
             prediction = True
-            #on indique quel nom doit etre afficher
-            nom_passe = True
+          
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
@@ -322,7 +309,6 @@ def gestion_des_prediction():
             
             #on enleve tout les précedents effets
             prediction = False
-            nom_passe = False
             carte_txt1 = False
 
             # on indique l'animation present peut etre lancée
@@ -348,13 +334,11 @@ def gestion_des_prediction():
             # on lance le tts d'annonce de carte
             tts_carte(script.json.recherche_json.nom)
 
-            #on indique quel est le nom de la carte présent
-            affiche_nom_present = script.json.recherche_json.nom
+
 
             #on annonce que la prediction et en cours
             prediction = True
-            #on indique quel nom doit etre afficher
-            nom_present = True
+
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_present, 'present')
@@ -362,7 +346,6 @@ def gestion_des_prediction():
             
             #on enleve tout les précedent effet
             prediction = False
-            nom_present= False
             carte_txt2 = False
 
             # on indique l'animation present peut etre lancée
@@ -389,13 +372,10 @@ def gestion_des_prediction():
             # on lance le tts d'annonce de carte
             tts_carte(script.json.recherche_json.nom)
 
-            #on indique quel est le nom de la carte futur
-            affiche_nom_futur = script.json.recherche_json.nom
+           
 
             #on annonce que la prediction et en cours
             prediction = True
-            #on indique quel nom doit etre afficher
-            nom_futur = True
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
@@ -403,7 +383,6 @@ def gestion_des_prediction():
             
             #on enleve tout les précedents effets
             prediction = False
-            nom_futur= False
             carte_txt3 = False
 
 

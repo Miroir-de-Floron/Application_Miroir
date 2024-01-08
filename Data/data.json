@@ -13,7 +13,7 @@
     {
         "tag":1,
         "nom":"Ressource/Son/magicien_nom.mp3",
-        "url":"Ressource/image/magicien.jpeg",
+        "url":"Ressource/image/magicien.png",
         "color":"LAB2BGR",
         "prediction":{
             "passe":"Ressource/Son/magicien_prediction_passe.mp3",
@@ -24,7 +24,7 @@
     {
         "tag":2,
         "nom":"Ressource/Son/papesse_nom.mp3",
-        "url":"Ressource/image/papesse.jpg",
+        "url":"Ressource/image/papesse.png",
         "color":"LUV2BGR",
         "prediction":{
             "passe":"Ressource/Son/papesse_prediction_passe.mp3",
@@ -35,7 +35,7 @@
     {
         "tag":3,
         "nom":"Ressource/Son/imperatrice_nom.mp3",
-        "url":"Ressource/image/imperatrice.jpg",
+        "url":"Ressource/image/imperatrice.png",
         "color":"LUV2BGR",
         "prediction":{
             "passe":"Ressource/Son/imperatrice_prediction_passe.mp3",
@@ -46,7 +46,7 @@
     {
         "tag":4,
         "nom":"Ressource/Son/empereur_nom.mp3",
-        "url":"Ressource/image/empereur.jpg",
+        "url":"Ressource/image/empereur.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/empereur_prediction_passe.mp3",
@@ -79,7 +79,7 @@
     {
         "tag":7,
         "nom":"Ressource/Son/chariot_nom.mp3",
-        "url":"Ressource/image/chariot.jpg",
+        "url":"Ressource/image/chariot.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/chariot_prediction_passe.mp3",
@@ -90,7 +90,7 @@
     {
         "tag":8,
         "nom":"Ressource/Son/justice_nom.mp3",
-        "url":"Ressource/image/justice.jpeg",
+        "url":"Ressource/image/justice.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/justice_prediction_passe.mp3",
@@ -123,7 +123,7 @@
     {
         "tag":11,
         "nom":"Ressource/Son/force_nom.mp3",
-        "url":"Ressource/image/force.jpg",
+        "url":"Ressource/image/force.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/force_prediction_passe.mp3",
@@ -145,7 +145,7 @@
     {
         "tag":13,
         "nom":"Ressource/Son/mort_nom.mp3",
-        "url":"Ressource/image/mort.jpg",
+        "url":"Ressource/image/mort.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/mort_prediction_passe.mp3",
@@ -156,7 +156,7 @@
     {
         "tag":14,
         "nom":"Ressource/Son/temperance_nom.mp3",
-        "url":"Ressource/image/tempérance.jpg",
+        "url":"Ressource/image/tempérance.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/temperance_prediction_passe.mp3",
@@ -167,7 +167,7 @@
     {
         "tag":15,
         "nom":"Ressource/Son/diable_nom.mp3",
-        "url":"Ressource/image/tempérance.jpg",
+        "url":"Ressource/image/diable.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/diable_prediction_passe.mp3",
@@ -178,7 +178,7 @@
     {
         "tag":16,
         "nom":"Ressource/Son/maison_dieu_nom.mp3",
-        "url":"Ressource/image/tempérance.jpg",
+        "url":"Ressource/image/maison_de_dieu.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/maison_dieu_prediction_passe.mp3",
@@ -189,7 +189,7 @@
     {
         "tag":17,
         "nom":"Ressource/Son/etoile_nom.mp3",
-        "url":"Ressource/image/étoile.jpg",
+        "url":"Ressource/image/étoile.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/etoile_prediction_passe.mp3",
@@ -200,7 +200,7 @@
     {
         "tag":18,
         "nom":"Ressource/Son/lune_nom.mp3",
-        "url":"Ressource/image/lune.jpg",
+        "url":"Ressource/image/lune.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/lune_prediction_passe.mp3",
@@ -211,7 +211,7 @@
     {
         "tag":19,
         "nom":"Ressource/Son/soleil_nom.mp3",
-        "url":"Ressource/image/soleil.jpg",
+        "url":"Ressource/image/soleil.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/soleil_prediction_passe.mp3",
@@ -222,7 +222,7 @@
     {
         "tag":20,
         "nom":"Ressource/Son/renaissance_nom.mp3",
-        "url":"Ressource/image/renaissance.jpg",
+        "url":"Ressource/image/renaissance.png",
         "color":"HSV2RGB",
         "prediction":{
             "passe":"Ressource/Son/renaissance_prediction_passe.mp3",
