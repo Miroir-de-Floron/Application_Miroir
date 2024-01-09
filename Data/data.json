@@ -1,244 +1,244 @@
 [
     {
         "tag":0,
-        "nom":"Ressource/Son/fou_nom.mp3",
+        "nom":"fou_nom.mp3",
         "url":"Ressource/image/fou.png",
         "color":"LAB2BGR",
         "prediction":{
-            "passe":"Ressource/Son/fou_prediction_passe.mp3",
-            "present":"Ressource/Son/fou_prediction_present.mp3",
-            "futur":"Ressource/Son/fou_prediction_futur.mp3"
+            "passe":"fou_prediction_passe.mp3",
+            "present":"fou_prediction_present.mp3",
+            "futur":"fou_prediction_futur.mp3"
         }
     },
     {
         "tag":1,
-        "nom":"Ressource/Son/magicien_nom.mp3",
+        "nom":"magicien_nom.mp3",
         "url":"Ressource/image/magicien.png",
         "color":"LAB2BGR",
         "prediction":{
-            "passe":"Ressource/Son/magicien_prediction_passe.mp3",
-            "present":"Ressource/Son/magicien_prediction_present.mp3",
-            "futur":"Ressource/Son/magicien_prediction_futur.mp3"
+            "passe":"magicien_prediction_passe.mp3",
+            "present":"magicien_prediction_present.mp3",
+            "futur":"magicien_prediction_futur.mp3"
         }
     },
     {
         "tag":2,
-        "nom":"Ressource/Son/papesse_nom.mp3",
+        "nom":"papesse_nom.mp3",
         "url":"Ressource/image/papesse.png",
         "color":"LUV2BGR",
         "prediction":{
-            "passe":"Ressource/Son/papesse_prediction_passe.mp3",
-            "present":"Ressource/Son/papesse_prediction_present.mp3",
-            "futur":"Ressource/Son/papesse_prediction_futur.mp3"
+            "passe":"papesse_prediction_passe.mp3",
+            "present":"papesse_prediction_present.mp3",
+            "futur":"papesse_prediction_futur.mp3"
         }
     },
     {
         "tag":3,
-        "nom":"Ressource/Son/imperatrice_nom.mp3",
+        "nom":"imperatrice_nom.mp3",
         "url":"Ressource/image/imperatrice.png",
         "color":"LUV2BGR",
         "prediction":{
-            "passe":"Ressource/Son/imperatrice_prediction_passe.mp3",
-            "present":"Ressource/Son/imperatrice_prediction_present.mp3",
-            "futur":"Ressource/Son/imperatrice_prediction_futur.mp3"
+            "passe":"imperatrice_prediction_passe.mp3",
+            "present":"imperatrice_prediction_present.mp3",
+            "futur":"imperatrice_prediction_futur.mp3"
         }
     },
     {
         "tag":4,
-        "nom":"Ressource/Son/empereur_nom.mp3",
+        "nom":"empereur_nom.mp3",
         "url":"Ressource/image/empereur.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/empereur_prediction_passe.mp3",
-            "present":"Ressource/Son/empereur_prediction_present.mp3",
-            "futur":"Ressource/Son/empereur_prediction_futur.mp3"
+            "passe":"empereur_prediction_passe.mp3",
+            "present":"empereur_prediction_present.mp3",
+            "futur":"empereur_prediction_futur.mp3"
         }
     },
     {
         "tag":5,
-        "nom":"Ressource/Son/pape_nom.mp3",
+        "nom":"pape_nom.mp3",
         "url":"Ressource/image/pape.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/pape_prediction_passe.mp3",
-            "present":"Ressource/Son/pape_prediction_present.mp3",
-            "futur":"Ressource/Son/pape_prediction_futur.mp3"
+            "passe":"pape_prediction_passe.mp3",
+            "present":"pape_prediction_present.mp3",
+            "futur":"pape_prediction_futur.mp3"
         }
     },
     {
         "tag":6,
-        "nom":"Ressource/Son/amoureux_nom.mp3",
+        "nom":"amoureux_nom.mp3",
         "url":"Ressource/image/amoureux.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/amoureux_prediction_passe.mp3",
-            "present":"Ressource/Son/amoureux_prediction_present.mp3",
-            "futur":"Ressource/Son/amoureux_prediction_futur.mp3"
+            "passe":"amoureux_prediction_passe.mp3",
+            "present":"amoureux_prediction_present.mp3",
+            "futur":"amoureux_prediction_futur.mp3"
         }
     },
     {
         "tag":7,
-        "nom":"Ressource/Son/chariot_nom.mp3",
+        "nom":"chariot_nom.mp3",
         "url":"Ressource/image/chariot.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/chariot_prediction_passe.mp3",
-            "present":"Ressource/Son/chariot_prediction_present.mp3",
-            "futur":"Ressource/Son/amoureux_prediction_futur.mp3"
+            "passe":"chariot_prediction_passe.mp3",
+            "present":"chariot_prediction_present.mp3",
+            "futur":"amoureux_prediction_futur.mp3"
         }
     },
     {
         "tag":8,
-        "nom":"Ressource/Son/justice_nom.mp3",
+        "nom":"justice_nom.mp3",
         "url":"Ressource/image/justice.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/justice_prediction_passe.mp3",
-            "present":"Ressource/Son/justice_prediction_present.mp3",
-            "futur":"Ressource/Son/justicce_prediction_futur.mp3"
+            "passe":"justice_prediction_passe.mp3",
+            "present":"justice_prediction_present.mp3",
+            "futur":"justicce_prediction_futur.mp3"
         }
     },
     {
         "tag":9,
-        "nom":"Ressource/Son/ermite_nom.mp3",
+        "nom":"ermite_nom.mp3",
         "url":"Ressource/image/ermite.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/ermite_prediction_passe.mp3",
-            "present":"Ressource/Son/ermite_prediction_present.mp3",
-            "futur":"Ressource/Son/ermite_prediction_futur.mp3"
+            "passe":"ermite_prediction_passe.mp3",
+            "present":"ermite_prediction_present.mp3",
+            "futur":"ermite_prediction_futur.mp3"
         }
     },
     {
         "tag":10,
-        "nom":"Ressource/Son/roue_de_fortune_nom.mp3",
+        "nom":"roue_de_fortune_nom.mp3",
         "url":"Ressource/image/roue.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/roue_de_fortune_prediction_passe.mp3",
-            "present":"Ressource/Son/roue_de_fortune_prediction_present.mp3",
-            "futur":"Ressource/Son/roue_de_fortune_prediction_futur.mp3"
+            "passe":"roue_de_fortune_prediction_passe.mp3",
+            "present":"roue_de_fortune_prediction_present.mp3",
+            "futur":"roue_de_fortune_prediction_futur.mp3"
         }
     },
     {
         "tag":11,
-        "nom":"Ressource/Son/force_nom.mp3",
+        "nom":"force_nom.mp3",
         "url":"Ressource/image/force.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/force_prediction_passe.mp3",
-            "present":"Ressource/Son/force_prediction_present.mp3",
-            "futur":"Ressource/Son/force_prediction_futur.mp3"
+            "passe":"force_prediction_passe.mp3",
+            "present":"force_prediction_present.mp3",
+            "futur":"force_prediction_futur.mp3"
         }
     },
     {
         "tag":12,
-        "nom":"Ressource/Son/pendu_nom.mp3",
+        "nom":"pendu_nom.mp3",
         "url":"Ressource/image/pendu.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/pendu_prediction_passe.mp3",
-            "present":"Ressource/Son/pendu_prediction_present.mp3",
-            "futur":"Ressource/Son/pendu_prediction_futur.mp3"
+            "passe":"pendu_prediction_passe.mp3",
+            "present":"pendu_prediction_present.mp3",
+            "futur":"pendu_prediction_futur.mp3"
         }
     },
     {
         "tag":13,
-        "nom":"Ressource/Son/mort_nom.mp3",
+        "nom":"mort_nom.mp3",
         "url":"Ressource/image/mort.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/mort_prediction_passe.mp3",
-            "present":"Ressource/Son/mort_prediction_present.mp3",
-            "futur":"Ressource/Son/mort_prediction_futur.mp3"
+            "passe":"mort_prediction_passe.mp3",
+            "present":"mort_prediction_present.mp3",
+            "futur":"mort_prediction_futur.mp3"
         }
     },
     {
         "tag":14,
-        "nom":"Ressource/Son/temperance_nom.mp3",
+        "nom":"temperance_nom.mp3",
         "url":"Ressource/image/tempérance.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/temperance_prediction_passe.mp3",
-            "present":"Ressource/Son/temperance_prediction_present.mp3",
-            "futur":"Ressource/Son/temperance_prediction_futur.mp3"
+            "passe":"temperance_prediction_passe.mp3",
+            "present":"temperance_prediction_present.mp3",
+            "futur":"temperance_prediction_futur.mp3"
         }
     },
     {
         "tag":15,
-        "nom":"Ressource/Son/diable_nom.mp3",
+        "nom":"diable_nom.mp3",
         "url":"Ressource/image/diable.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/diable_prediction_passe.mp3",
-            "present":"Ressource/Son/diable_prediction_present.mp3",
-            "futur":"Ressource/Son/diable_prediction_futur.mp3"
+            "passe":"diable_prediction_passe.mp3",
+            "present":"diable_prediction_present.mp3",
+            "futur":"diable_prediction_futur.mp3"
         }
     },
     {
         "tag":16,
-        "nom":"Ressource/Son/maison_dieu_nom.mp3",
+        "nom":"maison_dieu_nom.mp3",
         "url":"Ressource/image/maison_de_dieu.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/maison_dieu_prediction_passe.mp3",
-            "present":"Ressource/Son/maison_dieu_prediction_present.mp3",
-            "futur":"Ressource/Son/maison_dieu_prediction_futur.mp3"
+            "passe":"maison_dieu_prediction_passe.mp3",
+            "present":"maison_dieu_prediction_present.mp3",
+            "futur":"maison_dieu_prediction_futur.mp3"
         }
     },
     {
         "tag":17,
-        "nom":"Ressource/Son/etoile_nom.mp3",
+        "nom":"etoile_nom.mp3",
         "url":"Ressource/image/étoile.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/etoile_prediction_passe.mp3",
-            "present":"Ressource/Son/etoile_prediction_present.mp3",
-            "futur":"Ressource/Son/etoile_prediction_futur.mp3"
+            "passe":"etoile_prediction_passe.mp3",
+            "present":"etoile_prediction_present.mp3",
+            "futur":"etoile_prediction_futur.mp3"
         }
     },
     {
         "tag":18,
-        "nom":"Ressource/Son/lune_nom.mp3",
+        "nom":"lune_nom.mp3",
         "url":"Ressource/image/lune.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/lune_prediction_passe.mp3",
-            "present":"Ressource/Son/lune_prediction_present.mp3",
-            "futur":"Ressource/Son/lune_prediction_futur.mp3"
+            "passe":"lune_prediction_passe.mp3",
+            "present":"lune_prediction_present.mp3",
+            "futur":"lune_prediction_futur.mp3"
         }
     },
     {
         "tag":19,
-        "nom":"Ressource/Son/soleil_nom.mp3",
+        "nom":"soleil_nom.mp3",
         "url":"Ressource/image/soleil.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/soleil_prediction_passe.mp3",
-            "present":"Ressource/Son/soleil_prediction_present.mp3",
-            "futur":"Ressource/Son/soleil_prediction_futur.mp3"
+            "passe":"soleil_prediction_passe.mp3",
+            "present":"soleil_prediction_present.mp3",
+            "futur":"soleil_prediction_futur.mp3"
         }
     },
     {
         "tag":20,
-        "nom":"Ressource/Son/renaissance_nom.mp3",
+        "nom":"renaissance_nom.mp3",
         "url":"Ressource/image/renaissance.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/renaissance_prediction_passe.mp3",
-            "present":"Ressource/Son/renaissance_prediction_present.mp3",
-            "futur":"Ressource/Son/renaissance_prediction_futur.mp3"
+            "passe":"renaissance_prediction_passe.mp3",
+            "present":"renaissance_prediction_present.mp3",
+            "futur":"renaissance_prediction_futur.mp3"
         }
     },
     {
         "tag":21,
-        "nom":"Ressource/Son/monde_nom.mp3",
+        "nom":"monde_nom.mp3",
         "url":"Ressource/image/le_monde.png",
         "color":"HSV2RGB",
         "prediction":{
-            "passe":"Ressource/Son/monde_prediction_passe.mp3",
-            "present":"Ressource/Son/monde_prediction_present.mp3",
-            "futur":"Ressource/Son/monde_prediction_futur.mp3"
+            "passe":"monde_prediction_passe.mp3",
+            "present":"monde_prediction_present.mp3",
+            "futur":"monde_prediction_futur.mp3"
         }
     }
 ]
