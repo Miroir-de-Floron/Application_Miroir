@@ -8,39 +8,45 @@ flag = False
 robot_introduction = None
 # fonction(threader) pour lancer le TTS de la prédiction
 def annonce_carte(urlNomCarte,carte1,carte2,carte3):
-    voix_de_nom = pygame.mixer.Sound(urlNomCarte)
+    cheminParDefault = "Ressource/Son/"
+    n = randint(1,3)
+    cheminAléatoire = cheminParDefault+str(n)+"/"
+    voix_de_nom = pygame.mixer.Sound(cheminAléatoire+urlNomCarte)
     chanel_de_nom = voix_de_nom.play()
     wait(lambda:audioFinished(chanel_de_nom))
     if carte1 == True:
-        voix_de_nom_passe = pygame.mixer.Sound("Ressource/Son/nom_passe.mp3")
+        voix_de_nom_passe = pygame.mixer.Sound(cheminAléatoire+"nom_passe.mp3")
         chanel_de_nom_passe = voix_de_nom_passe.play()
         wait(lambda:audioFinished(chanel_de_nom_passe))
     if carte2 == True:
-        voix_de_nom_present = pygame.mixer.Sound("Ressource/Son/nom_present.mp3")
+        voix_de_nom_present = pygame.mixer.Sound(cheminAléatoire+"nom_present.mp3")
         chanel_de_nom_present = voix_de_nom_present.play()
         wait(lambda:audioFinished(chanel_de_nom_present))
     if carte3 == True:
-        voix_de_nom_futur = pygame.mixer.Sound("Ressource/Son/nom_futur.mp3")
+        voix_de_nom_futur = pygame.mixer.Sound(cheminAléatoire+"nom_futur.mp3")
         chanel_de_nom_futur = voix_de_nom_futur.play()
         wait(lambda:audioFinished(chanel_de_nom_futur))
 
 
 # fonction(threader) pour lancer le TTS de la prédiction
 def lancement_voix_de_prediction(prediction,carte1,carte2,carte3):
-    voix_de_prediction = pygame.mixer.Sound(prediction)
+    cheminParDefault = "Ressource/Son/"
+    n = randint(1,3)
+    cheminAléatoire = cheminParDefault+str(n)+"/"
+    voix_de_prediction = pygame.mixer.Sound(cheminAléatoire+prediction)
     chanel_de_prediction = voix_de_prediction.play()
     wait(lambda:audioFinished(chanel_de_prediction))
     
     if carte1 == True:
-        voix_de_prediction_passe = pygame.mixer.Sound("Ressource/Son/prediction_passe.mp3")
+        voix_de_prediction_passe = pygame.mixer.Sound(cheminAléatoire+"prediction_passe.mp3")
         chanel_de_prediction_passe = voix_de_prediction_passe.play()
         wait(lambda:audioFinished(chanel_de_prediction_passe))
     if carte2 == True:
-        voix_de_prediction_present = pygame.mixer.Sound("Ressource/Son/prediction_present.mp3")
+        voix_de_prediction_present = pygame.mixer.Sound(cheminAléatoire+"prediction_present.mp3")
         chanel_de_prediction_present = voix_de_prediction_present.play()
         wait(lambda:audioFinished(chanel_de_prediction_present))
     if carte3 == True:
-        voix_de_prediction_futur = pygame.mixer.Sound("Ressource/Son/prediction_futur.mp3")
+        voix_de_prediction_futur = pygame.mixer.Sound(cheminAléatoire+"prediction_futur.mp3")
         chanel_de_prediction_futur = voix_de_prediction_futur.play()
         wait(lambda:audioFinished(chanel_de_prediction_futur))
 
@@ -52,6 +58,9 @@ def voix_introduction():
     texte = None
     global flag
     intro_texts = ["texte_actif.mp3", "texte_inactif_1.mp3", "texte_inactif_2.mp3", "texte_inactif_3.mp3"]
+    cheminParDefault = "Ressource/Son/"
+    n = randint(1,3)
+    cheminAléatoire = cheminParDefault+str(n)+"/"
 
     texte = intro_texts[0]
     n = randint(0,100)
@@ -68,7 +77,7 @@ def voix_introduction():
         print("probleme voix d'intro")
 
     flag = True
-    voix_d_intro = pygame.mixer.Sound("Ressource/Son/"+texte)
+    voix_d_intro = pygame.mixer.Sound(cheminAléatoire+texte)
     chanel_d_intro = voix_d_intro.play()
     return chanel_d_intro
     flag = False
