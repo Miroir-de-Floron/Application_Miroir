@@ -1,5 +1,4 @@
 import serial
-import subprocess
 import time
 Tab_id = []
 ligne_compteur = 0

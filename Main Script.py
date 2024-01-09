@@ -3,9 +3,6 @@ import datetime
 import time
 import pygame
 import cv2
-import psutil
-import os
-import signal
 import Script as script
 
 ############################################################################################### Déclaration

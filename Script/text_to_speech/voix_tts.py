@@ -1,6 +1,4 @@
-import pyttsx3
 from random import *
-import psutil
 import pygame
 from waiting import wait
 
