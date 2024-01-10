@@ -3,12 +3,16 @@ import datetime
 import time
 import pygame
 import cv2
+import psutil
+import os
+import signal
 import Script as script
 import os
 import random
 
+from waiting import wait
 
-############################################################################################### Déclaration
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ déclaration ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 # booléen pour savoir si une vidéo de prédiction est en cours de lecture ou non
 video_de_prediction = False
@@ -28,8 +32,7 @@ id_present = None
 id_futur = None
 url_image_carte = None
 
-
-######################################################################################################
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des vidéos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 def videoEffetsAleatoire(directory):
     """
@@ -81,7 +84,7 @@ def effetsImage(frame, url_image_carte, largeur_video, hauteur_video):
 
 def lire_video():
 
-    ############################################################################## Utilisation de variable commmune
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ utilisation des variables global ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     #variable booléene pour la gestion des effets
     global lancement_effets
     
@@ -91,9 +94,8 @@ def lire_video():
     #variable booléene pour savoir si la prédiction et en cours
     global prediction
 
-    ############################################################################## 
 
-    ############################################################################## Déclaration
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ déclaration ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     #Chemin pour les ressources vidéo
     chemin_video = 'Ressource/Video/voyante.mp4'
@@ -110,8 +112,7 @@ def lire_video():
     largeur_video = int(video.get(3))
     hauteur_video = int(video.get(4))
     
-    ############################################################################## 
-    
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     
     #exception si l'url de la vidéo n'est pas bonne
     if not video.isOpened():
@@ -120,9 +121,11 @@ def lire_video():
 
     #On crée une fenêtre
     cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
-   
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ boucle de lecture des video ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     while True:
-        # Lecture des frames de la vidéo principale
+
+        #on lance les frames en boucle
         ret, frame = video.read()
 
         # Si on est en fin de vidéo, on recommence depuis le début
@@ -143,7 +146,7 @@ def lire_video():
             #on bloque la récupération du temps
             recupération_temps = True
 
-            #tant que les 5 seconde d'animation ne sont pas terminée on enléve aucun effet
+            #tant que les 5 secondes d'animation ne sont pas terminée on enléve aucun effet
             
             if (datetime.datetime.now() - temp_actuelle).total_seconds() >= 5:  
                 recupération_temps = False
@@ -186,8 +189,8 @@ def lire_video():
         cv2.setWindowProperty('Video', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
         if cv2.waitKey(25) & 0xFF == ord('q'):
             break
-    
-    # Libération des ressources et fermeture des fenêtres
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ liberation des frames plus fermeture de la video ~~~~~~~~~~~~~~~~~~~~#
     video.release()
     if video_effets is not None and video_effets.isOpened():
         video_effets.release()
@@ -200,20 +203,19 @@ def effets(frame,frame_effets):
         return cv2.addWeighted(frame, 0.6, frame_effets_resized, 0.4, 0)
     return frame
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des voix tts des predictions ~~~~~~~~~~~~~~~~~~~~#
 def tts_carte(carte_tag):
     global carte_txt1
     global carte_txt2
     global carte_txt3
-
-    # musique_de_fond.fadeout(1)
     script.text_to_speech.voix_tts.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
     script.json.recherche_json.fileObject.close()
   
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des vidéos de prediction ~~~~~~~~~~~~~~~~~~~~~~~~#
 # Fonction pour la lecture des vidéos de prediction
 def gestion_des_prediction():
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ utilisation de varibles globale ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-    ############################################################################## Utilisation de variable commmune
     #variable booléene pour la gestion des effets
     global lancement_effets
 
@@ -233,23 +235,15 @@ def gestion_des_prediction():
     #variable booléene pour savoir si la prédiction et en cours
     global prediction 
 
-
-
-    ##############################################################################
-
-    ############################################################################## Déclaration
-
-    # variable booléene permettant d'ajuster le départ de chaque condition
-    declencheur_present= False
-    declencheur_futur = False
-
     #variables booléene qui permetent de savoir si les annonces (passe,present et futur) on était réalisé
     fin_passe = False
     fin_present = False
-    fin_futur = False
-    ############################################################################## 
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ debut boucle ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     while True:
+
+        print
 
         import Arduino as Card
         #on récupére les donnée du tableau de l'observateur
@@ -257,35 +251,47 @@ def gestion_des_prediction():
         global voix_intro_flag
         voix_intro_flag = False
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Affectation Passé ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
         #si l'id du passée n'existe pas on affecte la valeur de l'id passe au premiére id du tableau
         if id_passe is None :
             id_passe = Card.listener_requete.Tab_id[0]
 
-        #si l'id du passée existe , que le déclencheur de l'évenement présent est activer et que le resultat renvoyé est différent de l'id affecter précedement
-        #on affecte la valeur de l'id present au deuxiéme id du tableau
-        if id_passe is not None and declencheur_present== True and Card.listener_requete.result != id_passe:
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Affectation Present ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+        #si l'évenement passé est fini et qu'un resultat a etait envoyé
+        #on affecte la valeur du deuxiéme element du tableau a l'id du present 
+        if fin_passe and len(Card.listener_requete.Tab_id) == 2:
             id_present = Card.listener_requete.Tab_id[1]
-            declencheur_present= False
-        # exception
-        else :
-            print("le tableau n'est pas à la bonne taille car vous avez rentrez deux fois la même carte")
+        
+        # exceptions
+        #si l'evenement passe est terminé mais qu'il n'y a pas d'id pour le prensent on ingique que que la carte present est la même que celle du passé
+        elif fin_passe and len(Card.listener_requete.Tab_id) == 1:
+            print("id carte present est le même que celle du passe")
+        #sinon on indique que la carte present n'a pas encore était passé
+        elif fin_present == False:
+            print("la carte du present n'a pas encore était passé ")
 
-        #si l'id du présent existe , que le déclencheur de l'évenement futur est activer et que le resultat renvoyé est différent de l'id affecter précedement
-        #on affecte la valeur de l'id futur au troisiéme id du tableau
-        if id_present is not None and declencheur_futur == True and Card.listener_requete.result != id_present :
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Affectation futur ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
+        #si l'évenement present est terminé et qu'un resultat a été renvoyé
+        #on affecte la valeur du troisiéme id du tableau a l'id futur 
+        if fin_present and fin_present and len(Card.listener_requete.Tab_id) == 3 :
             id_futur = Card.listener_requete.Tab_id[2]
-            declencheur_futur = False
-
+        
         #exception
-        else :
-            print("le tableau n'est pas à la bonne taille car vous avez rentrez deux fois la même carte")
+        #si l'evenement present est terminé et qu'aucun nouvelle id est la on indique que la carte a deja etait passé
+        elif fin_present and len(Card.listener_requete.Tab_id) == 2:
+            print("la carte est deja passé choisissez-en un autre")
+        #sinon on indique que la carte du futur n'a pas encore était passé
+        else:
+            print("la carte du futur n'a pas encore était passé")
     
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ lecture video passé ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-
-        # si l'id du passé est non null ,que l'id du présent n'a pas était encore rentré et que on est jamais rentré dans cette condition
+        # si l'id du passé est non null et que on est jamais rentré dans cette condition
         #on peut donc jouer les animation pour le passé
-        if id_passe is not None and id_present is None and fin_passe == False :
+        if id_passe is not None and fin_passe == False :
 
             url_image_carte = script.json.recherche_json.rechercheUrlEtNom(id_passe)
             
@@ -309,8 +315,6 @@ def gestion_des_prediction():
             prediction = False
             carte_txt1 = False
 
-            # on indique l'animation present peut etre lancée
-            declencheur_present= True
             #on attend un peu
             time.sleep(1)
             #on indique que l'on peut plus passée ici tant que les trois prédiction n'ont pas était dite
@@ -318,9 +322,12 @@ def gestion_des_prediction():
 
             # musique_de_fond.play(-1)
 
-        # si l'id du présent est non null ,que l'id du futur n'a pas était encore rentré et que on est jamais rentré dans cette condition
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ lecture video present ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+        # si l'id du présent est non null et que on est jamais rentré dans cette condition
         #on peut donc jouer les animation pour le présent
-        if id_present is not None and id_futur is None and fin_present == False and fin_futur == False:
+
+        if id_present is not None and fin_present == False :
 
 
             url_image_carte = script.json.recherche_json.rechercheUrlEtNom(id_present)
@@ -346,13 +353,12 @@ def gestion_des_prediction():
             prediction = False
             carte_txt2 = False
 
-            # on indique l'animation present peut etre lancée
-            declencheur_futur= True
             #on attend un peu
             time.sleep(1)
             #on indique que l'on peut plus passée ici tant que les trois prédiction n'ont pas était dite
             fin_present = True
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ lecture video futur ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
         #si l'id du futur n'est pas null
         #on peut donc jouer les animation pour le futur
@@ -401,9 +407,8 @@ def gestion_des_prediction():
             fin_futur= False
 
             voix_intro_flag = True
-            
-            
-            
+                      
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ lecture des voix ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #les voix ce chevauche mais c'est réglabe (je pense)   
 def voix_intro():
     global voix_intro_flag
@@ -420,8 +425,7 @@ def voix_intro():
                 chanel_d_intro.stop()
                 stoped = True
 
-
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ création des thread ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 # Création des threads et lancement des fonctions
 intro_thread = threading.Thread(target=gestion_des_prediction)
