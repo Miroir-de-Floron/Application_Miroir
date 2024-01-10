@@ -20,7 +20,6 @@ def lectureDepuisJsonAvecInput(nbTag, temps):
 def rechercheUrlEtNom(nbTag):
     global nom
     global color
-    print("le tag et",nbTag)
     # On lance la vidéo de prédiction
     for i in range(len(obj_python)):
         if(obj_python[i]['tag'] == int(nbTag)):
