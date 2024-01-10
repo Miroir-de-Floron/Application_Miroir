@@ -29,6 +29,12 @@ id_present = None
 id_futur = None
 url_image_carte = None
 
+fin_passe = False
+fin_present = False
+
+effet = 'Ressource/Video/Fumee.mov'
+
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des vidéos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 def lire_video():
@@ -42,20 +48,20 @@ def lire_video():
 
     #variable booléene pour savoir si la prédiction et en cours
     global prediction
+    
+    global effet
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ déclaration ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     #Chemin pour les ressources vidéo
     chemin_video = 'Ressource/Video/voyante.mp4'
-    chemin_fumée = 'Ressource/Video/Fumee.mov'
     
     #variable booléene pour vérifier si c'est le moment de récupérer le temp ou non
     recupération_temps = False
    
     #on initialise les vidéo à la bibliothéque cv2
     video = cv2.VideoCapture(chemin_video)
-    video_fumée = cv2.VideoCapture(chemin_fumée)
    
     # on récupere les coordonée de la video
     largeur_video = int(video.get(3))
@@ -74,6 +80,7 @@ def lire_video():
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ boucle de lecture des video ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     while True:
 
+        video_fumée = cv2.VideoCapture(effet)
         #on lance les frames en boucle
         ret, frame = video.read()
         ret_fumee, frame_fumée = video_fumée.read()
@@ -212,6 +219,8 @@ def tts_carte(carte_tag):
   
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des vidéos de prediction ~~~~~~~~~~~~~~~~~~~~~~~~#
 # Fonction pour la lecture des vidéos de prediction
+
+stop_prediction_thread = threading.Event()
 def gestion_des_prediction():
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ utilisation de varibles globale ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
@@ -233,22 +242,24 @@ def gestion_des_prediction():
 
     #variable booléene pour savoir si la prédiction et en cours
     global prediction 
-
+    
     #variables booléene qui permetent de savoir si les annonces (passe,present et futur) on était réalisé
-    fin_passe = False
-    fin_present = False
+    global fin_passe 
+    global fin_present 
+    
+    #effet de video
+    global effet
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ debut boucle ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     while True:
-
-        print
 
         import Arduino as Card
         #on récupére les donnée du tableau de l'observateur
         Card.listener_requete.get_id()
         global voix_intro_flag
         voix_intro_flag = False
+        
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Affectation Passé ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
@@ -291,8 +302,10 @@ def gestion_des_prediction():
         # si l'id du passé est non null et que on est jamais rentré dans cette condition
         #on peut donc jouer les animation pour le passé
         if id_passe is not None and fin_passe == False :
-
+            voix_intro_flag = False
+            
             url_image_carte = script.json.recherche_json.rechercheUrlEtNom(id_passe)
+            effet = script.json.recherche_json.effet
             
             #on indique l'identité de la carte et on lance les effet
             lancement_effets = True
@@ -301,7 +314,7 @@ def gestion_des_prediction():
             # on lance le tts d'annonce de carte
             tts_carte(script.json.recherche_json.nom)
 
-
+        
             #on annonce que la prediction est en cours
             prediction = True
           
@@ -318,6 +331,12 @@ def gestion_des_prediction():
             time.sleep(1)
             #on indique que l'on peut plus passée ici tant que les trois prédiction n'ont pas était dite
             fin_passe = True
+            
+            timer = threading.Timer(120, timer_call)
+            timer.start()
+            voix_intro_flag = True
+            
+
 
             # musique_de_fond.play(-1)
 
@@ -327,9 +346,12 @@ def gestion_des_prediction():
         #on peut donc jouer les animation pour le présent
 
         if id_present is not None and fin_present == False :
-
+            voix_intro_flag = False
+           
+            timer.cancel()
 
             url_image_carte = script.json.recherche_json.rechercheUrlEtNom(id_present)
+            effet = script.json.recherche_json.effet
             
             #on indique l'identité de la carte et on lance les effet
             lancement_effets = True
@@ -337,8 +359,8 @@ def gestion_des_prediction():
 
             # on lance le tts d'annonce de carte
             tts_carte(script.json.recherche_json.nom)
-
-
+            
+            
 
             #on annonce que la prediction et en cours
             prediction = True
@@ -356,17 +378,24 @@ def gestion_des_prediction():
             time.sleep(1)
             #on indique que l'on peut plus passée ici tant que les trois prédiction n'ont pas était dite
             fin_present = True
+            
+            timer2 = threading.Timer(120, timer_call)
+            timer2.start()
+            voix_intro_flag = True
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ lecture video futur ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
         #si l'id du futur n'est pas null
         #on peut donc jouer les animation pour le futur
         if id_futur is not None :
+            voix_intro_flag = False
+            timer2.cancel()
 
             #on attend que le processus soit bien tuer
             time.sleep(0.5)
 
             url_image_carte = script.json.recherche_json.rechercheUrlEtNom(id_futur)
+            effet = script.json.recherche_json.effet
             
             #on indique l'identité de la carte et on lance les effet
             lancement_effets = True
@@ -406,9 +435,10 @@ def gestion_des_prediction():
             fin_futur= False
 
             voix_intro_flag = True
+            voix_intro_flag = True
                       
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ lecture des voix ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-#les voix ce chevauche mais c'est réglabe (je pense)   
+#gestion voix introduction 
 def voix_intro():
     global voix_intro_flag
     voix_intro_flag = True
@@ -418,12 +448,56 @@ def voix_intro():
         if voix_intro_flag:
             if not chanel_d_intro.get_busy():
                 time.sleep(20)
-                chanel_d_intro = script.text_to_speech.voix_tts.voix_introduction()
+                if voix_intro_flag:
+                    chanel_d_intro = script.text_to_speech.voix_tts.voix_introduction()
         else : 
             if not stoped:
                 chanel_d_intro.stop()
                 stoped = True
 
+def timer_call():
+
+    import Arduino as Card
+
+    #variables des 3 id des 3 carte scanées respectivement
+    global id_passe
+    global id_present
+    global id_futur
+
+    global voix_intro_flag
+
+    global prediction_thread
+    
+    # comme les prédictions sont terminée on reset toutes les variables (id,tableau et flag de condition)
+    id_passe = None
+    id_present = None
+    id_futur = None
+
+    #variables booléene qui permettent de savoir si les annonces (passe,present et futur) on était réalisé
+    global fin_passe 
+    global fin_present 
+    global fin_futur 
+
+    Card.listener_requete.Tab_id.clear()
+    print("tableau suprimée",Card.listener_requete.Tab_id)
+
+    #compteur de ligne dans le serial monitor remi à zero
+    Card.listener_requete.ligne_compteur = 0
+
+    fin_passe = False
+    fin_present = False
+    fin_futur= False
+
+    voix_intro_flag = True
+    
+    # Attendre que le thread existant se termine proprement (facultatif)
+    prediction_thread.join()
+
+    # Créer et démarrer un nouveau thread de lecture vidéo
+    prediction_thread = threading.Thread(target=lire_video)
+    prediction_thread.start()
+
+    
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ création des thread ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 # Création des threads et lancement des fonctions
