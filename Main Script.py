@@ -4,6 +4,9 @@ import time
 import pygame
 import cv2
 import Script as script
+import os
+import random
+
 
 ############################################################################################### Déclaration
 
@@ -28,6 +31,54 @@ url_image_carte = None
 
 ######################################################################################################
 
+def videoEffetsAleatoire(directory):
+    """
+    Renvoie un fichier vidéo aléatoire à partir du répertoire spécifié.
+
+    Args:
+        directory (str): Le chemin du répertoire contenant les fichiers vidéo.
+
+    Returns:
+        str: Le chemin complet du fichier vidéo aléatoire sélectionné.
+
+        Si aucun fichier vidéo n'est trouvé dans le répertoire, la fonction renvoie None.
+    """
+    video_files = [f for f in os.listdir(directory) if f.endswith('.mov') or f.endswith('.mp4')]
+    if not video_files:
+        return None
+    return os.path.join(directory, random.choice(video_files))
+
+def effetsImage(frame, url_image_carte, largeur_video, hauteur_video):
+    # On charge l'url_image_carte
+    image = cv2.imread(url_image_carte, cv2.IMREAD_UNCHANGED)
+
+    hauteur_image = image.shape[0]
+    largeur_image = image.shape[1]
+
+    # on redimensionne l'image
+    image_resized = cv2.resize(image, (largeur_image, hauteur_image))
+
+    # on centre l image
+    centre_x = (largeur_video - image_resized.shape[1]) // 2
+    centre_y = (hauteur_video - image_resized.shape[0]) // 2
+
+    # on copie la vidéo defaut pour les modification
+    frame_default = frame.copy()
+
+    # On applique les effets de blur
+    frame_default = cv2.GaussianBlur(frame_default, (0, 0), 10)
+
+    # On récuper le canal alpha de l'image PNG
+    alpha_channel = image_resized[:, :, 3] / 255.0
+
+    # On superpose l'image avec la transparence du png
+    for c in range(0, 3):
+        frame_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] = \
+            (1 - alpha_channel) * frame_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] + \
+            alpha_channel * image_resized[:, :, c]
+
+    return frame_default
+
 def lire_video():
 
     ############################################################################## Utilisation de variable commmune
@@ -40,23 +91,21 @@ def lire_video():
     #variable booléene pour savoir si la prédiction et en cours
     global prediction
 
-
-
     ############################################################################## 
 
     ############################################################################## Déclaration
 
     #Chemin pour les ressources vidéo
     chemin_video = 'Ressource/Video/voyante.mp4'
-    chemin_fumée = 'Ressource/Video/Fumee.mov'
+    dossier_effets = 'Ressource/VideoEffets'
     
     #variable booléene pour vérifier si c'est le moment de récupérer le temp ou non
     recupération_temps = False
    
     #on initialise les vidéo à la bibliothéque cv2
     video = cv2.VideoCapture(chemin_video)
-    video_fumée = cv2.VideoCapture(chemin_fumée)
-   
+    video_effets = None
+    effet_charge = False
     # on récupere les coordonée de la video
     largeur_video = int(video.get(3))
     hauteur_video = int(video.get(4))
@@ -73,53 +122,19 @@ def lire_video():
     cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
    
     while True:
-
-        #on lance les frame en boucle
+        # Lecture des frames de la vidéo principale
         ret, frame = video.read()
-        ret_fumee, frame_fumée = video_fumée.read()
 
-        # si on est en fin de vidéo on boucle la vidéo
-        if not ret or not ret_fumee:
+        # Si on est en fin de vidéo, on recommence depuis le début
+        if not ret:
             video.set(cv2.CAP_PROP_POS_FRAMES, 0)
-            video_fumée.set(cv2.CAP_PROP_POS_FRAMES, 0)
             continue
-        frame_copy = frame.copy()
-
-        cv2.imshow('Video', frame_copy)
-
-
-        # si l'effet est lancé on affiche l'image avec effet de blur
+        
+        # # si l'effet est lancé on affiche l'image avec effet de blur
         if lancement_effets == True:
-            
-            #On charge l'url_image_carte
-            image = cv2.imread(url_image_carte, cv2.IMREAD_UNCHANGED)
 
-            #on redimensionne l'image
-            image_resized = cv2.resize(image, (largeur_video//4, hauteur_video//3))
-
-            # on centre l image
-            centre_x = (largeur_video - image_resized.shape[1]) // 2
-            centre_y = (hauteur_video - image_resized.shape[0]) // 2
-
-             # on copie la vidéo defaut pour les modification
-            frame_copy_default = frame_copy.copy()
-
-            #On applique les effets de blur
-            frame_copy_default = cv2.GaussianBlur(frame_copy_default, (0, 0), 10)
-
-            # On récuper le canal alpha de l'image PNG
-            alpha_channel = image_resized[:, :, 3] / 255.0
-
-            # On superpose l'image avec la transparence du png
-            for c in range(0, 3):
-                frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] = \
-                    (1 - alpha_channel) * frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] + \
-                    alpha_channel * image_resized[:, :, c]
-
-            # On mixe les deux copies pour exclure le flou de l'image
-            frame_copy = frame_copy_default
-            
-            ##################################
+            # Call the function like this:
+            frame = effetsImage(frame, url_image_carte, largeur_video, hauteur_video)
             
             # on récupére le temps une seul fois 
             if recupération_temps == False :
@@ -134,70 +149,56 @@ def lire_video():
                 recupération_temps = False
                 lancement_effets = False   
 
-            cv2.imshow('Video', frame_copy)
-        
-        
-        if prediction == True:
-            
-            ###################### Application effet de blur
-            # on lance les effets
-            frame_copy = effets(frame_copy, frame_fumée)
+            cv2.imshow('Video', frame)
 
+        if prediction and not effet_charge :
+            # Sélection et ouverture d'une vidéo d'effets aléatoire
+            chemin_effets = videoEffetsAleatoire(dossier_effets)
+            video_effets = cv2.VideoCapture(chemin_effets)
+            effet_charge = True
+
+        if prediction:
+            # Lecture d'une frame de la vidéo d'effets
+            if video_effets is not None and video_effets.isOpened():
+                ret_effets, frame_effets = video_effets.read()
+                if ret_effets:
+                    frame = effets(frame, frame_effets)
+
+            # Traitement de couleur et superposition de l'image de la carte
             color = script.json.recherche_json.color
             couleur_opencv = getattr(cv2, f"COLOR_{color}")
-            frame_color = cv2.cvtColor(frame_copy, couleur_opencv)
+            frame_color = cv2.cvtColor(frame, couleur_opencv)
 
-            # On charge l'url_image_carte
-            image = cv2.imread(url_image_carte, cv2.IMREAD_UNCHANGED)
+            # Chargement et traitement de l'image de la carte
+            frame_default = effetsImage(frame, url_image_carte, largeur_video, hauteur_video)
 
-            # On redimensionne l'image
-            image_resized = cv2.resize(image, (largeur_video//4, hauteur_video//3))
-
-            # On centre l'image
-            centre_x = (largeur_video - image_resized.shape[1]) // 2
-            centre_y = (hauteur_video - image_resized.shape[0]) // 2
-
-            # On copie la vidéo defaut pour les modifications
-            frame_copy_default = frame_copy.copy()
-
-            # On applique les effets de blur
-            frame_copy_default = cv2.GaussianBlur(frame_copy_default, (0, 0), 10)
-
-            # On récupère le canal alpha de l'image PNG
-            alpha_channel = image_resized[:, :, 3] / 255.0
-
-            # On superpose l'image avec la transparence du png
-            for c in range(0, 3):
-                frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] = \
-                    (1 - alpha_channel) * frame_copy_default[centre_y:centre_y + image_resized.shape[0], centre_x:centre_x + image_resized.shape[1], c] + \
-                    alpha_channel * image_resized[:, :, c]
-
-            # On utilise addWeighted pour fusionner les deux  frame donc effet de couleur et image
-            frame_result = cv2.addWeighted(frame_color, 0.5, frame_copy_default, 0.5, 0)
-
+            # Fusion des frames pour le résultat final
+            frame_result = cv2.addWeighted(frame_color, 0.5, frame_default, 0.5, 0)
             cv2.imshow('Video', frame_result)
-                    
 
-            ##################################
-    
-        
-        # Mettre la fenêtre en plein écran
+        else:
+            #reinitialisation des effets
+            effet_charge = False
+            # Affichage de la vidéo principale si pas de prédiction
+            cv2.imshow('Video', frame)
+
+        # Plein écran et gestion de la sortie
         cv2.setWindowProperty('Video', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-
         if cv2.waitKey(25) & 0xFF == ord('q'):
             break
-
-    # on libére les frame et on ferme la video
+    
+    # Libération des ressources et fermeture des fenêtres
     video.release()
-    video_fumée.release()
+    if video_effets is not None and video_effets.isOpened():
+        video_effets.release()
     cv2.destroyAllWindows()
 
-def effets(frame_copy,frame_fumée):
+def effets(frame,frame_effets):
     global prediction
     if prediction == True :
-        frame_fumée_resized = cv2.resize(frame_fumée, (frame_copy.shape[1], frame_copy.shape[0]))
-        return cv2.addWeighted(frame_copy, 0.5, frame_fumée_resized, 0.5, 0)
-    return frame_copy
+        frame_effets_resized = cv2.resize(frame_effets, (frame.shape[1], frame.shape[0]))
+        return cv2.addWeighted(frame, 0.6, frame_effets_resized, 0.4, 0)
+    return frame
 
 def tts_carte(carte_tag):
     global carte_txt1
