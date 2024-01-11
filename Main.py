@@ -211,7 +211,7 @@ def tts_carte(carte_tag):
     global carte_txt1
     global carte_txt2
     global carte_txt3
-    script.text_to_speech.voix_tts.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
+    script.voix.voix.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
     script.json.recherche_json.fileObject.close()
   
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des vidéos de prediction ~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -318,7 +318,7 @@ def gestion_des_prediction():
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
-            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
+            script.voix.voix.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
             #on enleve tout les précedents effets
             prediction = False
@@ -365,7 +365,7 @@ def gestion_des_prediction():
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_present, 'present')
-            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
+            script.voix.voix.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
             #on enleve tout les précedent effet
             prediction = False
@@ -408,7 +408,7 @@ def gestion_des_prediction():
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
-            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
+            script.voix.voix.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
             #on enleve tout les précedents effets
             prediction = False
@@ -439,14 +439,14 @@ def gestion_des_prediction():
 def voix_intro():
     global voix_intro_flag
     voix_intro_flag = True
-    chanel_d_intro = script.text_to_speech.voix_tts.voix_introduction()
+    chanel_d_intro = script.voix.voix.voix_introduction()
     stoped = False
     while True:
         if voix_intro_flag:
             if not chanel_d_intro.get_busy():
                 time.sleep(20)
                 if voix_intro_flag:
-                    chanel_d_intro = script.text_to_speech.voix_tts.voix_introduction()
+                    chanel_d_intro = script.voix.voix.voix_introduction()
         else : 
             if not stoped:
                 chanel_d_intro.stop()

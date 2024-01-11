@@ -1,2 +1,2 @@
 import Script.json.recherche_json
-import Script.text_to_speech.voix_tts
+import Script.voix.voix
