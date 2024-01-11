@@ -59,6 +59,8 @@ def lire_video():
    
     #on initialise les vidéo à la bibliothéque cv2
     video = cv2.VideoCapture(chemin_video)
+    
+    video_effet = cv2.VideoCapture(effet)
    
     # on récupere les coordonée de la video
     largeur_video = int(video.get(3))
@@ -76,16 +78,15 @@ def lire_video():
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ boucle de lecture des video ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     while True:
-
-        video_fumée = cv2.VideoCapture(effet)
+        
         #on lance les frames en boucle
         ret, frame = video.read()
-        ret_fumee, frame_fumée = video_fumée.read()
+        ret_fumee, frame_fumée = video_effet.read()
 
         # si on est en fin de vidéo on boucle la vidéo
         if not ret or not ret_fumee:
             video.set(cv2.CAP_PROP_POS_FRAMES, 0)
-            video_fumée.set(cv2.CAP_PROP_POS_FRAMES, 0)
+            video_effet.set(cv2.CAP_PROP_POS_FRAMES, 0)
             continue
         frame_copy = frame.copy()
 
@@ -94,7 +95,9 @@ def lire_video():
 
         # si l'effet est lancé on affiche l'image avec effet de blur
         if lancement_effets == True:
-                
+            
+            video_effet = cv2.VideoCapture(effet)
+            
             #On charge l'url_image_carte
             image = cv2.imread(url_image_carte, cv2.IMREAD_UNCHANGED)
 
@@ -195,7 +198,7 @@ def lire_video():
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ liberation des frames plus fermeture de la video ~~~~~~~~~~~~~~~~~~~~#
     video.release()
-    video_fumée.release()
+    video_effet.release()
     cv2.destroyAllWindows()
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction des effets des vidéos de prediction ~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -211,7 +214,8 @@ def tts_carte(carte_tag):
     global carte_txt1
     global carte_txt2
     global carte_txt3
-    script.text_to_speech.voix_tts.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
+    
+    script.voix.voix.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
     script.json.recherche_json.fileObject.close()
   
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des vidéos de prediction ~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -246,6 +250,8 @@ def gestion_des_prediction():
     
     #effet de video
     global effet
+    
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ debut boucle ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
@@ -318,7 +324,7 @@ def gestion_des_prediction():
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
-            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
+            script.voix.voix.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
             #on enleve tout les précedents effets
             prediction = False
@@ -344,7 +350,8 @@ def gestion_des_prediction():
 
         if id_present is not None and fin_present == False :
             voix_intro_flag = False
-           
+            toto = True
+
             timer.cancel()
 
             url_image_carte = script.json.recherche_json.rechercheUrlEtNom(id_present)
@@ -365,7 +372,7 @@ def gestion_des_prediction():
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_present, 'present')
-            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
+            script.voix.voix.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
             #on enleve tout les précedent effet
             prediction = False
@@ -408,7 +415,7 @@ def gestion_des_prediction():
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
-            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
+            script.voix.voix.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
             #on enleve tout les précedents effets
             prediction = False
@@ -438,6 +445,7 @@ def gestion_des_prediction():
 #gestion voix introduction 
 def voix_intro():
     global voix_intro_flag
+    global toto
     voix_intro_flag = True
     chanel_d_intro = script.voix.voix.voix_introduction()
     stoped = False
@@ -451,6 +459,7 @@ def voix_intro():
             if not stoped:
                 chanel_d_intro.stop()
                 stoped = True
+
 
 def timer_call():
 
