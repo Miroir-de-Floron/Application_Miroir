@@ -29,7 +29,7 @@ url_image_carte = None
 fin_passe = False
 fin_present = False
 
-effet = 'Ressource/Video/Fumee.mov'
+effet = 'Ressource/Video/effet_fumee.mov'
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des vidéos ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -211,7 +211,7 @@ def tts_carte(carte_tag):
     global carte_txt1
     global carte_txt2
     global carte_txt3
-    script.voix.voix.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
+    script.text_to_speech.voix_tts.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
     script.json.recherche_json.fileObject.close()
   
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des vidéos de prediction ~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -318,7 +318,7 @@ def gestion_des_prediction():
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_passe, 'passe')
-            script.voix.voix.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
+            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
             #on enleve tout les précedents effets
             prediction = False
@@ -365,7 +365,7 @@ def gestion_des_prediction():
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_present, 'present')
-            script.voix.voix.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
+            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
             #on enleve tout les précedent effet
             prediction = False
@@ -408,7 +408,7 @@ def gestion_des_prediction():
 
             #on lance la recherche de la prédiction puis le tts
             script.json.recherche_json.lectureDepuisJsonAvecInput(id_futur, 'futur')
-            script.voix.voix.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
+            script.text_to_speech.voix_tts.lancement_voix_de_prediction(script.json.recherche_json.prediction,carte_txt1,carte_txt2,carte_txt3)
             
             #on enleve tout les précedents effets
             prediction = False
