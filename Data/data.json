@@ -104,7 +104,7 @@
         "prediction":{
             "passe":"justice_prediction_passe.mp3",
             "present":"justice_prediction_present.mp3",
-            "futur":"justicce_prediction_futur.mp3"
+            "futur":"justice_prediction_futur.mp3"
         }
     },
     {
@@ -170,7 +170,7 @@
     {
         "tag":14,
         "nom":"temperance_nom.mp3",
-        "url":"Ressource/Image/tempérance.png",
+        "url":"Ressource/Image/temperance.png",
         "color":"HSV2RGB",
         "effet":"Ressource/Video/effet_fumee.mov",
         "prediction":{

@@ -452,6 +452,7 @@ def voix_intro():
                 time.sleep(20)
                 if voix_intro_flag:
                     chanel_d_intro = script.voix.voix.voix_introduction()
+                    stoped = False
         else : 
             if not stoped:
                 chanel_d_intro.stop()
