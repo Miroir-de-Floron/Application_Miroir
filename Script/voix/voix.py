@@ -2,7 +2,6 @@ from random import *
 import pygame
 from waiting import wait
 
-flag = False
 robot_introduction = None
 cheminParDefault = "Ressource/Son/"
 # fonction(threader) pour lancer le TTS de la prédiction
@@ -49,7 +48,6 @@ def voix_introduction():
     global robot_introduction
 
     texte = None
-    global flag
     intro_texts = ["texte_actif.mp3", "texte_inactif_1.mp3", "texte_inactif_2.mp3", "texte_inactif_3.mp3"]
 
     texte = intro_texts[0]
