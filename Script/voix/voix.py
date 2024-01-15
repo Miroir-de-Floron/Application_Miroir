@@ -66,11 +66,9 @@ def voix_introduction():
     else : 
         print("probleme voix d'intro")
 
-    flag = True
     voix_d_intro = pygame.mixer.Sound(cheminParDefault+texte)
     chanel_d_intro = voix_d_intro.play()
     return chanel_d_intro
-    flag = False
 
 
 

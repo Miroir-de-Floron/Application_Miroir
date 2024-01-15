@@ -347,8 +347,7 @@ def gestion_des_prediction():
 
         if id_present is not None and fin_present == False :
             voix_intro_flag = False
-            toto = True
-
+            
             timer.cancel()
 
             url_image_carte = script.json.recherche_json.rechercheUrlEtNom(id_present)
@@ -442,7 +441,6 @@ def gestion_des_prediction():
 #gestion voix introduction 
 def voix_intro():
     global voix_intro_flag
-    global toto
     voix_intro_flag = True
     chanel_d_intro = script.voix.voix.voix_introduction()
     stoped = False
