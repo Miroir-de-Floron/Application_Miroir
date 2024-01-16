@@ -15,6 +15,15 @@ video_de_prediction = False
 
 pygame.init()
 
+#Musique de fond
+musique_de_fond = "Ressource/Son/fond.mp3"
+pygame.mixer.music.load(musique_de_fond)
+pygame.mixer.music.play(-1) 
+pygame.mixer.music.set_volume(1.0)
+
+
+
+
 # on charge les fichiers audio de musique 
 
 prediction = False
@@ -33,22 +42,6 @@ fin_present = False
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonctions utiles aux effets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-def videoEffetsAleatoire(directory):
-    """
-    Renvoie un fichier vidéo aléatoire à partir du répertoire spécifié.
-
-    Args:
-        directory (str): Le chemin du répertoire contenant les fichiers vidéo.
-
-    Returns:
-        str: Le chemin complet du fichier vidéo aléatoire sélectionné.
-
-        Si aucun fichier vidéo n'est trouvé dans le répertoire, la fonction renvoie None.
-    """
-    video_files = [f for f in os.listdir(directory) if f.endswith('.mov') or f.endswith('.mp4')]
-    if not video_files:
-        return None
-    return os.path.join(directory, random.choice(video_files))
 
 def effetsImage(frame, url_image_carte, largeur_video, hauteur_video):
     # On charge l'url_image_carte
@@ -100,13 +93,14 @@ def lire_video():
     global poidsVideo
 
     global poidsVideoEffet
+    
+
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ déclaration ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     #Chemin pour les ressources vidéo
     chemin_video = 'Ressource/Video/voyante.mp4'
-    dossier_effets = 'Ressource/VideoEffets'
     
     #variable booléene pour vérifier si c'est le moment de récupérer le temp ou non
     recupération_temps = False
@@ -167,8 +161,7 @@ def lire_video():
 
         if prediction and not effet_charge :
             # Sélection et ouverture d'une vidéo d'effets aléatoire
-            chemin_effets = videoEffetsAleatoire(dossier_effets)
-            video_effets = cv2.VideoCapture(chemin_effets)
+            video_effets = cv2.VideoCapture(effet)
             effet_charge = True
 
         if prediction:
@@ -511,6 +504,8 @@ def timer_call():
     # Créer et démarrer un nouveau thread de lecture vidéo
     prediction_thread = threading.Thread(target=lire_video)
     prediction_thread.start()
+
+
 
     
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ création des thread ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
