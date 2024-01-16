@@ -97,6 +97,10 @@ def lire_video():
     
     global effet
 
+    global poidsVideo
+
+    global poidsVideoEffet
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ déclaration ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
@@ -114,6 +118,10 @@ def lire_video():
     # on récupere les coordonée de la video
     largeur_video = int(video.get(3))
     hauteur_video = int(video.get(4))
+
+    #initialisation poids des vidéos (opacité dans la superposition)
+    poidsVideo = 1
+    poidsVideoEffet = 0
     
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
     
@@ -164,11 +172,16 @@ def lire_video():
             effet_charge = True
 
         if prediction:
+            # Maj des poids des vidéos
+            if poidsVideo > 0.6:
+                poidsVideo -= 0.05
+                poidsVideoEffet += 0.05
+
             # Lecture d'une frame de la vidéo d'effets
             if video_effets is not None and video_effets.isOpened():
                 ret_effets, frame_effets = video_effets.read()
                 if ret_effets:
-                    frame = effets(frame, frame_effets)
+                    frame = effets(frame, frame_effets, poidsVideo, poidsVideoEffet)
 
             # Traitement de couleur et superposition de l'image de la carte
             color = script.json.recherche_json.color
@@ -179,7 +192,7 @@ def lire_video():
             frame_default = effetsImage(frame, url_image_carte, largeur_video, hauteur_video)
 
             # Fusion des frames pour le résultat final
-            frame_result = cv2.addWeighted(frame_color, 0.5, frame_default, 0.5, 0)
+            frame_result = cv2.addWeighted(frame_color, poidsVideoEffet, frame_default, poidsVideo, 0)
             cv2.imshow('Video', frame_result)
 
         else:
@@ -199,11 +212,11 @@ def lire_video():
         video_effets.release()
     cv2.destroyAllWindows()
 
-def effets(frame,frame_effets):
+def effets(frame,frame_effets,poidsVideo,poidsVideoEffet):
     global prediction
     if prediction == True :
         frame_effets_resized = cv2.resize(frame_effets, (frame.shape[1], frame.shape[0]))
-        return cv2.addWeighted(frame, 0.6, frame_effets_resized, 0.4, 0)
+        return cv2.addWeighted(frame, poidsVideo, frame_effets_resized, poidsVideoEffet, 0)
     return frame
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des voix tts des predictions ~~~~~~~~~~~~~~~~~~~~#
