@@ -1,266 +1,266 @@
 [
     {
-        "tag":0,
-        "nom":"fou_nom.mp3",
-        "url":"Ressource/Image/fou.png",
-        "color":"BGR2LAB",
-        "effet":"Ressource/VideoEffets/effet_fou.mp4",
-        "prediction":{
-            "passe":"fou_prediction_passe.mp3",
-            "present":"fou_prediction_present.mp3",
-            "futur":"fou_prediction_futur.mp3"
+        "tag": 0,
+        "nom": "fou_nom.mp3",
+        "url": "Ressource/Image/fou.png",
+        "color": "BGR2XYZ",
+        "effet": "Ressource/VideoEffets/effet_fou.mp4",
+        "prediction": {
+            "passe": "fou_prediction_passe.mp3",
+            "present": "fou_prediction_present.mp3",
+            "futur": "fou_prediction_futur.mp3"
         }
     },
     {
-        "tag":1,
-        "nom":"magicien_nom.mp3",
-        "url":"Ressource/Image/magicien.png",
-        "color":"BGR2Lab",
-        "effet":"Ressource/VideoEffets/effet_magicien.mp4",
-        "prediction":{
-            "passe":"magicien_prediction_passe.mp3",
-            "present":"magicien_prediction_present.mp3",
-            "futur":"magicien_prediction_futur.mp3"
+        "tag": 1,
+        "nom": "magicien_nom.mp3",
+        "url": "Ressource/Image/magicien.png",
+        "color": "BGR2Lab",
+        "effet": "Ressource/VideoEffets/effet_magicien.mp4",
+        "prediction": {
+            "passe": "magicien_prediction_passe.mp3",
+            "present": "magicien_prediction_present.mp3",
+            "futur": "magicien_prediction_futur.mp3"
         }
     },
     {
-        "tag":2,
-        "nom":"papesse_nom.mp3",
-        "url":"Ressource/Image/papesse.png",
-        "color":"LUV2BGR",
-        "effet":"Ressource/VideoEffets/effet_papesse.mp4",
-        "prediction":{
-            "passe":"papesse_prediction_passe.mp3",
-            "present":"papesse_prediction_present.mp3",
-            "futur":"papesse_prediction_futur.mp3"
+        "tag": 2,
+        "nom": "papesse_nom.mp3",
+        "url": "Ressource/Image/papesse.png",
+        "color": "BGR2RGB",
+        "effet": "Ressource/VideoEffets/effet_papesse.mp4",
+        "prediction": {
+            "passe": "papesse_prediction_passe.mp3",
+            "present": "papesse_prediction_present.mp3",
+            "futur": "papesse_prediction_futur.mp3"
         }
     },
     {
-        "tag":3,
-        "nom":"imperatrice_nom.mp3",
-        "url":"Ressource/Image/imperatrice.png",
-        "color":"LUV2BGR",
-        "effet":"Ressource/VideoEffets/effet_imperatrice.mp4",
-        "prediction":{
-            "passe":"imperatrice_prediction_passe.mp3",
-            "present":"imperatrice_prediction_present.mp3",
-            "futur":"imperatrice_prediction_futur.mp3"
+        "tag": 3,
+        "nom": "imperatrice_nom.mp3",
+        "url": "Ressource/Image/imperatrice.png",
+        "color": "RGB2Lab",
+        "effet": "Ressource/VideoEffets/effet_imperatrice.mp4",
+        "prediction": {
+            "passe": "imperatrice_prediction_passe.mp3",
+            "present": "imperatrice_prediction_present.mp3",
+            "futur": "imperatrice_prediction_futur.mp3"
         }
     },
     {
-        "tag":4,
-        "nom":"empereur_nom.mp3",
-        "url":"Ressource/Image/empereur.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_empereur.mp4",
-        "prediction":{
-            "passe":"empereur_prediction_passe.mp3",
-            "present":"empereur_prediction_present.mp3",
-            "futur":"empereur_prediction_futur.mp3"
+        "tag": 4,
+        "nom": "empereur_nom.mp3",
+        "url": "Ressource/Image/empereur.png",
+        "color": "BGR2HSV",
+        "effet": "Ressource/VideoEffets/effet_empereur.mp4",
+        "prediction": {
+            "passe": "empereur_prediction_passe.mp3",
+            "present": "empereur_prediction_present.mp3",
+            "futur": "empereur_prediction_futur.mp3"
         }
     },
     {
-        "tag":5,
-        "nom":"pape_nom.mp3",
-        "url":"Ressource/Image/pape.png",
-        "color":"BGR2HLS",
-        "effet":"Ressource/VideoEffets/effet_pape.mp4",
-        "prediction":{
-            "passe":"pape_prediction_passe.mp3",
-            "present":"pape_prediction_present.mp3",
-            "futur":"pape_prediction_futur.mp3"
+        "tag": 5,
+        "nom": "pape_nom.mp3",
+        "url": "Ressource/Image/pape.png",
+        "color": "BGR2YCrCb",
+        "effet": "Ressource/VideoEffets/effet_pape.mp4",
+        "prediction": {
+            "passe": "pape_prediction_passe.mp3",
+            "present": "pape_prediction_present.mp3",
+            "futur": "pape_prediction_futur.mp3"
         }
     },
     {
-        "tag":6,
-        "nom":"amoureux_nom.mp3",
-        "url":"Ressource/Image/amoureux.png",
-        "color":"BGR2RGB",
-        "effet":"Ressource/VideoEffets/effet_neige1.mp4",
-        "prediction":{
-            "passe":"amoureux_prediction_passe.mp3",
-            "present":"amoureux_prediction_present.mp3",
-            "futur":"amoureux_prediction_futur.mp3"
+        "tag": 6,
+        "nom": "amoureux_nom.mp3",
+        "url": "Ressource/Image/amoureux.png",
+        "color": "BGR2HLS",
+        "effet": "Ressource/VideoEffets/effet_neige1.mp4",
+        "prediction": {
+            "passe": "amoureux_prediction_passe.mp3",
+            "present": "amoureux_prediction_present.mp3",
+            "futur": "amoureux_prediction_futur.mp3"
         }
     },
     {
-        "tag":7,
-        "nom":"chariot_nom.mp3",
-        "url":"Ressource/Image/chariot.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_fumee.mov",
-        "prediction":{
-            "passe":"chariot_prediction_passe.mp3",
-            "present":"chariot_prediction_present.mp3",
-            "futur":"chariot_prediction_futur.mp3"
+        "tag": 7,
+        "nom": "chariot_nom.mp3",
+        "url": "Ressource/Image/chariot.png",
+        "color": "HSV2BGR",
+        "effet": "Ressource/VideoEffets/effet_fumee.mov",
+        "prediction": {
+            "passe": "chariot_prediction_passe.mp3",
+            "present": "chariot_prediction_present.mp3",
+            "futur": "chariot_prediction_futur.mp3"
         }
     },
     {
-        "tag":8,
-        "nom":"justice_nom.mp3",
-        "url":"Ressource/Image/justice.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_fumee.mov",
-        "prediction":{
-            "passe":"justice_prediction_passe.mp3",
-            "present":"justice_prediction_present.mp3",
-            "futur":"justice_prediction_futur.mp3"
+        "tag": 8,
+        "nom": "justice_nom.mp3",
+        "url": "Ressource/Image/justice.png",
+        "color": "Lab2BGR",
+        "effet": "Ressource/VideoEffets/effet_fumee.mov",
+        "prediction": {
+            "passe": "justice_prediction_passe.mp3",
+            "present": "justice_prediction_present.mp3",
+            "futur": "justice_prediction_futur.mp3"
         }
     },
     {
-        "tag":9,
-        "nom":"ermite_nom.mp3",
-        "url":"Ressource/Image/ermite.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_ermite.mp4",
-        "prediction":{
-            "passe":"ermite_prediction_passe.mp3",
-            "present":"ermite_prediction_present.mp3",
-            "futur":"ermite_prediction_futur.mp3"
+        "tag": 9,
+        "nom": "ermite_nom.mp3",
+        "url": "Ressource/Image/ermite.png",
+        "color": "HLS2BGR",
+        "effet": "Ressource/VideoEffets/effet_ermite.mp4",
+        "prediction": {
+            "passe": "ermite_prediction_passe.mp3",
+            "present": "ermite_prediction_present.mp3",
+            "futur": "ermite_prediction_futur.mp3"
         }
     },
     {
-        "tag":10,
-        "nom":"roue_de_fortune_nom.mp3",
-        "url":"Ressource/Image/roue.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_espace.mp4",
-        "prediction":{
-            "passe":"roue_de_fortune_prediction_passe.mp3",
-            "present":"roue_de_fortune_prediction_present.mp3",
-            "futur":"roue_de_fortune_prediction_futur.mp3"
+        "tag": 10,
+        "nom": "roue_de_fortune_nom.mp3",
+        "url": "Ressource/Image/roue.png",
+        "color": "YCrCb2BGR",
+        "effet": "Ressource/VideoEffets/effet_espace.mp4",
+        "prediction": {
+            "passe": "roue_de_fortune_prediction_passe.mp3",
+            "present": "roue_de_fortune_prediction_present.mp3",
+            "futur": "roue_de_fortune_prediction_futur.mp3"
         }
     },
     {
-        "tag":11,
-        "nom":"force_nom.mp3",
-        "url":"Ressource/Image/force.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_fumee.mov",
-        "prediction":{
-            "passe":"force_prediction_passe.mp3",
-            "present":"force_prediction_present.mp3",
-            "futur":"force_prediction_futur.mp3"
+        "tag": 11,
+        "nom": "force_nom.mp3",
+        "url": "Ressource/Image/force.png",
+        "color": "Luv2BGR",
+        "effet": "Ressource/VideoEffets/effet_fumee.mov",
+        "prediction": {
+            "passe": "force_prediction_passe.mp3",
+            "present": "force_prediction_present.mp3",
+            "futur": "force_prediction_futur.mp3"
         }
     },
     {
-        "tag":12,
-        "nom":"pendu_nom.mp3",
-        "url":"Ressource/Image/pendu.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_bug.mp4",
-        "prediction":{
-            "passe":"pendu_prediction_passe.mp3",
-            "present":"pendu_prediction_present.mp3",
-            "futur":"pendu_prediction_futur.mp3"
+        "tag": 12,
+        "nom": "pendu_nom.mp3",
+        "url": "Ressource/Image/pendu.png",
+        "color": "XYZ2BGR",
+        "effet": "Ressource/VideoEffets/effet_bug.mp4",
+        "prediction": {
+            "passe": "pendu_prediction_passe.mp3",
+            "present": "pendu_prediction_present.mp3",
+            "futur": "pendu_prediction_futur.mp3"
         }
     },
     {
-        "tag":13,
-        "nom":"mort_nom.mp3",
-        "url":"Ressource/Image/mort.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_bug2.mp4",
-        "prediction":{
-            "passe":"mort_prediction_passe.mp3",
-            "present":"mort_prediction_present.mp3",
-            "futur":"mort_prediction_futur.mp3"
+        "tag": 13,
+        "nom": "mort_nom.mp3",
+        "url": "Ressource/Image/mort.png",
+        "color": "RGB2BGR",
+        "effet": "Ressource/VideoEffets/effet_bug2.mp4",
+        "prediction": {
+            "passe": "mort_prediction_passe.mp3",
+            "present": "mort_prediction_present.mp3",
+            "futur": "mort_prediction_futur.mp3"
         }
     },
     {
-        "tag":14,
-        "nom":"temperance_nom.mp3",
-        "url":"Ressource/Image/temperance.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_pluie.mp4",
-        "prediction":{
-            "passe":"temperance_prediction_passe.mp3",
-            "present":"temperance_prediction_present.mp3",
-            "futur":"temperance_prediction_futur.mp3"
+        "tag": 14,
+        "nom": "temperance_nom.mp3",
+        "url": "Ressource/Image/temperance.png",
+        "color": "YCrCb2RGB",
+        "effet": "Ressource/VideoEffets/effet_pluie.mp4",
+        "prediction": {
+            "passe": "temperance_prediction_passe.mp3",
+            "present": "temperance_prediction_present.mp3",
+            "futur": "temperance_prediction_futur.mp3"
         }
     },
     {
-        "tag":15,
-        "nom":"diable_nom.mp3",
-        "url":"Ressource/Image/diable.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_diable.mov",
-        "prediction":{
-            "passe":"diable_prediction_passe.mp3",
-            "present":"diable_prediction_present.mp3",
-            "futur":"diable_prediction_futur.mp3"
+        "tag": 15,
+        "nom": "diable_nom.mp3",
+        "url": "Ressource/Image/diable.png",
+        "color": "Lab2RGB",
+        "effet": "Ressource/VideoEffets/effet_diable.mov",
+        "prediction": {
+            "passe": "diable_prediction_passe.mp3",
+            "present": "diable_prediction_present.mp3",
+            "futur": "diable_prediction_futur.mp3"
         }
     },
     {
-        "tag":16,
-        "nom":"maison_dieu_nom.mp3",
-        "url":"Ressource/Image/maison_de_dieu.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_maison_de_dieu.mp4",
-        "prediction":{
-            "passe":"maison_dieu_prediction_passe.mp3",
-            "present":"maison_dieu_prediction_present.mp3",
-            "futur":"maison_dieu_prediction_futur.mp3"
+        "tag": 16,
+        "nom": "maison_dieu_nom.mp3",
+        "url": "Ressource/Image/maison_de_dieu.png",
+        "color": "Luv2RGB",
+        "effet": "Ressource/VideoEffets/effet_maison_de_dieu.mp4",
+        "prediction": {
+            "passe": "maison_dieu_prediction_passe.mp3",
+            "present": "maison_dieu_prediction_present.mp3",
+            "futur": "maison_dieu_prediction_futur.mp3"
         }
     },
     {
-        "tag":17,
-        "nom":"etoile_nom.mp3",
-        "url":"Ressource/Image/étoile.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_etoile.mp4",
-        "prediction":{
-            "passe":"etoile_prediction_passe.mp3",
-            "present":"etoile_prediction_present.mp3",
-            "futur":"etoile_prediction_futur.mp3"
+        "tag": 17,
+        "nom": "etoile_nom.mp3",
+        "url": "Ressource/Image/etoile.png",
+        "color": "BGR2YUV",
+        "effet": "Ressource/VideoEffets/effet_etoile.mp4",
+        "prediction": {
+            "passe": "etoile_prediction_passe.mp3",
+            "present": "etoile_prediction_present.mp3",
+            "futur": "etoile_prediction_futur.mp3"
         }
     },
     {
-        "tag":18,
-        "nom":"lune_nom.mp3",
-        "url":"Ressource/Image/lune.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_lune.mp4",
-        "prediction":{
-            "passe":"lune_prediction_passe.mp3",
-            "present":"lune_prediction_present.mp3",
-            "futur":"lune_prediction_futur.mp3"
+        "tag": 18,
+        "nom": "lune_nom.mp3",
+        "url": "Ressource/Image/lune.png",
+        "color": "HSV2RGB",
+        "effet": "Ressource/VideoEffets/effet_lune.mp4",
+        "prediction": {
+            "passe": "lune_prediction_passe.mp3",
+            "present": "lune_prediction_present.mp3",
+            "futur": "lune_prediction_futur.mp3"
         }
     },
     {
-        "tag":19,
-        "nom":"soleil_nom.mp3",
-        "url":"Ressource/Image/soleil.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_soleil.mp4",
-        "prediction":{
-            "passe":"soleil_prediction_passe.mp3",
-            "present":"soleil_prediction_present.mp3",
-            "futur":"soleil_prediction_futur.mp3"
+        "tag": 19,
+        "nom": "soleil_nom.mp3",
+        "url": "Ressource/Image/soleil.png",
+        "color": "XYZ2RGB",
+        "effet": "Ressource/VideoEffets/effet_soleil.mp4",
+        "prediction": {
+            "passe": "soleil_prediction_passe.mp3",
+            "present": "soleil_prediction_present.mp3",
+            "futur": "soleil_prediction_futur.mp3"
         }
     },
     {
-        "tag":20,
-        "nom":"renaissance_nom.mp3",
-        "url":"Ressource/Image/renaissance.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_neige2.mp4",
-        "prediction":{
-            "passe":"renaissance_prediction_passe.mp3",
-            "present":"renaissance_prediction_present.mp3",
-            "futur":"renaissance_prediction_futur.mp3"
+        "tag": 20,
+        "nom": "renaissance_nom.mp3",
+        "url": "Ressource/Image/renaissance.png",
+        "color": "BGR2Luv",
+        "effet": "Ressource/VideoEffets/effet_neige2.mp4",
+        "prediction": {
+            "passe": "renaissance_prediction_passe.mp3",
+            "present": "renaissance_prediction_present.mp3",
+            "futur": "renaissance_prediction_futur.mp3"
         }
     },
     {
-        "tag":21,
-        "nom":"monde_nom.mp3",
-        "url":"Ressource/Image/le_monde.png",
-        "color":"HSV2RGB",
-        "effet":"Ressource/VideoEffets/effet_le_monde.mp4",
-        "prediction":{
-            "passe":"monde_prediction_passe.mp3",
-            "present":"monde_prediction_present.mp3",
-            "futur":"monde_prediction_futur.mp3"
+        "tag": 21,
+        "nom": "monde_nom.mp3",
+        "url": "Ressource/Image/le_monde.png",
+        "color": "YUV2BGR",
+        "effet": "Ressource/VideoEffets/effet_le_monde.mp4",
+        "prediction": {
+            "passe": "monde_prediction_passe.mp3",
+            "present": "monde_prediction_present.mp3",
+            "futur": "monde_prediction_futur.mp3"
         }
     }
 ]
