@@ -22,8 +22,6 @@ pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(1.0)
 
 
-
-
 # on charge les fichiers audio de musique 
 
 prediction = False
@@ -41,7 +39,6 @@ fin_passe = False
 fin_present = False
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonctions utiles aux effets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
 
 def effetsImage(frame, url_image_carte, largeur_video, hauteur_video):
     # On charge l'url_image_carte
@@ -94,9 +91,6 @@ def lire_video():
 
     global poidsVideoEffet
     
-
-
-
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ déclaration ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     #Chemin pour les ressources vidéo
@@ -204,6 +198,7 @@ def lire_video():
     if video_effets is not None and video_effets.isOpened():
         video_effets.release()
     cv2.destroyAllWindows()
+    
 
 def effets(frame,frame_effets,poidsVideo,poidsVideoEffet):
     global prediction
@@ -220,6 +215,7 @@ def tts_carte(carte_tag):
     
     script.voix.voix.annonce_carte(carte_tag,carte_txt1,carte_txt2,carte_txt3)
     script.json.recherche_json.fileObject.close()
+    
   
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ fonction de lecture des vidéos de prediction ~~~~~~~~~~~~~~~~~~~~~~~~#
 # Fonction pour la lecture des vidéos de prediction
@@ -254,22 +250,19 @@ def gestion_des_prediction():
     #effet de video
     global effet
     
-
-
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ debut boucle ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
     while True:
 
         import Arduino as Card
-        #on récupére les donnée du tableau de l'observateur
+        #on récupére les données du tableau de l'observateur
         Card.listener_requete.get_id()
         global voix_intro_flag
         voix_intro_flag = False
-        
-
+     
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Affectation Passé ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-        #si l'id du passée n'existe pas on affecte la valeur de l'id passe au premiére id du tableau
+        #si l'id du passée n'existe pas on affecte la valeur du premiére id du tableau a l'id passe 
         if id_passe is None :
             id_passe = Card.listener_requete.Tab_id[0]
 
@@ -281,7 +274,7 @@ def gestion_des_prediction():
             id_present = Card.listener_requete.Tab_id[1]
         
         # exceptions
-        #si l'evenement passe est terminé mais qu'il n'y a pas d'id pour le prensent on ingique que que la carte present est la même que celle du passé
+        #si l'evenement passe est terminé mais qu'il n'y a pas d'id pour le present on indique que que la carte present est la même que celle du passé
         elif fin_passe and len(Card.listener_requete.Tab_id) == 1:
             print("id carte present est le même que celle du passe")
         #sinon on indique que la carte present n'a pas encore était passé
@@ -296,7 +289,7 @@ def gestion_des_prediction():
             id_futur = Card.listener_requete.Tab_id[2]
         
         #exception
-        #si l'evenement present est terminé et qu'aucun nouvelle id est la on indique que la carte a deja etait passé
+        #si l'evenement present est terminé et qu'aucun nouvelle id est la on indique que la carte a déjà etait passé
         elif fin_present and len(Card.listener_requete.Tab_id) == 2:
             print("la carte est deja passé choisissez-en un autre")
         #sinon on indique que la carte du futur n'a pas encore était passé
@@ -306,7 +299,7 @@ def gestion_des_prediction():
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ lecture video passé ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
         # si l'id du passé est non null et que on est jamais rentré dans cette condition
-        #on peut donc jouer les animation pour le passé
+        #on peut donc jouer les animations pour le passé
         if id_passe is not None and fin_passe == False :
             voix_intro_flag = False
             
@@ -442,6 +435,7 @@ def gestion_des_prediction():
 
             voix_intro_flag = True
             voix_intro_flag = True
+    
                       
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ lecture des voix ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #gestion voix introduction 
@@ -461,7 +455,7 @@ def voix_intro():
             if not stoped:
                 chanel_d_intro.stop()
                 stoped = True
-
+    
 
 def timer_call():
 
@@ -504,10 +498,8 @@ def timer_call():
     # Créer et démarrer un nouveau thread de lecture vidéo
     prediction_thread = threading.Thread(target=lire_video)
     prediction_thread.start()
-
-
-
     
+ 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ création des thread ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
 # Création des threads et lancement des fonctions

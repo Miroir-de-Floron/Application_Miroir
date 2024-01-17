@@ -92,7 +92,7 @@
         "prediction":{
             "passe":"chariot_prediction_passe.mp3",
             "present":"chariot_prediction_present.mp3",
-            "futur":"amoureux_prediction_futur.mp3"
+            "futur":"chariot_prediction_futur.mp3"
         }
     },
     {
