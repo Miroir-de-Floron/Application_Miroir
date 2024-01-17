@@ -5,3 +5,5 @@ pour pouvoir faire fonctionner le projet sur linux (seul systéme que nous avons
 * waiting
 * datetime
 * pygame
+* pi-rc522
+* RPi-GPIO
