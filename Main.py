@@ -254,7 +254,7 @@ def gestion_des_prediction():
 
     while True:
 
-        import Arduino as Card
+        import RFID as Card
         #on récupére les données du tableau de l'observateur
         Card.listener_requete.get_id()
         global voix_intro_flag
@@ -459,7 +459,7 @@ def voix_intro():
 
 def timer_call():
 
-    import Arduino as Card
+    import RFID as Card
 
     #variables des 3 id des 3 carte scanées respectivement
     global id_passe
