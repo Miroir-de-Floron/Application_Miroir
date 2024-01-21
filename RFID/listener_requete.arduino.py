@@ -13,6 +13,7 @@ def get_id():
     global ligne_compteur
     global exception_tableau
     global ligne
+    global arduino_brancher
 
     try:
         ser = serial.Serial('/dev/ttyACM0', 9600)

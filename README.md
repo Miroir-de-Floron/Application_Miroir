@@ -11,15 +11,26 @@
   <img src="https://i.pinimg.com/originals/f6/4f/53/f64f53da53b34d2479f3b3bff26fa4fc.png" width="825" height="600">
 </div>
 
-Pour pouvoir faire fonctionner le projet sur linux (seul systéme que nous avons testé) il faut faire quelque installation :
+Pour pouvoir faire fonctionner le projet sur linux il faut faire quelques installations :
 
 ### Modules python nécessaires 🐍 : 
 * opencv-python
 * waiting
 * datetime
 * pygame
+
+pour la version Arduino, il faut en plus : 
+* pyserial
+
+pour la version Raspberry pi, il faut en plus :
 * pi-rc522
 * RPi-GPIO
+
+linux est le seul systéme que nous avons pleinnement testé mais il ne devrait pas y avoir de probléme sur les autres tant que toute les dépendances sont là.
+
+##### en fonction de l'utilisation du projet avec une carte Arduino ou sur une Raspberry pi, il faut penser a rennomer soit le fichier listener_requete.arduino.py ou listener_requete.raspberry.py en listener_requete.py !
+
+###### en cas d'utilisation de la carte Arduino pensez à bien changer le nom du serial sur lequel est branché votre carte Arduino.
 
 ## Contributeur ✨
 

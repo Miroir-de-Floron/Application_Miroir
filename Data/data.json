@@ -3,7 +3,7 @@
         "tag": 0,
         "nom": "fou_nom.mp3",
         "url": "Ressource/Image/fou.png",
-        "color": "BGR2XYZ",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_fou.mp4",
         "prediction": {
             "passe": "fou_prediction_passe.mp3",
@@ -15,7 +15,7 @@
         "tag": 1,
         "nom": "magicien_nom.mp3",
         "url": "Ressource/Image/magicien.png",
-        "color": "BGR2Lab",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_magicien.mp4",
         "prediction": {
             "passe": "magicien_prediction_passe.mp3",
@@ -27,7 +27,7 @@
         "tag": 2,
         "nom": "papesse_nom.mp3",
         "url": "Ressource/Image/papesse.png",
-        "color": "BGR2RGB",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_papesse.mp4",
         "prediction": {
             "passe": "papesse_prediction_passe.mp3",
@@ -39,7 +39,7 @@
         "tag": 3,
         "nom": "imperatrice_nom.mp3",
         "url": "Ressource/Image/imperatrice.png",
-        "color": "RGB2Lab",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_imperatrice.mp4",
         "prediction": {
             "passe": "imperatrice_prediction_passe.mp3",
@@ -51,7 +51,7 @@
         "tag": 4,
         "nom": "empereur_nom.mp3",
         "url": "Ressource/Image/empereur.png",
-        "color": "BGR2HSV",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_empereur.mp4",
         "prediction": {
             "passe": "empereur_prediction_passe.mp3",
@@ -63,7 +63,7 @@
         "tag": 5,
         "nom": "pape_nom.mp3",
         "url": "Ressource/Image/pape.png",
-        "color": "BGR2YCrCb",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_pape.mp4",
         "prediction": {
             "passe": "pape_prediction_passe.mp3",
@@ -87,7 +87,7 @@
         "tag": 7,
         "nom": "chariot_nom.mp3",
         "url": "Ressource/Image/chariot.png",
-        "color": "HSV2BGR",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_fumee.mov",
         "prediction": {
             "passe": "chariot_prediction_passe.mp3",
@@ -99,7 +99,7 @@
         "tag": 8,
         "nom": "justice_nom.mp3",
         "url": "Ressource/Image/justice.png",
-        "color": "Lab2BGR",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_fumee.mov",
         "prediction": {
             "passe": "justice_prediction_passe.mp3",
@@ -111,7 +111,7 @@
         "tag": 9,
         "nom": "ermite_nom.mp3",
         "url": "Ressource/Image/ermite.png",
-        "color": "HLS2BGR",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_ermite.mp4",
         "prediction": {
             "passe": "ermite_prediction_passe.mp3",
@@ -147,7 +147,7 @@
         "tag": 12,
         "nom": "pendu_nom.mp3",
         "url": "Ressource/Image/pendu.png",
-        "color": "XYZ2BGR",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_bug.mp4",
         "prediction": {
             "passe": "pendu_prediction_passe.mp3",
@@ -159,7 +159,7 @@
         "tag": 13,
         "nom": "mort_nom.mp3",
         "url": "Ressource/Image/mort.png",
-        "color": "RGB2BGR",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_bug2.mp4",
         "prediction": {
             "passe": "mort_prediction_passe.mp3",
@@ -171,7 +171,7 @@
         "tag": 14,
         "nom": "temperance_nom.mp3",
         "url": "Ressource/Image/temperance.png",
-        "color": "YCrCb2RGB",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_pluie.mp4",
         "prediction": {
             "passe": "temperance_prediction_passe.mp3",
@@ -183,7 +183,7 @@
         "tag": 15,
         "nom": "diable_nom.mp3",
         "url": "Ressource/Image/diable.png",
-        "color": "Lab2RGB",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_diable.mov",
         "prediction": {
             "passe": "diable_prediction_passe.mp3",
@@ -195,7 +195,7 @@
         "tag": 16,
         "nom": "maison_dieu_nom.mp3",
         "url": "Ressource/Image/maison_de_dieu.png",
-        "color": "Luv2RGB",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_maison_de_dieu.mp4",
         "prediction": {
             "passe": "maison_dieu_prediction_passe.mp3",
@@ -207,7 +207,7 @@
         "tag": 17,
         "nom": "etoile_nom.mp3",
         "url": "Ressource/Image/etoile.png",
-        "color": "BGR2YUV",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_etoile.mp4",
         "prediction": {
             "passe": "etoile_prediction_passe.mp3",
@@ -219,7 +219,7 @@
         "tag": 18,
         "nom": "lune_nom.mp3",
         "url": "Ressource/Image/lune.png",
-        "color": "HSV2RGB",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_lune.mp4",
         "prediction": {
             "passe": "lune_prediction_passe.mp3",
@@ -231,7 +231,7 @@
         "tag": 19,
         "nom": "soleil_nom.mp3",
         "url": "Ressource/Image/soleil.png",
-        "color": "XYZ2RGB",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_soleil.mp4",
         "prediction": {
             "passe": "soleil_prediction_passe.mp3",
@@ -255,7 +255,7 @@
         "tag": 21,
         "nom": "monde_nom.mp3",
         "url": "Ressource/Image/le_monde.png",
-        "color": "YUV2BGR",
+        "color": "none",
         "effet": "Ressource/VideoEffets/effet_le_monde.mp4",
         "prediction": {
             "passe": "monde_prediction_passe.mp3",

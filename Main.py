@@ -172,9 +172,11 @@ def lire_video():
 
             # Traitement de couleur et superposition de l'image de la carte
             color = script.json.recherche_json.color
-            couleur_opencv = getattr(cv2, f"COLOR_{color}")
-            frame_color = cv2.cvtColor(frame, couleur_opencv)
-
+            if color != "none":
+                couleur_opencv = getattr(cv2, f"COLOR_{color}")
+                frame_color = cv2.cvtColor(frame, couleur_opencv)
+            else:
+                frame_color=frame
             # Chargement et traitement de l'image de la carte
             frame_default = effetsImage(frame, url_image_carte, largeur_video, hauteur_video)
 
