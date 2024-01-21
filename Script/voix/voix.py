@@ -1,6 +1,7 @@
 from random import *
 import pygame
 from waiting import wait
+import time
 
 robot_introduction = None
 cheminParDefault = "Ressource/Son/"
@@ -28,7 +29,7 @@ def lancement_voix_de_prediction(prediction,carte1,carte2,carte3):
     voix_de_prediction = pygame.mixer.Sound(cheminParDefault+prediction)
     chanel_de_prediction = voix_de_prediction.play()
     wait(lambda:audioFinished(chanel_de_prediction))
-    
+    time.sleep(2)
     if carte1 == True:
         voix_de_prediction_passe = pygame.mixer.Sound(cheminParDefault+"prediction_passe.mp3")
         chanel_de_prediction_passe = voix_de_prediction_passe.play()
