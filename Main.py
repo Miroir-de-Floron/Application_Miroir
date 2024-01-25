@@ -6,7 +6,7 @@ import cv2
 import Script as script
 import os
 import random
-from waiting import wait
+#from waiting import wait
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ déclaration ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 

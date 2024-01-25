@@ -18,7 +18,7 @@ Pour pouvoir faire fonctionner le projet sur linux il faut faire quelques instal
 ### Modules python nécessaires 🐍 :
 
 * opencv-python
-* waiting
+* waiting (on test de faire sans)
 * datetime
 * pygame
 
