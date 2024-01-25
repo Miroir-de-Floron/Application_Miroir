@@ -16,7 +16,7 @@ video_de_prediction = False
 pygame.init()
 
 #Musique de fond
-musique_de_fond = "Ressource/Son/fond.mp3"
+musique_de_fond = "Ressource/Son/fond.wav"
 pygame.mixer.music.load(musique_de_fond)
 pygame.mixer.music.play(-1) 
 pygame.mixer.music.set_volume(1.0)
