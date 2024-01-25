@@ -49,7 +49,7 @@ def get_id():
                 b"35140232232000000\r\n": 6,        #les amoureux
                 b"839337233000000\r\n": 7,          #le chariot
                 b"1955023233000000\r\n": 8,         #la justice
-                b"66187184137000000\r\n": 9,        #l'ermite
+                b"148342591000000\r\n": 9,          #l'ermite
                 b"16324662233000000\r\n": 10,       #la rou de fortune
                 b"1956191232000000\r\n": 11,        #la force
                 b"11515648233000000\r\n": 12,       #le pendu
@@ -61,7 +61,7 @@ def get_id():
                 b"515023233000000\r\n": 18,         #la lune
                 b"8380250232000000\r\n": 19,        #le soleil
                 b"8315881233000000\r\n": 20,        #la renaissance
-                b"1636924523200000\r\n": 21         #le monde
+                b"16369245232000000\r\n": 21        #le monde
                 
             }
             
