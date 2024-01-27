@@ -39,7 +39,7 @@ linux est le seul systéme que nous avons pleinnement testé mais il ne devrait 
 
 il faut aussi penser a modifier les code des carte RFID.
 
-* Pour plus d'information se rensignée dans le guide d'utilisation à la racine du projet
+* Pour plus d'information se renseigner dans le guide d'utilisation à la racine du projet
 
 ## Contributeur ✨
 
